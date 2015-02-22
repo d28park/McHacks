@@ -30,7 +30,9 @@ public class JointsUpdate : MonoBehaviour {
 	public GameObject RightHand;
 	public GameObject RightElbow;
 	public GameObject RightShoulder;
-	
+	public GameObject TargetHand;
+	public float fix;
+
 	// current target sphere locations
 	private GameObject handTarget, elbowTarget;
 	private SphereCollider handTargetCollider, elbowTargetCollider;
@@ -69,7 +71,7 @@ public class JointsUpdate : MonoBehaviour {
 		frameRateCalc = new FrameRateCalc(50);
 		
 		// init targets
-		handTarget = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+		/*handTarget = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 		handTarget.transform.position = new Vector3(1.0f, 1.5f, -6.0f);
 		handTargetCollider = handTarget.gameObject.AddComponent<SphereCollider>();
 		handTargetCollider.center = Vector3.zero;
@@ -79,7 +81,10 @@ public class JointsUpdate : MonoBehaviour {
 		elbowTarget.transform.position = new Vector3((float)-2.0, (float)(1.5), (float)(-6.0));
 		elbowTargetCollider = elbowTarget.gameObject.AddComponent<SphereCollider>();
 		elbowTargetCollider.center = Vector3.zero;
-		elbowTargetCollider.radius = 1.0f;
+		elbowTargetCollider.radius = 1.0f;*/
+		TargetHand.transform.position = new Vector3 (0.5f, 0.3f, -7.5f);
+		//TargetElbow.transform.position = new Vector3 (1.5f, 0.2f, -6.5f);
+
 	}
 	
 	private void CalculateTextureParams()
@@ -141,53 +146,53 @@ public class JointsUpdate : MonoBehaviour {
 	void Update()
 	{
 		// Don't do anything if no info was passed yet
-		if (!typesToJoints.ContainsKey(JointType.Head))
+		/*if (!typesToJoints.ContainsKey(JointType.Head))
 			return;
 		
 		// Loop through each JointType
 		foreach (JointType type in jointTypesArray)
-		{
+		{*/
 			if (typesToJoints[JointType.HandLeft].jointTrackingState == JointTrackingState.Tracked)
 			{
 				float x = textureXPos + typesToJoints[JointType.HandLeft].skeletonPoint.ImgCoordNormHorizontal * textureDimensionX;
 				float y = textureYPos + -1* typesToJoints[JointType.HandLeft].skeletonPoint.ImgCoordNormVertical * textureDimensionY;
 				float z = DEPTH_CONSTANT + typesToJoints[JointType.HandLeft].skeletonPoint.Z;
-				LeftHand.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y, z));
+				LeftHand.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y - fix, z));
 			}
 			if (typesToJoints[JointType.ElbowLeft].jointTrackingState == JointTrackingState.Tracked)
 			{
 				float x = textureXPos + typesToJoints[JointType.ElbowLeft].skeletonPoint.ImgCoordNormHorizontal * textureDimensionX;
 				float y = textureYPos + -1* typesToJoints[JointType.ElbowLeft].skeletonPoint.ImgCoordNormVertical * textureDimensionY;
 				float z = DEPTH_CONSTANT + typesToJoints[JointType.ElbowLeft].skeletonPoint.Z;
-				LeftElbow.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y, z));
+				LeftElbow.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y - fix, z));
 			}
 			if (typesToJoints[JointType.ShoulderLeft].jointTrackingState == JointTrackingState.Tracked)
 			{
 				float x = textureXPos + typesToJoints[JointType.ShoulderLeft].skeletonPoint.ImgCoordNormHorizontal * textureDimensionX;
 				float y = textureYPos + -1* typesToJoints[JointType.ShoulderLeft].skeletonPoint.ImgCoordNormVertical * textureDimensionY;
 				float z = DEPTH_CONSTANT + typesToJoints[JointType.ShoulderLeft].skeletonPoint.Z;
-				LeftShoulder.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y, z));
+				LeftShoulder.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y - fix, z));
 			}
 			if (typesToJoints[JointType.HandRight].jointTrackingState == JointTrackingState.Tracked)
 			{
 				float x = textureXPos + typesToJoints[JointType.HandRight].skeletonPoint.ImgCoordNormHorizontal * textureDimensionX;
 				float y = textureYPos + -1* typesToJoints[JointType.HandRight].skeletonPoint.ImgCoordNormVertical * textureDimensionY;
 				float z = DEPTH_CONSTANT + typesToJoints[JointType.HandRight].skeletonPoint.Z;
-				RightHand.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y, z));
+				RightHand.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y - fix, z));
 			}
 			if (typesToJoints[JointType.ElbowRight].jointTrackingState == JointTrackingState.Tracked)
 			{
 				float x = textureXPos + typesToJoints[JointType.ElbowRight].skeletonPoint.ImgCoordNormHorizontal * textureDimensionX;
 				float y = textureYPos + -1* typesToJoints[JointType.ElbowRight].skeletonPoint.ImgCoordNormVertical * textureDimensionY;
 				float z = DEPTH_CONSTANT + typesToJoints[JointType.ElbowRight].skeletonPoint.Z;
-				RightElbow.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y, z));
+				RightElbow.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y - fix, z));
 			}
 			if (typesToJoints[JointType.ElbowRight].jointTrackingState == JointTrackingState.Tracked)
 			{
 				float x = textureXPos + typesToJoints[JointType.ShoulderRight].skeletonPoint.ImgCoordNormHorizontal * textureDimensionX;
 				float y = textureYPos + -1* typesToJoints[JointType.ShoulderRight].skeletonPoint.ImgCoordNormVertical * textureDimensionY;
 				float z = DEPTH_CONSTANT + typesToJoints[JointType.ShoulderRight].skeletonPoint.Z;
-				RightShoulder.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y, z));
+				RightShoulder.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y - fix, z));
 			}
 			// Update positions if tracked
 			/*if (typesToJoints [type].jointTrackingState == JointTrackingState.Tracked)
@@ -199,7 +204,7 @@ public class JointsUpdate : MonoBehaviour {
 				
 				// (re-)activate joint and update position
 				jointsGameObjects[type].SetActive(true);
-				jointsGameObjects[type].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y, z));*/
+				jointsGameObjects[type].transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x , y, z));
 
 				// TODO:
 				//		check for joint collision
@@ -213,7 +218,7 @@ public class JointsUpdate : MonoBehaviour {
 					{
 						currentLocIndex = 0;
 					}
-				}
+				}*/
 			}
 		}
-	}
+	

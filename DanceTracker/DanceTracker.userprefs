@@ -1,8 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\JointsUpdate.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TargetUpdate.cs">
     <Files>
-      <File FileName="Assets\Scripts\JointsUpdate.cs" Line="192" Column="1" />
+      <File FileName="Assets\Scripts\JointsUpdate.cs" Line="85" Column="42" />
+      <File FileName="Assets\Scripts\TargetUpdate.cs" Line="20" Column="31" />
+      <File FileName="..\..\Manual Skater\Assets\Scripts\PlayerController.cs" Line="33" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

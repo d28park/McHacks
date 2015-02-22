@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\RgbTextureUpdate.cs" />
      <Compile Include="Assets\Scripts\SkeletonGen.cs" />
      <Compile Include="Assets\Scripts\StartStopDrawingRGB.cs" />
+     <Compile Include="Assets\Scripts\TargetUpdate.cs" />
      <Compile Include="Assets\Scripts\TrackingStateUpdater.cs" />
      <Compile Include="Assets\Scripts\WarningsUpdater.cs" />
      <Compile Include="Assets\Scripts\Xtr3dGeneratorStateManager.cs" />
