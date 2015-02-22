@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Xtr3D.Net.ExtremeMotion.Data;
+              using Xtr3D.Net.ExtremeMotion.Data;
 
 public class MenuController : MonoBehaviour {
 	
 	#region Defines
 	private const float CLICK_TIME_IN_SEC = 1;
-	private const float TIME_BEFORE_START_ANIMATION = 0.5f; // time is in seconds
+       private const float TIME_BEFORE_START_ANIMATION = 0.5f; // time is in seconds
 	private const float  BUTTON_VALIDATION_TIME = 0.2f;
 	private const float  BUTTON_READY_FOR_SLIDE_TIME = 0.5f;
 	private const float SCENE_BUTTONS_ANIMATION_TIME = 1.5f;
@@ -17,14 +17,13 @@ public class MenuController : MonoBehaviour {
 	//Regions
 	private const float REGION_START_X = 0.5f;
 	private const float LOWER_REGIONS_START_X = 0.4f;
-	private const float UP_ARROW_REGION_Y_POS = 1f;
+         private const float UP_ARROW_REGION_Y_POS = 1f;
 	private const float DOWN_ARROW_REGION_Y_POS = -0.55f;
-	private const float ARROW_REGION_HEIGHT = 0.65f;
+   //	private const float ARROW_REGION_HEIGHT = 0.65f;
 	private const float LOWER_ARROW_REGION_HEIGHT = 0.35f;
 	private const float BUTTON_REGION_HEIGHT = 0.3f;
 	private const float REGION_WIDTH = 2f;
-	private const float SCENE_BUTTON_HYSTE_X = 0.1f;
-	private const float SCENE_BUTTON_HYSTE_Y = 0.1f;
+			private const float SCENE_BUTTON_HYSTE_X = 0.1f;
 	private const float ARROW_BUTTON_HYSTE_X = 0.1f;
 	private const float ARROW_BUTTON_HYSTE_Y = 0.05f;
 	// Scene buttons
@@ -37,7 +36,7 @@ public class MenuController : MonoBehaviour {
 	private const float BUTTON_Y_DIS_FROM_NEIGHBOR = 200; // button height + space
 	private const float BUTTON_Y_DIS_TO_MOVE = BUTTON_Y_DIS_FROM_NEIGHBOR * NUM_OF_BUTTONS_TO_SCROLL;
 	// Arrow buttons
-	private const int NUM_OF_ARROWS = 2;
+   private const int NUM_OF_ARROWS = 2;
 	private const float ARROW_BUTTON_WIDTH = 610;
 	private const float ARROW_BUTTON_HEIGHT = 140;
 	private const float TOP_ARROW_START_Y_POS = 0;
@@ -45,7 +44,7 @@ public class MenuController : MonoBehaviour {
 	private const float ARROW_START_X_POS = -610;
 	
 	private enum Buttons
-	{
+					{
 		UP_ARROW			= 0,
 		DOWN_ARROW			= 1,
 		THREE_TWO_GRID 		= 2,
@@ -59,13 +58,12 @@ public class MenuController : MonoBehaviour {
 	private Dictionary<int, string> m_scenesNames = new Dictionary<int, string>
 	{
 		{(int)Buttons.THREE_TWO_GRID 	,"Grid Selection"},
-		{(int)Buttons.BUTTONS_OVER_VIDEO	,"Buttons\nOver Video"},
+      {(int)Buttons.BUTTONS_OVER_VIDEO	,"Buttons\nOver Video"},
 		{(int)Buttons.HORIZONTAL_SCROLL 	,"Horizontal\nScroll"},
 		{(int)Buttons.X_POSITION 		, "User\nPosition"},
 		{(int)Buttons.TWO_HANDS_UI 		,"Two Hands"}
 	};
-	
-	private List<int> m_sceneRegionsIds = new List<int>();
+  	private List<int> m_sceneRegionsIds = new List<int>();
 	private Dictionary<int, int> m_regionIdToButtonId = new Dictionary<int, int>();
 	
 	public SkeletonManager m_skeletonManager;
@@ -81,9 +79,9 @@ public class MenuController : MonoBehaviour {
 	
 	private MyButton[] m_buttons;
 	private int m_numberOfPagesToScroll;
-	private int m_currentPage = 1;
+  //  	private int m_currentPage = 1;
 	
-	private int m_firstSceneButtonIdOnPage = 0;
+    private int m_firstSceneButtonIdOnPage = 0;
 	
 	private float m_myTimer = 0;
 	private int m_currentSelectedRegionID = INVALID_VALUE;
@@ -105,17 +103,18 @@ public class MenuController : MonoBehaviour {
 	#region Initialize Scene
 	void Awake () {
 		CreateRegions();
-		m_numberOfPagesToScroll = Mathf.CeilToInt((float)NUM_OF_SCENE_BUTTONS/(float)NUM_OF_BUTTONS_TO_SCROLL);
+             m_numberOfPagesToScroll = Mathf.CeilToInt((float)NUM_OF_SCENE_BUTTONS/(float)NUM_OF_BUTTONS_TO_SCROLL);
 	}
+	
 	
 	/// <summary>
 	/// Use this for initialization
 	/// </summary>
-	void Start () {
+ //	void Start () {
 		CreateButtons();
 		
 		//Register to slide event
-		m_slideDetectorManager.SlideOccured += SlideDetected;
+               m_slideDetectorManager.SlideOccured += SlideDetected;
 		InitArrowButtonsVisibility();
 	}
 	
@@ -148,7 +147,7 @@ public class MenuController : MonoBehaviour {
 			}
 		}
 		//Building the buttons column
-		for(int i = 0; i < NUM_OF_SCENE_BUTTONS;i++)
+   for(int i = 0; i < NUM_OF_SCENE_BUTTONS;i++)
 		{
 			int sceneIndex = i + NUM_OF_ARROWS;
 			GameObject movableBtnObject = (GameObject) Instantiate(sceneButtonPrefab,Vector3.zero,Quaternion.identity);
@@ -160,7 +159,7 @@ public class MenuController : MonoBehaviour {
 			((MovableButton)m_buttons[sceneIndex]).InitTweenYpos(-i,SCENE_BUTTON_START_Y_POS,BUTTON_Y_DIS_TO_MOVE,BUTTON_Y_DIS_FROM_NEIGHBOR,SCENE_BUTTONS_ANIMATION_TIME);
 			//sets button label
 			((MovableButton)m_buttons[sceneIndex]).SetLabel(m_scenesNames[sceneIndex]);
-			((MovableButton)m_buttons[sceneIndex]).SetIcon(i);
+          ((MovableButton)m_buttons[sceneIndex]).SetIcon(i);
 			((MovableButton)m_buttons[sceneIndex]).SetLevelToLoad(DEFAULT_UI_SCENE_BUTTON_NAME + i.ToString());
 		}
 	}
@@ -168,7 +167,7 @@ public class MenuController : MonoBehaviour {
 	/// Creates the regions
 	/// </summary>
 	private void CreateRegions ()
-	{
+   {
 		int retRegionId = 0;
 		m_regionIdToButtonId = new Dictionary<int, int>();
 		m_regionsManager = new GenericRegionsManager();
@@ -191,7 +190,6 @@ public class MenuController : MonoBehaviour {
 		}
 	}
 	#endregion Initialize Scene
-	
 	/// <summary>
 	/// Moves the scene buttons down.
 	/// </summary>
@@ -201,7 +199,7 @@ public class MenuController : MonoBehaviour {
 		int buttonsLeft = 0;
 		
 		float distanceToMove = BUTTON_Y_DIS_FROM_NEIGHBOR * NUM_OF_BUTTONS_TO_SCROLL; // setting default menu movement
-		int firstPage = 1;
+int firstPage = 1;
 		
 		if(m_currentPage > firstPage) // if we are not on the first page
 		{
@@ -222,14 +220,13 @@ public class MenuController : MonoBehaviour {
 			m_currentPage--;
 		}
 		else{// we are in the upper edge
-			isEdge = true;
+    // 			isEdge = true;
 		}
 		
 		for(int i = (int)Buttons.THREE_TWO_GRID; i < (int)Buttons.NUM_OF_BUTTONS;i++) // moves all scenes buttons down
 		{
-			((MovableButton)m_buttons[i]).SetYdistanceToMove(distanceToMove);
 			((MovableButton)m_buttons[i]).MoveDown(isEdge);
-		}
+         }
 	}
 	/// <summary>
 	/// Moves the scene buttons up.
@@ -248,15 +245,15 @@ public class MenuController : MonoBehaviour {
 			if(m_currentPage + 1 == m_numberOfPagesToScroll) // checking if next movement is last page
 			{
 				remainder = (NUM_OF_SCENE_BUTTONS - NUM_OF_BUTTONS_TO_SCROLL) - m_firstSceneButtonIdOnPage; // calculating the the number of buttons left on the last page
-				if(remainder > 0){
+if(remainder > 0){
 					distanceToMove = remainder * BUTTON_Y_DIS_FROM_NEIGHBOR; // calculating the smaller distance we need to move according to the number of buttons left
 				}
 				//we are hiding bottom arrow
-				HideArrow(Buttons.DOWN_ARROW);
+	HideArrow(Buttons.DOWN_ARROW);
 			}
 				
 			UpdateFirstButtonOnPageID(remainder,true);
-			
+     //  			
 			m_currentPage++;
 		}
 		else{ // we are in the bottom edge
@@ -266,12 +263,12 @@ public class MenuController : MonoBehaviour {
 		for(int i = (int)Buttons.THREE_TWO_GRID; i < (int)Buttons.NUM_OF_BUTTONS;i++) // moves all scenes buttons up
 		{	
 			((MovableButton)m_buttons[i]).SetYdistanceToMove(distanceToMove);
-			((MovableButton)m_buttons[i]).MoveUp(isEdge);
+((MovableButton)m_buttons[i]).MoveUp(isEdge);
 		}
 	}
 	/// <summary>
 	/// Updates the first button ID on current page.
-	/// </summary>
+    /// </summary>
 	/// <param name='buttonsRemainder'>
 	/// the buttons left to scroll on the next/prev page.
 	/// </param>
@@ -289,7 +286,7 @@ public class MenuController : MonoBehaviour {
 		int direction  = movingUp ? 1 : -1;
 		int positionsToMove = direction*buttonsRemainder;
 		//Updating buttons for each region according to positionsToMove
-		foreach(int regionId in m_sceneRegionsIds)
+   foreach(int regionId in m_sceneRegionsIds)
 		{
 			m_regionIdToButtonId[regionId] = m_regionIdToButtonId[regionId] + positionsToMove;
 		}
@@ -304,11 +301,10 @@ public class MenuController : MonoBehaviour {
 	
 	void Update()
 	{
-		m_myTimer += Time.deltaTime; // updates game timer
+	m_myTimer += Time.deltaTime; // updates game timer
 		
 		UpdateCalibrationState();
-		
-		if(m_isSlideDetected && m_lastKnownActiveRegionID > 1) // slide detected and current region is NOT an arrow button
+               		if(m_isSlideDetected && m_lastKnownActiveRegionID > 1) // slide detected and current region is NOT an arrow button
 		{
 			Point slideStartLocation = m_slideDetectorManager.GetSlideStartLocation(); // getting slide start location
 			//checking if we started slide inside our last selected region at the last accepted period of time (MAX_TIME_SLIDE_ACCEPTED)
@@ -316,6 +312,7 @@ public class MenuController : MonoBehaviour {
 				m_regionsManager.IsInRegionWithHyst(new Vector2(slideStartLocation.X,slideStartLocation.Y),m_lastKnownActiveRegionID))
 			{
 				MenuItemClicked();
+			}
 			}
 			else{ // illegal slide
 				m_isSlideDetected = false;
@@ -326,11 +323,11 @@ public class MenuController : MonoBehaviour {
 				UpdateActiveButtons();
 		}
 	}
-	/// <summary>
+		/// <summary>
 	/// Updates the state of the calibration screen
 	/// </summary>
-	private void UpdateCalibrationState ()
-	{
+    private void UpdateCalibrationState ()
+  //	{
 		if(!m_lastEngineState.Equals(m_skeletonManager.GetTrackingState()))
 		{
 			m_lastEngineState = m_skeletonManager.GetTrackingState();
@@ -354,8 +351,9 @@ public class MenuController : MonoBehaviour {
 	private void UpdateActiveButtons()
 	{
 		if(m_lastEngineState.Equals(TrackingState.Tracked)) // if user is tracked
-		{
+					{
 			Vector2 palmPosition = m_skeletonManager.GetRightPalmPosition();
+			Vector2 palmFixedPosition = new Vector2(Mathf.Clamp(palmPosition.x,0,REGION_WIDTH), palmPosition.y);
 			Vector2 palmFixedPosition = new Vector2(Mathf.Clamp(palmPosition.x,0,REGION_WIDTH), palmPosition.y);
 			//saving current active region id according to cursor position
 			int selectedActiveRegionID = m_regionsManager.GetActiveRegion(palmFixedPosition);
@@ -364,7 +362,6 @@ public class MenuController : MonoBehaviour {
 				m_currentSelectedRegionID = selectedActiveRegionID;
 				
 				//checking if a new region is selected
-				if(m_currentSelectedRegionID != m_lastSelectedRegionID)
 				{
 					//Debug.Log(m_currentSelectedRegionID);
 					// checking if the current region is not disabled
@@ -383,13 +380,12 @@ public class MenuController : MonoBehaviour {
 						
 						//update new selected button
 						m_lastSelectedRegionID = m_currentSelectedRegionID;
-						m_lastSelectedButtonID = m_currentSelectedButtonID;
+		m_lastSelectedButtonID = m_currentSelectedButtonID;
 						
 						// if we have a new button we want starting a new time based click
 						InitClickState();
 					}
-					
-				}
+        				}
 			}
 			//Only after we passed BUTTON_VALIDATION_TIME time and current selected button is activated
 			if(m_currentSelectedButtonID != INVALID_VALUE)
@@ -401,7 +397,7 @@ public class MenuController : MonoBehaviour {
 				}
 				else{ // one of our arrows is selected, we start the time base click
 					UpdateTimeBasedClick();
-				}
+  //   				}
 			}
 		}
 		else{ // user is not tracked
@@ -419,7 +415,7 @@ public class MenuController : MonoBehaviour {
 			m_buttons[m_lastSelectedButtonID].HighLightState(false);
 			
 			if((m_lastSelectedButtonID != (int)Buttons.DOWN_ARROW) && (m_lastSelectedButtonID != (int)Buttons.UP_ARROW))
-			{
+		{
 				((MovableButton)m_buttons[m_lastSelectedButtonID]).ShowSlider(false);
 			}
 		}
@@ -427,7 +423,7 @@ public class MenuController : MonoBehaviour {
 	
 	private bool IsCurrentRegionDisabled()
 	{
-		bool disabled = false;
+ //   		bool disabled = false;
 		
 		foreach (int region in m_disabledRegions)
 		{
@@ -435,7 +431,7 @@ public class MenuController : MonoBehaviour {
 			{
 				disabled = true;
 				break;
-			}
+				}
 		}
 		
 		return disabled;
@@ -458,18 +454,18 @@ public class MenuController : MonoBehaviour {
 	private bool IsButtonSelectionValid (int activeRegionId)
 	{
 		bool valid = false;
-		if(activeRegionId != INVALID_VALUE)
+if(activeRegionId != INVALID_VALUE)
 		{
 			if(m_buttonValidationStartedTime == INVALID_VALUE)
 			{
 				m_buttonValidationStartedTime = m_myTimer;
-			}
+	}
 			else
 			{
 				if(m_myTimer - m_buttonValidationStartedTime > BUTTON_VALIDATION_TIME)
 				{
 					m_buttonValidationStartedTime = INVALID_VALUE;
-					valid = true;
+            valid = true;
 				}
 			}
 		}
@@ -482,10 +478,9 @@ public class MenuController : MonoBehaviour {
 	/// <summary>
 	/// Checks if the current button is selected for BUTTON_VALIDATION_TIME
 	/// </summary>
-	/// <returns>
 	/// <c>true</c> if BUTTON_VALIDATION_TIME passed ; otherwise, <c>false</c>.
-	/// </returns>
-	private void UpdateButtonReadyForSlide ()
+               /// </returns>
+         private void UpdateButtonReadyForSlide ()
 	{
 		
 		if(m_readyForSlideTime == INVALID_VALUE)
@@ -513,14 +508,14 @@ public class MenuController : MonoBehaviour {
 	{	
 		m_readyForSlideTime = INVALID_VALUE;
 		m_buttonSelectedStartedTime = INVALID_VALUE;
-		m_sceneButtonAnimStartedTime = INVALID_VALUE;
+               m_sceneButtonAnimStartedTime = INVALID_VALUE;
 		m_timeBaseAnimation.HideAnimation();
-	}
+		}
 	/// <summary>
 	/// Inits the state of the regions.
 	/// </summary>
-	private void InitRegionsState()
-	{
+  // 	private void InitRegionsState()
+  //   	{
 		DeselectLastRegion();
 		m_currentSelectedRegionID = INVALID_VALUE;
 		m_currentSelectedButtonID = INVALID_VALUE;
@@ -529,9 +524,9 @@ public class MenuController : MonoBehaviour {
 		m_timeBaseAnimation.HideAnimation();
 	}
 		
-	/// <summary>
+ //  	/// <summary>
 	/// Updates the arrows time based click when one of the buttons is selected
-	/// </summary>
+           /// </summary>
 	private void UpdateTimeBasedClick ()
 	{
 		if(m_lastSelectedRegionID != INVALID_VALUE) // one of our valid region is selected
@@ -545,7 +540,7 @@ public class MenuController : MonoBehaviour {
 			else // click animation started
 			{
 				//Waiting TIME_BEFORE_START_ANIMATION so animation wouldn't start immediatly when just hovered over a button.
-				if(m_myTimer - m_buttonSelectedStartedTime > TIME_BEFORE_START_ANIMATION)
+    // 				if(m_myTimer - m_buttonSelectedStartedTime > TIME_BEFORE_START_ANIMATION)
 				{
 					// Start playing animation only if it isn't playing already and Scene moving animation has finsihed.
 					if(!m_timeBaseAnimation.isPlaying && !m_waitWithAnimation)
@@ -559,15 +554,14 @@ public class MenuController : MonoBehaviour {
 				// we will have to sync between "CLICK_TIME_IN_SEC" and our actual animation time (num of frames / fps - see TimeBaseAnimation)
 				if(m_myTimer - m_buttonSelectedStartedTime > CLICK_TIME_IN_SEC + TIME_BEFORE_START_ANIMATION)
 				{
-					//if we need to trigger recurring clicks, we want to start time base click again only after scene buttons movement animation finished
+             //if we need to trigger recurring clicks, we want to start time base click again only after scene buttons movement animation finished
 					if(m_sceneButtonAnimStartedTime == INVALID_VALUE) // save starting time of scene buttons animation if not started
 					{
-						//trigger click - start scene buttons movement
+				//trigger click - start scene buttons movement
 						m_sceneButtonAnimStartedTime = m_myTimer;
 						ArrowItemClicked();
 						m_timeBaseAnimation.HideAnimation();
-						
-					}
+									}
 					else // scene buttons movement animation started
 					{
 						// checking if scene buttons animation finished - SCENE_BUTTONS_ANIMATION_TIME
@@ -579,13 +573,13 @@ public class MenuController : MonoBehaviour {
 							m_sceneButtonAnimStartedTime = INVALID_VALUE;
 							m_waitWithAnimation = false;
 						}
-					}
+    }
 				}				
 			}
 		}
 		else // we are currently on an invalid region
-		{
-			if(m_timeBaseAnimation.isPlaying)
+               {
+                if(m_timeBaseAnimation.isPlaying)
 				m_timeBaseAnimation.HideAnimation();
 		}
 	}
@@ -615,6 +609,7 @@ public class MenuController : MonoBehaviour {
 			//m_regionsManager.EnableRegion(m_regionIdToButtonId[(int)Buttons.UP_ARROW],true);
 			((ArrowButton)m_buttons[(int)Buttons.UP_ARROW]).SetAvailability(true);
 			if(m_disabledRegions.Contains((int)Buttons.UP_ARROW))
+			if(m_disabledRegions.Contains((int)Buttons.UP_ARROW))
 				m_disabledRegions.Remove((int)Buttons.UP_ARROW);
 			
 			//m_regionsManager.EnableRegion(m_regionIdToButtonId[(int)Buttons.DOWN_ARROW],true);
@@ -629,7 +624,7 @@ public class MenuController : MonoBehaviour {
 		//m_regionsManager.EnableRegion(m_regionIdToButtonId[(int)arrowId],false);
 		m_buttons[(int)arrowId].SetAvailability(false);
 		m_disabledRegions.Add((int)arrowId);
-		m_buttons[m_regionIdToButtonId[(int)arrowId]].HighLightState(false);
+             m_buttons[m_regionIdToButtonId[(int)arrowId]].HighLightState(false);
 		m_lastSelectedRegionID = INVALID_VALUE;
 	}
 	
@@ -639,10 +634,10 @@ public class MenuController : MonoBehaviour {
 	void UpdateClickAnimationPosition ()
 	{
 		m_timeBaseAnimation.transform.parent = (m_currentSelectedButtonID == (int) Buttons.UP_ARROW) ? m_topScrollPanel.transform : m_bottomScrollPanel.transform;
-		Vector3 arrowButtonPos = m_buttons[m_currentSelectedButtonID].transform.localPosition;
+  //   		Vector3 arrowButtonPos = m_buttons[m_currentSelectedButtonID].transform.localPosition;
 		int arrowPositionOffset = 10;
 		int direction = (m_currentSelectedButtonID == (int) Buttons.UP_ARROW) ? 1 : -1;
-		m_timeBaseAnimation.transform.localPosition = new Vector3(arrowButtonPos.x + ARROW_BUTTON_WIDTH/2,arrowButtonPos.y - m_timeBaseAnimation.transform.localScale.y + (direction * arrowPositionOffset));
+				m_timeBaseAnimation.transform.localPosition = new Vector3(arrowButtonPos.x + ARROW_BUTTON_WIDTH/2,arrowButtonPos.y - m_timeBaseAnimation.transform.localScale.y + (direction * arrowPositionOffset));
 	}
 	
 	/// <summary>
@@ -658,7 +653,7 @@ public class MenuController : MonoBehaviour {
 			if(m_lastSelectedRegionID != INVALID_VALUE && m_lastSelectedRegionID != m_lastKnownActiveRegionID)
 				m_buttons[m_regionIdToButtonId[m_lastSelectedRegionID]].HighLightState(false);
 			// force highlight last known ready for slide button when activated
-			m_buttons[m_regionIdToButtonId[m_lastKnownActiveRegionID]].HighLightState(true);
+           m_buttons[m_regionIdToButtonId[m_lastKnownActiveRegionID]].HighLightState(true);
 			((MovableButton)m_buttons[m_regionIdToButtonId[m_lastKnownActiveRegionID]]).ShowSlider(true);
 			// Start slide
 			((MovableButton)m_buttons[m_regionIdToButtonId[m_lastKnownActiveRegionID]]).Slide();

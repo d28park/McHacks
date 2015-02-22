@@ -14,7 +14,7 @@ using System.Collections.Generic;
 /// transformed coordinates only change if the widget's transform moves relative to the panel,
 /// so that can be cached as well. In the end, using this class means using more memory, but at
 /// the same time it allows for significant performance gains, especially when using widgets that
-/// spit out a lot of vertices, such as UILabels.
+        /// spit out a lot of vertices, such as UILabels.
 /// </summary>
 
 public class UIGeometry
@@ -26,8 +26,8 @@ public class UIGeometry
 	public BetterList<Vector3> verts = new BetterList<Vector3>();
 
 	/// <summary>
-	/// Widget's texture coordinates for the geometry's vertices.
-	/// </summary>
+         /// Widget's texture coordinates for the geometry's vertices.
+  /// </summary>
 
 	public BetterList<Vector2> uvs = new BetterList<Vector2>();
 
@@ -35,18 +35,17 @@ public class UIGeometry
 	/// Array of colors for the geometry's vertices.
 	/// </summary>
 
-	public BetterList<Color32> cols = new BetterList<Color32>();
+ //   	public BetterList<Color32> cols = new BetterList<Color32>();
 
-	// Relative-to-panel vertices, normal, and tangent
+        // Relative-to-panel vertices, normal, and tangent
 	BetterList<Vector3> mRtpVerts = new BetterList<Vector3>();
 	Vector3 mRtpNormal;
-	Vector4 mRtpTan;
+		Vector4 mRtpTan;
 
 	/// <summary>
-	/// Whether the geometry contains usable vertices.
+/// Whether the geometry contains usable vertices.
 	/// </summary>
-
-	public bool hasVertices { get { return (verts.size > 0); } }
+       	public bool hasVertices { get { return (verts.size > 0); } }
 
 	/// <summary>
 	/// Whether the geometry has usable transformed vertex data.
@@ -56,10 +55,10 @@ public class UIGeometry
 
 	/// <summary>
 	/// Step 1: Prepare to fill the buffers -- make them clean and valid.
-	/// </summary>
+            /// </summary>
 
 	public void Clear ()
-	{
+		{
 		verts.Clear();
 		uvs.Clear();
 		cols.Clear();
@@ -84,7 +83,7 @@ public class UIGeometry
 		if (verts.size > 0)
 		{
 			mRtpVerts.Clear();
-			for (int i = 0, imax = verts.size; i < imax; ++i) mRtpVerts.Add(widgetToPanel.MultiplyPoint3x4(verts[i]));
+   for (int i = 0, imax = verts.size; i < imax; ++i) mRtpVerts.Add(widgetToPanel.MultiplyPoint3x4(verts[i]));
 
 			// Calculate the widget's normal and tangent
 			mRtpNormal = widgetToPanel.MultiplyVector(Vector3.back).normalized;
@@ -95,15 +94,15 @@ public class UIGeometry
 	}
 
 	/// <summary>
-	/// Step 4: Fill the specified buffer using the transformed values.
+ //  	/// Step 4: Fill the specified buffer using the transformed values.
 	/// </summary>
 
-	public void WriteToBuffers (BetterList<Vector3> v, BetterList<Vector2> u, BetterList<Color32> c, BetterList<Vector3> n, BetterList<Vector4> t)
+public void WriteToBuffers (BetterList<Vector3> v, BetterList<Vector2> u, BetterList<Color32> c, BetterList<Vector3> n, BetterList<Vector4> t)
 	{
-		if (mRtpVerts != null && mRtpVerts.size > 0)
+if (mRtpVerts != null && mRtpVerts.size > 0)
 		{
 			if (n == null)
-			{
+	{
 				for (int i = 0; i < mRtpVerts.size; ++i)
 				{
 					v.Add(mRtpVerts.buffer[i]);

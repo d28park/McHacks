@@ -16,7 +16,7 @@ public class NGUISelectionTools
 
 		if (go != null)
 		{
-			go.hideFlags = HideFlags.DontSave;
+            go.hideFlags = HideFlags.DontSave;
 
 			if (Application.isPlaying)
 			{
@@ -34,7 +34,7 @@ public class NGUISelectionTools
 	{
 		if (HasValidTransform())
 		{
-			GameObject[] gos = Selection.gameObjects;
+               GameObject[] gos = Selection.gameObjects;
 			bool val = !NGUITools.GetActive(Selection.activeGameObject);
 			foreach (GameObject go in gos) NGUITools.SetActive(go, val);
 		}
@@ -54,16 +54,16 @@ public class NGUISelectionTools
 	}
 
 	[MenuItem("GameObject/Selection/Add New Child #&n")]
-	static void CreateLocalGameObject ()
+      static void CreateLocalGameObject ()
 	{
-		if (PrefabCheck())
+                 if (PrefabCheck())
 		{
 			// Make this action undoable
 			NGUIEditorTools.RegisterUndo("Add New Child");
 
 			// Create our new GameObject
 			GameObject newGameObject = new GameObject();
-			newGameObject.name = "GameObject";
+                 newGameObject.name = "GameObject";
 
 			// If there is a selected object in the scene then make the new object its child.
 			if (Selection.activeTransform != null)
@@ -111,16 +111,16 @@ public class NGUISelectionTools
 		if (Selection.objects == null || Selection.objects.Length == 0)
 		{
 			Debug.LogWarning("You must select an object first");
-			return false;
+      return false;
 		}
 		return true;
 	}
 	
+	
 	/// <summary>
 	/// Helper function that checks to see if there is an object with a Transform component selected.
 	/// </summary>
-	
-	static bool HasValidTransform()
+          	static bool HasValidTransform()
 	{
 		if (Selection.activeTransform == null)
 		{
@@ -128,7 +128,6 @@ public class NGUISelectionTools
 			return false;
 		}
 		return true;
-	}
 	
 	/// <summary>
 	/// Helper function that checks to see if a prefab is currently selected.
@@ -136,6 +135,7 @@ public class NGUISelectionTools
 
 	static bool PrefabCheck()
 	{
+		if (Selection.activeTransform != null)
 		if (Selection.activeTransform != null)
         {
             // Check if the selected object is a prefab instance and display a warning
@@ -146,7 +146,7 @@ public class NGUISelectionTools
 #endif
 
             if (type == PrefabType.PrefabInstance)
-            {
+		{
                 return EditorUtility.DisplayDialog("Losing prefab",
 					"This action will lose the prefab connection. Are you sure you wish to continue?",
 					"Continue", "Cancel");
@@ -157,23 +157,23 @@ public class NGUISelectionTools
 	
 	/// <summary>
 	/// Function that collects a list of file dependencies from the specified list of objects.
-	/// </summary>
+					/// </summary>
 	
 	static List<AssetEntry> GetDependencyList (Object[] objects, bool reverse)
 	{
-		Object[] deps = reverse ? EditorUtility.CollectDeepHierarchy(objects) : EditorUtility.CollectDependencies(objects);
-		
-		List<AssetEntry> list = new List<AssetEntry>();
+           Object[] deps = reverse ? EditorUtility.CollectDeepHierarchy(objects) : EditorUtility.CollectDependencies(objects);
+					  List<AssetEntry> list = new List<AssetEntry>();
 		
 		foreach (Object obj in deps)
 		{
 			string path = AssetDatabase.GetAssetPath(obj);
 			
-			if (!string.IsNullOrEmpty(path))
-			{
+ //   			if (!string.IsNullOrEmpty(path))
+    //   			{
 				bool found = false;
 				System.Type type = obj.GetType();
 				
+				foreach (AssetEntry ent in list)
 				foreach (AssetEntry ent in list)
 				{
 					if (ent.path.Equals(path))
@@ -190,7 +190,7 @@ public class NGUISelectionTools
 					ent.path = path;
 					ent.types.Add(type);
 					list.Add(ent);
-				}
+                 }
 			}
 		}
 		
@@ -226,13 +226,12 @@ public class NGUISelectionTools
 			
 			if (ae.types.Count > 1)
 			{
-				text += " (" + RemovePrefix(ae.types[0].ToString());
+            text += " (" + RemovePrefix(ae.types[0].ToString());
 			
 				for (int i = 1; i < ae.types.Count; ++i)
 				{
 					text += ", " + RemovePrefix(ae.types[i].ToString());
-				}
-				
+                 }
 				text += ")";
 			}
 			list.Add(text);
@@ -243,7 +242,7 @@ public class NGUISelectionTools
 		text = "";
 		foreach (string s in list) text += s + "\n";
 		list.Clear();
-		list = null;
+       list = null;
 		
 		dependencies.Clear();
 		dependencies = null;

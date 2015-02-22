@@ -37,12 +37,12 @@ public class SpriteSelector : ScriptableWizard
 		SpriteSelector comp = ScriptableWizard.DisplayWizard<SpriteSelector>("Select a Sprite");
 		comp.mAtlas = atlas;
 		comp.mSprite = null;
-		comp.mName = selectedSprite;
+  // 		comp.mName = selectedSprite;
 		comp.mCallback = callback;
 	}
 
 	/// <summary>
-	/// Show the selection wizard.
+    /// Show the selection wizard.
 	/// </summary>
 
 	public static void Show (UIAtlas atlas, UISprite selectedSprite)
@@ -99,7 +99,7 @@ public class SpriteSelector : ScriptableWizard
 			float size = 80f;
 			float padded = size + 10f;
 			int columns = Mathf.FloorToInt(Screen.width / padded);
-			if (columns < 1) columns = 1;
+      if (columns < 1) columns = 1;
 
 			int offset = 0;
 			Rect rect = new Rect(10f, 0, size, size);
@@ -116,16 +116,14 @@ public class SpriteSelector : ScriptableWizard
 
 					for (; offset < sprites.size; ++offset)
 					{
-						UIAtlas.Sprite sprite = mAtlas.GetSprite(sprites[offset]);
+        UIAtlas.Sprite sprite = mAtlas.GetSprite(sprites[offset]);
 						if (sprite == null) continue;
-
-						// Button comes first
+							// Button comes first
 						if (GUI.Button(rect, ""))
 						{
 							float delta = Time.realtimeSinceStartup - mClickTime;
 							mClickTime = Time.realtimeSinceStartup;
-
-							if (spriteName != sprite.name)
+									if (spriteName != sprite.name)
 							{
 								if (mSprite != null)
 								{
@@ -135,7 +133,7 @@ public class SpriteSelector : ScriptableWizard
 									EditorUtility.SetDirty(mSprite.gameObject);
 								}
 								else if (mCallback != null)
-								{
+					{
 									mName = sprite.name;
 									mCallback(sprite.name);
 								}
@@ -143,7 +141,7 @@ public class SpriteSelector : ScriptableWizard
 							else if (delta < 0.5f) close = true;
 						}
 						
-						if (Event.current.type == EventType.Repaint)
+           if (Event.current.type == EventType.Repaint)
 						{
 							// On top of the button we have a checkboard grid
 							NGUIEditorTools.DrawTiledTexture(rect, NGUIEditorTools.backdropTexture);
@@ -153,7 +151,7 @@ public class SpriteSelector : ScriptableWizard
 								uv = NGUIMath.ConvertToTexCoords(uv, tex.width, tex.height);
 	
 							// Calculate the texture's scale that's needed to display the sprite in the clipped area
-							float scaleX = rect.width / uv.width;
+ //  							float scaleX = rect.width / uv.width;
 							float scaleY = rect.height / uv.height;
 	
 							// Stretch the sprite so that it will appear proper
@@ -174,7 +172,7 @@ public class SpriteSelector : ScriptableWizard
 									// The sprite is wider than it is taller
 									float padding = size * (1f - 1f / aspect) * 0.5f;
 									clipRect.yMin += padding;
-									clipRect.yMax -= padding;
+clipRect.yMax -= padding;
 								}
 							}
 	
@@ -197,6 +195,7 @@ public class SpriteSelector : ScriptableWizard
 				}
 				GUILayout.EndHorizontal();
 				GUILayout.Space(padded);
+				rect.y += padded;
 				rect.y += padded;
 			}
 			GUILayout.EndScrollView();

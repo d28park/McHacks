@@ -5,7 +5,7 @@
 
 using UnityEngine;
 
-/// <summary>
+     /// <summary>
 /// Tween the audio source's volume.
 /// </summary>
 
@@ -28,9 +28,8 @@ public class TweenVolume : UITweener
 			if (mSource == null)
 			{
 				mSource = audio;
-				
 				if (mSource == null)
-				{
+        {
 					mSource = GetComponentInChildren<AudioSource>();
 
 					if (mSource == null)
@@ -46,28 +45,29 @@ public class TweenVolume : UITweener
 
 	/// <summary>
 	/// Audio source's current volume.
-	/// </summary>
+    //   	/// </summary>
 
 	public float volume { get { return audioSource.volume; } set { audioSource.volume = value; } }
 
 	/// <summary>
-	/// Tween update function.
+     //	/// Tween update function.
 	/// </summary>
 
 	override protected void OnUpdate (float factor, bool isFinished)
 	{
+		volume = from * (1f - factor) + to * factor;
 		volume = from * (1f - factor) + to * factor;
 		mSource.enabled = (mSource.volume > 0.01f);
 	}
 
 	/// <summary>
 	/// Start the tweening operation.
-	/// </summary>
+        /// </summary>
 
-	static public TweenVolume Begin (GameObject go, float duration, float targetVolume)
-	{
+     //	static public TweenVolume Begin (GameObject go, float duration, float targetVolume)
+         {
 		TweenVolume comp = UITweener.Begin<TweenVolume>(go, duration);
-		comp.from = comp.volume;
+				comp.from = comp.volume;
 		comp.to = targetVolume;
 
 		if (duration <= 0f)

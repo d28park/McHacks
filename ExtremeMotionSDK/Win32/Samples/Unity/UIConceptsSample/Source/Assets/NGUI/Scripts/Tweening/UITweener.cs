@@ -6,7 +6,7 @@
 using UnityEngine;
 using System.Collections;
 
-/// <summary>
+   //   /// <summary>
 /// Base class for all tweening operations.
 /// </summary>
 
@@ -20,11 +20,11 @@ public abstract class UITweener : IgnoreTimeScale
 		EaseInOut,
 		BounceIn,
 		BounceOut,
-	}
+			}
 
 	public enum Style
 	{
-		Once,
+     //		Once,
 		Loop,
 		PingPong,
 	}
@@ -36,7 +36,6 @@ public abstract class UITweener : IgnoreTimeScale
 	/// </summary>
 
 	public OnFinished onFinished;
-
 	/// <summary>
 	/// Tweening method used.
 	/// </summary>
@@ -53,7 +52,7 @@ public abstract class UITweener : IgnoreTimeScale
 	/// Optional curve to apply to the tween's time factor value.
 	/// </summary>
 
-	public AnimationCurve animationCurve = new AnimationCurve(new Keyframe(0f, 0f, 0f, 1f), new Keyframe(1f, 1f, 1f, 0f));
+     //   	public AnimationCurve animationCurve = new AnimationCurve(new Keyframe(0f, 0f, 0f, 1f), new Keyframe(1f, 1f, 1f, 0f));
 
 	/// <summary>
 	/// Whether the tween will ignore the timescale, making it work while the game is paused.
@@ -61,9 +60,9 @@ public abstract class UITweener : IgnoreTimeScale
 
 	public bool ignoreTimeScale = true;
 
-	/// <summary>
-	/// How long will the tweener wait before starting the tween?
-	/// </summary>
+       /// <summary>
+			/// How long will the tweener wait before starting the tween?
+                 /// </summary>
 
 	public float delay = 0f;
 
@@ -75,25 +74,26 @@ public abstract class UITweener : IgnoreTimeScale
 
 	/// <summary>
 	/// Whether the tweener will use steeper curves for ease in / out style interpolation.
-	/// </summary>
+           /// </summary>
 
 	public bool steeperCurves = false;
 
 	/// <summary>
 	/// Used by buttons and tween sequences. Group of '0' means not in a sequence.
 	/// </summary>
-
-	public int tweenGroup = 0;
+   	public int tweenGroup = 0;
 
 	/// <summary>
+	/// Target used with 'callWhenFinished', or this game object if none was specified.
 	/// Target used with 'callWhenFinished', or this game object if none was specified.
 	/// </summary>
 
 	public GameObject eventReceiver;
 
+
 	/// <summary>
 	/// Name of the function to call when the tween finishes.
-	/// </summary>
+/// </summary>
 
 	public string callWhenFinished;
 
@@ -102,8 +102,7 @@ public abstract class UITweener : IgnoreTimeScale
 	float mDuration = 0f;
 	float mAmountPerDelta = 1f;
 	float mFactor = 0f;
-
-	/// <summary>
+   	/// <summary>
 	/// Amount advanced per delta time.
 	/// </summary>
 
@@ -113,7 +112,7 @@ public abstract class UITweener : IgnoreTimeScale
 		{
 			if (mDuration != duration)
 			{
-				mDuration = duration;
+//   				mDuration = duration;
 				mAmountPerDelta = Mathf.Abs((duration > 0f) ? 1f / duration : 1000f);
 			}
 			return mAmountPerDelta;
@@ -137,8 +136,7 @@ public abstract class UITweener : IgnoreTimeScale
 	/// </summary>
 
 	void Start () { Update(); }
-
-	/// <summary>
+              	/// <summary>
 	/// Update the tweening factor and call the virtual update function.
 	/// </summary>
 
@@ -147,7 +145,7 @@ public abstract class UITweener : IgnoreTimeScale
 		float delta = ignoreTimeScale ? UpdateRealTimeDelta() : Time.deltaTime;
 		float time = ignoreTimeScale ? realTime : Time.time;
 
-		if (!mStarted)
+      if (!mStarted)
 		{
 			mStarted = true;
 			mStartTime = time + delay;
@@ -184,7 +182,7 @@ public abstract class UITweener : IgnoreTimeScale
 
 		// If the factor goes out of range and this is a one-time tweening operation, disable the script
 		if ((style == Style.Once) && (mFactor > 1f || mFactor < 0f))
-		{
+     {
 			mFactor = Mathf.Clamp01(mFactor);
 			Sample(mFactor, true);
 
@@ -195,6 +193,7 @@ public abstract class UITweener : IgnoreTimeScale
 			if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
 			{
 				eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
+			}
 			}
 
 			// Disable this script unless the function calls above changed something
@@ -213,24 +212,22 @@ public abstract class UITweener : IgnoreTimeScale
 	void OnDisable () { mStarted = false; }
 
 	/// <summary>
-	/// Sample the tween at the specified factor.
-	/// </summary>
-
-	public void Sample (float factor, bool isFinished)
+			/// Sample the tween at the specified factor.
+				/// </summary>
+         	public void Sample (float factor, bool isFinished)
 	{
 		// Calculate the sampling value
 		float val = Mathf.Clamp01(factor);
 
 		if (method == Method.EaseIn)
-		{
+			{
 			val = 1f - Mathf.Sin(0.5f * Mathf.PI * (1f - val));
 			if (steeperCurves) val *= val;
 		}
 		else if (method == Method.EaseOut)
 		{
 			val = Mathf.Sin(0.5f * Mathf.PI * val);
-
-			if (steeperCurves)
+					if (steeperCurves)
 			{
 				val = 1f - val;
 				val = 1f - val * val;
@@ -247,7 +244,7 @@ public abstract class UITweener : IgnoreTimeScale
 				float sign = Mathf.Sign(val);
 				val = 1f - Mathf.Abs(val);
 				val = 1f - val * val;
-				val = sign * val * 0.5f + 0.5f;
+	val = sign * val * 0.5f + 0.5f;
 			}
 		}
 		else if (method == Method.BounceIn)
@@ -261,7 +258,7 @@ public abstract class UITweener : IgnoreTimeScale
 
 		// Call the virtual update
 		OnUpdate((animationCurve != null) ? animationCurve.Evaluate(val) : val, isFinished);
-	}
+  //   	}
 
 	/// <summary>
 	/// Main Bounce logic to simplify the Sample function
@@ -284,11 +281,10 @@ public abstract class UITweener : IgnoreTimeScale
 		else
 		{
 			val = 7.5625f * (val -= 0.9545454f) * val + 0.984375f; // 0.9545454 = (2.625 / 2.75) 
-		}
-		return val;
+      }
+return val;
 	}
-
-	/// <summary>
+  	/// <summary>
 	/// Manually activate the tweening process, reversing it if necessary.
 	/// </summary>
 
@@ -300,9 +296,10 @@ public abstract class UITweener : IgnoreTimeScale
 	}
 
 	/// <summary>
+	/// <summary>
 	/// Manually reset the tweener's state to the beginning.
 	/// </summary>
-
+				public void Reset () { mStarted = false; mFactor = (mAmountPerDelta < 0f) ? 1f : 0f; Sample(mFactor, false); }
 	public void Reset () { mStarted = false; mFactor = (mAmountPerDelta < 0f) ? 1f : 0f; Sample(mFactor, false); }
 
 	/// <summary>
@@ -314,11 +311,12 @@ public abstract class UITweener : IgnoreTimeScale
 		if (mFactor > 0f)
 		{
 			mAmountPerDelta = -amountPerDelta;
+			mAmountPerDelta = -amountPerDelta;
 		}
 		else
 		{
 			mAmountPerDelta = Mathf.Abs(amountPerDelta);
-		}
+           }
 		enabled = true;
 	}
 
@@ -331,25 +329,24 @@ public abstract class UITweener : IgnoreTimeScale
 	/// <summary>
 	/// Starts the tweening operation.
 	/// </summary>
-
-	static public T Begin<T> (GameObject go, float duration) where T : UITweener
+        	static public T Begin<T> (GameObject go, float duration) where T : UITweener
 	{
 		T comp = go.GetComponent<T>();
-#if UNITY_FLASH
-		if ((object)comp == null) comp = (T)go.AddComponent<T>();
+    #if UNITY_FLASH
+   if ((object)comp == null) comp = (T)go.AddComponent<T>();
 #else
 		if (comp == null) comp = go.AddComponent<T>();
 #endif
-		comp.mStarted = false;
+       comp.mStarted = false;
 		comp.duration = duration;
-		comp.mFactor = 0f;
+			comp.mFactor = 0f;
 		comp.mAmountPerDelta = Mathf.Abs(comp.mAmountPerDelta);
 		comp.style = Style.Once;
 		comp.animationCurve = new AnimationCurve(new Keyframe(0f, 0f, 0f, 1f), new Keyframe(1f, 1f, 1f, 0f));
 		comp.eventReceiver = null;
 		comp.callWhenFinished = null;
 		comp.onFinished = null;
-		comp.enabled = true;
+					comp.enabled = true;
 		return comp;
 	}
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
-
-using System;
+//   using System;
 using System.Collections.Generic;
 using Xtr3D.Net.ExtremeMotion;
 using Xtr3D.Net.ColorImage;
@@ -8,9 +7,9 @@ using Xtr3D.Net.ExtremeMotion.Data;
 using Xtr3D.Net.ExtremeMotion.Interop.Types;
 
 /* Note: this code need to be synced (using locks for example) , as the Update thread is read from a different thread than the MyColorImageFrameReadyEventHandler thread.
- * For clarity of the code, it was not added here.  See JointsUpdate.cs for an example.
+    //   * For clarity of the code, it was not added here.  See JointsUpdate.cs for an example.
  */
-public class TrackingStateUpdater : MonoBehaviour {
+     // public class TrackingStateUpdater : MonoBehaviour {
 	
 	private TrackingState trackingState;
 	private const string basicTrackingText = "Tracking State: ";
@@ -24,8 +23,7 @@ public class TrackingStateUpdater : MonoBehaviour {
 	};
 	public GUIText GuiTextComponent;
 	public GameObject GuiCalibrationCube;
-	
-	// Use this for initialization
+             	// Use this for initialization
 	void Start () {
 		GeneratorSingleton.Instance.DataFrameReady += OnDataFrameReceived;
 	}
@@ -44,8 +42,7 @@ public class TrackingStateUpdater : MonoBehaviour {
 			}
 		}
 	}
-	
-	// Update is called once per frame
+         	// Update is called once per frame
 	void Update () {
         GuiTextComponent.text = basicTrackingText + text;
         // If we're in calibration mode - show the Calibration Image

@@ -1,7 +1,7 @@
 //----------------------------------------------
-//            NGUI: Next-Gen UI kit
+                //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
-//----------------------------------------------
+  ////----------------------------------------------
 
 using UnityEditor;
 using UnityEngine;
@@ -19,7 +19,7 @@ public class SpriteSelector : ScriptableWizard
 	UISprite mSprite;
 	string mName;
 	Vector2 mPos = Vector2.zero;
-	Callback mCallback;
+Callback mCallback;
 	float mClickTime = 0f;
 
 	/// <summary>
@@ -29,8 +29,9 @@ public class SpriteSelector : ScriptableWizard
 	public string spriteName { get { return (mSprite != null) ? mSprite.spriteName : mName; } }
 
 	/// <summary>
+	/// <summary>
 	/// Show the selection wizard.
-	/// </summary>
+   /// </summary>
 
 	public static void Show (UIAtlas atlas, string selectedSprite, Callback callback)
 	{
@@ -39,7 +40,7 @@ public class SpriteSelector : ScriptableWizard
 		comp.mSprite = null;
 		comp.mName = selectedSprite;
 		comp.mCallback = callback;
-	}
+				}
 
 	/// <summary>
 	/// Show the selection wizard.
@@ -57,7 +58,7 @@ public class SpriteSelector : ScriptableWizard
 	/// Draw the custom wizard.
 	/// </summary>
 
-	void OnGUI ()
+		void OnGUI ()
 	{
 		EditorGUIUtility.LookLikeControls(80f);
 
@@ -67,16 +68,15 @@ public class SpriteSelector : ScriptableWizard
 		}
 		else
 		{
-			bool close = false;
+              bool close = false;
 			GUILayout.Label(mAtlas.name + " Sprites", "LODLevelNotifyText");
 			NGUIEditorTools.DrawSeparator();
-
-			GUILayout.BeginHorizontal();
+          			GUILayout.BeginHorizontal();
 			GUILayout.Space(84f);
 
 			string before = NGUISettings.partialSprite;
 			string after = EditorGUILayout.TextField("", before, "SearchTextField");
-			NGUISettings.partialSprite = after;
+		NGUISettings.partialSprite = after;
 
 			if (GUILayout.Button("", "SearchCancelButton", GUILayout.Width(18f)))
 			{
@@ -103,11 +103,9 @@ public class SpriteSelector : ScriptableWizard
 
 			int offset = 0;
 			Rect rect = new Rect(10f, 0, size, size);
-
-			GUILayout.Space(10f);
+           			GUILayout.Space(10f);
 			mPos = GUILayout.BeginScrollView(mPos);
-
-			while (offset < sprites.size)
+								while (offset < sprites.size)
 			{
 				GUILayout.BeginHorizontal();
 				{
@@ -119,8 +117,8 @@ public class SpriteSelector : ScriptableWizard
 						UIAtlas.Sprite sprite = mAtlas.GetSprite(sprites[offset]);
 						if (sprite == null) continue;
 
-						// Button comes first
-						if (GUI.Button(rect, ""))
+               // Button comes first
+if (GUI.Button(rect, ""))
 						{
 							float delta = Time.realtimeSinceStartup - mClickTime;
 							mClickTime = Time.realtimeSinceStartup;
@@ -158,9 +156,9 @@ public class SpriteSelector : ScriptableWizard
 	
 							// Stretch the sprite so that it will appear proper
 							float aspect = (scaleY / scaleX) / ((float)tex.height / tex.width);
-							Rect clipRect = rect;
+ //							Rect clipRect = rect;
 	
-							if (aspect != 1f)
+     if (aspect != 1f)
 							{
 								if (aspect < 1f)
 								{
@@ -203,4 +201,4 @@ public class SpriteSelector : ScriptableWizard
 			if (close) Close();
 		}
 	}
-}
+  //   }

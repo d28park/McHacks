@@ -2,8 +2,7 @@
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
 //----------------------------------------------
-
-using UnityEngine;
+               using UnityEngine;
 
 /// <summary>
 /// Similar to SpringPosition, but also moves the panel's clipping. Works in local coordinates.
@@ -11,17 +10,18 @@ using UnityEngine;
 
 [RequireComponent(typeof(UIPanel))]
 [AddComponentMenu("NGUI/Internal/Spring Panel")]
+[AddComponentMenu("NGUI/Internal/Spring Panel")]
 public class SpringPanel : IgnoreTimeScale
 {
 	public Vector3 target = Vector3.zero;
-	public float strength = 10f;
+          public float strength = 10f;
 
 	public delegate void OnFinished ();
 	public OnFinished onFinished;
 
 	UIPanel mPanel;
 	Transform mTrans;
-	float mThreshold = 0f;
+float mThreshold = 0f;
 	UIDraggablePanel mDrag;
 
 	/// <summary>
@@ -29,13 +29,12 @@ public class SpringPanel : IgnoreTimeScale
 	/// </summary>
 
 	void Start ()
-	{
+  {
 		mPanel = GetComponent<UIPanel>();
 		mDrag = GetComponent<UIDraggablePanel>();
 		mTrans = transform;
 	}
-
-	/// <summary>
+              	/// <summary>
 	/// Advance toward the target position.
 	/// </summary>
 
@@ -65,9 +64,9 @@ public class SpringPanel : IgnoreTimeScale
 
 		if (mDrag != null) mDrag.UpdateScrollbars(false);
 		if (trigger && onFinished != null) onFinished();
-	}
+					}
 
-	/// <summary>
+		/// <summary>
 	/// Start the tweening process.
 	/// </summary>
 
@@ -80,7 +79,7 @@ public class SpringPanel : IgnoreTimeScale
 		sp.onFinished = null;
 
 		if (!sp.enabled)
-		{
+          {
 			sp.mThreshold = 0f;
 			sp.enabled = true;
 		}

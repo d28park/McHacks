@@ -1,6 +1,5 @@
 /************************************************************************************
-
-Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 Licensed under the Oculus VR Rift SDK License Version 3.2 (the "License");
 you may not use the Oculus VR Rift SDK except in compliance with the License,
@@ -21,8 +20,7 @@ limitations under the License.
 
 using UnityEngine;
 using System.Collections;
-
-/// <summary>
+           /// <summary>
 /// Diagnostic display with a regular grid of cubes for visual testing of
 /// tracking and distortion.
 /// </summary>
@@ -34,21 +32,20 @@ public class OVRGridCube : MonoBehaviour
 	public KeyCode GridKey                     = KeyCode.G;
 
 	private GameObject 	CubeGrid			   = null;
-
+    // 
 	private bool 	CubeGridOn		    	   = false;
 	private bool 	CubeSwitchColorOld  	   = false;
-	private bool 	CubeSwitchColor     	   = false;
+					private bool 	CubeSwitchColor     	   = false;
 
 	private int   gridSizeX  = 6;
 	private int   gridSizeY  = 4;
 	private int   gridSizeZ  = 6;
 	private float gridScale  = 0.3f;
 	private float cubeScale  = 0.03f;
-
 	// Handle to OVRCameraRig
 	private OVRCameraRig CameraController = null;
 	
-	/// <summary>
+        /// <summary>
 	/// Update this instance.
 	/// </summary>
 	void Update () 
@@ -58,7 +55,7 @@ public class OVRGridCube : MonoBehaviour
 
 	/// <summary>
 	/// Sets the OVR camera controller.
-	/// </summary>
+                /// </summary>
 	/// <param name="cameraController">Camera controller.</param>
 	public void SetOVRCameraController(ref OVRCameraRig cameraController)
 	{
@@ -73,28 +70,28 @@ public class OVRGridCube : MonoBehaviour
 			if(CubeGridOn == false)
 			{
 				CubeGridOn = true;
-				Debug.LogWarning("CubeGrid ON");
+	Debug.LogWarning("CubeGrid ON");
 				if(CubeGrid != null)
 					CubeGrid.SetActive(true);	
 				else
 					CreateCubeGrid();
 			}
 			else
-			{
+					{
 				CubeGridOn = false;
 				Debug.LogWarning("CubeGrid OFF");
 				
 				if(CubeGrid != null)
 					CubeGrid.SetActive(false);
 			}
-		}
+                }
 		
-		if(CubeGrid != null)
+    //		if(CubeGrid != null)
 		{
 			// Set cube colors to let user know if camera is tracking
 			CubeSwitchColor = !OVRManager.tracker.isPositionTracked;
 			
-			if(CubeSwitchColor != CubeSwitchColorOld)
+          if(CubeSwitchColor != CubeSwitchColorOld)
 				CubeGridSwitchColor(CubeSwitchColor);
 			CubeSwitchColorOld = CubeSwitchColor;
 		}
@@ -102,7 +99,7 @@ public class OVRGridCube : MonoBehaviour
 
 	void CreateCubeGrid()
 	{
-		Debug.LogWarning("Create CubeGrid");
+     Debug.LogWarning("Create CubeGrid");
 
 		// Create the visual cube grid
 		CubeGrid = new GameObject("CubeGrid");
@@ -119,7 +116,7 @@ public class OVRGridCube : MonoBehaviour
 				// 2 = center cube
 				int CubeType = 0;
 				if ((x == 0 && y == 0) || (x == 0 && z == 0) || (y == 0 && z == 0))
-				{
+             {
 					if((x == 0) && (y == 0) && (z == 0))
 						CubeType = 2;
 					else
@@ -135,7 +132,7 @@ public class OVRGridCube : MonoBehaviour
 				
 				// No shadows
 				Renderer r = cube.GetComponent<Renderer>();
-				r.castShadows    = false;
+           r.castShadows    = false;
 				r.receiveShadows = false;
 				
 				// Cube line is white down the middle
@@ -146,19 +143,18 @@ public class OVRGridCube : MonoBehaviour
 				else
 					r.material.color = Color.yellow;
 				
-				cube.transform.position = 
+             cube.transform.position = 
 					new Vector3(((float)x * gridScale), 
 					            ((float)y * gridScale), 
 					            ((float)z * gridScale));
-				
-				float s = 0.7f;
+   float s = 0.7f;
 				
 				// Axis cubes are bigger
 				if(CubeType == 1)
 					s = 1.0f;				
 				// Center cube is the largest
 				if(CubeType == 2)
-					s = 2.0f;
+ //   					s = 2.0f;
 				
 				cube.transform.localScale = 
 					new Vector3(cubeScale * s, cubeScale * s, cubeScale * s);
@@ -166,15 +162,15 @@ public class OVRGridCube : MonoBehaviour
 				cube.transform.parent = CubeGrid.transform;
 			}
 	}
-	
+     // 	
 	/// <summary>
-	/// Switch the Cube grid color.
+                 /// Switch the Cube grid color.
 	/// </summary>
 	/// <param name="CubeSwitchColor">If set to <c>true</c> cube switch color.</param>
 	void CubeGridSwitchColor(bool CubeSwitchColor)
 	{
 		Color c = Color.red;
-		if(CubeSwitchColor == true)
+			if(CubeSwitchColor == true)
 			c = Color.blue;
 		
 		foreach(Transform child in CubeGrid.transform)

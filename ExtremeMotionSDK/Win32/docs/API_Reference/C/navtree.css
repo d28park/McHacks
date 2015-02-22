@@ -2,9 +2,8 @@
   margin:0;
   padding:4px;
 }
-
-#nav-tree ul {
-  list-style:none outside none;
+ #nav-tree ul {
+                list-style:none outside none;
   margin:0px;
   padding:0px;
 }
@@ -45,8 +44,7 @@
   padding:0px;
   font: 12px 'Lucida Grande',Geneva,Helvetica,Arial,sans-serif;
 }
-
-#nav-tree .label a {
+      #nav-tree .label a {
   padding:2px;
 }
 
@@ -65,14 +63,13 @@
   padding:0px;
 }
 
-#nav-tree {
+       #nav-tree {
   padding: 0px 0px;
   background-color: #FAFAFF; 
   font-size:14px;
   overflow:auto;
 }
-
-#doc-content {
+                #doc-content {
   overflow:auto;
   display:block;
   padding:0px;
@@ -90,7 +87,7 @@
 }
 
 .ui-resizable .ui-resizable-handle {
-  display:block;
+           display:block;
 }
 
 .ui-resizable-e {
@@ -102,7 +99,7 @@
   width:6px;
 }
 
-.ui-resizable-handle {
+              .ui-resizable-handle {
   display:none;
   font-size:0.1px;
   position:absolute;
@@ -115,12 +112,11 @@
 
 #nav-tree {
   background-image:url('nav_h.png');
-  background-repeat:repeat-x;
+	background-repeat:repeat-x;
   background-color: #F9FAFC;
   -webkit-overflow-scrolling : touch; /* iOS 5+ */
-}
-
-#nav-sync {
+    }
+					#nav-sync {
   position:absolute;
   top:5px;
   right:24px;
@@ -134,8 +130,7 @@
 #nav-sync img:hover {
   opacity:0.9;
 }
-
-@media print
+    @media print
 {
   #nav-tree { display: none; }
   div.ui-resizable-handle { display: none; position: relative; }

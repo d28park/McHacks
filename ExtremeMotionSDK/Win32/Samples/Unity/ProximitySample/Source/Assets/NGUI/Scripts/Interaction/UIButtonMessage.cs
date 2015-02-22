@@ -1,7 +1,7 @@
 ﻿//----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
-//----------------------------------------------
+			//----------------------------------------------
 
 using UnityEngine;
 
@@ -12,13 +12,13 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Interaction/Button Message")]
 public class UIButtonMessage : MonoBehaviour
 {
-	public enum Trigger
+           public enum Trigger
 	{
 		OnClick,
 		OnMouseOver,
 		OnMouseOut,
 		OnPress,
-		OnRelease,
+OnRelease,
 		OnDoubleClick,
 	}
 
@@ -28,7 +28,7 @@ public class UIButtonMessage : MonoBehaviour
 	public bool includeChildren = false;
 
 	bool mStarted = false;
-	bool mHighlighted = false;
+			bool mHighlighted = false;
 
 	void Start () { mStarted = true; }
 
@@ -45,7 +45,7 @@ public class UIButtonMessage : MonoBehaviour
 	}
 
 	void OnPress (bool isPressed)
-	{
+              {
 		if (enabled)
 		{
 			if (((isPressed && trigger == Trigger.OnPress) ||
@@ -60,10 +60,10 @@ public class UIButtonMessage : MonoBehaviour
 	void Send ()
 	{
 		if (string.IsNullOrEmpty(functionName)) return;
-		if (target == null) target = gameObject;
+    // 		if (target == null) target = gameObject;
 
 		if (includeChildren)
-		{
+         {
 			Transform[] transforms = target.GetComponentsInChildren<Transform>();
 
 			for (int i = 0, imax = transforms.Length; i < imax; ++i)

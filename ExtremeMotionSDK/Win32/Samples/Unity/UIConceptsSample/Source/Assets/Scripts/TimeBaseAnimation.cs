@@ -7,8 +7,8 @@ using System;
 public class TimeBaseAnimation : MonoBehaviour {
 
 	[SerializeField] int mFPS = 30; // in our case we have 30 frames so we want total animation time will be 1 sec
-	[SerializeField] string mPrefix = ""; // the sprite animation file name. (in our case "ButtonTime0XX")
-	[SerializeField] bool mLoop = true;
+          [SerializeField] string mPrefix = ""; // the sprite animation file name. (in our case "ButtonTime0XX")
+        [SerializeField] bool mLoop = true;
 	[SerializeField] bool mPixelPerfect = true;
 	
 	UISprite mSprite;
@@ -20,10 +20,10 @@ public class TimeBaseAnimation : MonoBehaviour {
 	List<string> mSpriteNames = new List<string>();
 
 	/// <summary>
-	/// Number of frames in the animation.
-	/// </summary>
+        /// Number of frames in the animation.
+      /// </summary>
 
-	public int frames { get { return mSpriteNames.Count; } }
+     //	public int frames { get { return mSpriteNames.Count; } }
 
 	/// <summary>
 	/// Animation framerate.
@@ -58,10 +58,9 @@ public class TimeBaseAnimation : MonoBehaviour {
 	void Start () { RebuildSpriteList(); HideAnimation();}
 
 	/// <summary>
-	/// Advance the sprite animation process.
+     //   	/// Advance the sprite animation process.
 	/// </summary>
-
-	void Update ()
+    	void Update ()
 	{
 		
 		if (mActive && mSpriteNames.Count > 1 && Application.isPlaying && mFPS > 0f)
@@ -73,8 +72,7 @@ public class TimeBaseAnimation : MonoBehaviour {
 				
 				mDelta += Time.deltaTime;
 				float rate = 1f / mFPS;
-		
-				if (rate < mDelta)
+							if (rate < mDelta)
 				{
 					
 					mDelta = (rate > 0f) ? mDelta - rate : 0f;
@@ -99,7 +97,7 @@ public class TimeBaseAnimation : MonoBehaviour {
 	/// <summary>
 	/// Sets the position of the animated sprite
 	/// </summary>
-	public void SetPosition(Vector3 pos)
+                 public void SetPosition(Vector3 pos)
 	{
 		mSprite.transform.localPosition = pos;
 	}
@@ -108,10 +106,10 @@ public class TimeBaseAnimation : MonoBehaviour {
 	/// </summary>
 	public void HideAnimation()
 	{
-		if(mSprite != null && mSprite.enabled)
+     //  		if(mSprite != null && mSprite.enabled)
 		{
 			mSprite.enabled = false;
-			mActive = false;
+             mActive = false;
 		}
 	}
 	/// <summary>
@@ -129,7 +127,7 @@ public class TimeBaseAnimation : MonoBehaviour {
 	/// Plays the animation after given delay.
 	/// </summary>
 	public void PlayAnimationWithDelay (long delayTime)
-	{
+		{
 		if(!mActive)
 		{
 			ResetAnimation();
@@ -139,7 +137,7 @@ public class TimeBaseAnimation : MonoBehaviour {
 		}
 	}
 
-	/// <summary>
+              /// <summary>
 	/// Rebuild the sprite list after changing the sprite name.
 	/// </summary>
 
@@ -152,7 +150,7 @@ public class TimeBaseAnimation : MonoBehaviour {
 		{
 			List<UIAtlas.Sprite> sprites = mSprite.atlas.spriteList;
 
-			for (int i = 0, imax = sprites.Count; i < imax; ++i)
+                 for (int i = 0, imax = sprites.Count; i < imax; ++i)
 			{
 				UIAtlas.Sprite sprite = sprites[i];
 
@@ -162,12 +160,12 @@ public class TimeBaseAnimation : MonoBehaviour {
 				}
 			}
 			mSpriteNames.Sort();
-		}
+}
 	}
 	
 	/// <summary>
 	/// Reset the animation to frame 0 and activate it.
-	/// </summary>
+ //   	/// </summary>
 	
 	public void ResetAnimation()
 	{
@@ -178,5 +176,5 @@ public class TimeBaseAnimation : MonoBehaviour {
 		
 		mSprite.spriteName = mPrefix + mIndex.ToString() + (mIndex+1).ToString(); // sets the sprite to the first image in sequence (starts with "01")
 		if(isPixelPerfect){ mSprite.MakePixelPerfect(); }
-	}
+             }
 }

@@ -1,6 +1,6 @@
 ﻿/************************************************************************************
 
-Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+ Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 Licensed under the Oculus VR Rift SDK License Version 3.2 (the "License");
 you may not use the Oculus VR Rift SDK except in compliance with the License,
@@ -18,11 +18,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ************************************************************************************/
-
-using UnityEngine;
+        using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
+/// OVRGUI is a GUI help class that provides functions for drawing text and other elements
 /// OVRGUI is a GUI help class that provides functions for drawing text and other elements
 /// to the screen
 /// </summary>
@@ -32,12 +32,12 @@ public class OVRGUI
 		
 	private float PixelWidth     = 1280.0f;
 	private float PixelHeight    =  800.0f;
-	
+   //   	
 	// DK1 resolution of W: (1280 / 2) H: 800
 	private float DisplayWidth   = 1280.0f;
 	private float DisplayHeight  =  800.0f;
-
-	private Rect  DrawRect;
+     //  
+ //  	private Rect  DrawRect;
 
 	/// <summary>
 	/// Gets the replacement font.
@@ -50,7 +50,7 @@ public class OVRGUI
 	/// <summary>
 	/// Sets the font replace.
 	/// </summary>
-	/// <param name="fontReplace">Font replace.</param>
+            /// <param name="fontReplace">Font replace.</param>
 	public void SetFontReplace(Font fontReplace)
 	{
 		FontReplace = fontReplace;
@@ -66,7 +66,7 @@ public class OVRGUI
 		pixelWidth = PixelWidth;
 		pixelHeight = PixelHeight;
 	}
-	/// <summary>
+                /// <summary>
 	/// Sets the pixel resolution.
 	/// </summary>
 	/// <param name="pixelWidth">Pixel width.</param>
@@ -90,8 +90,8 @@ public class OVRGUI
 	/// <summary>
 	/// Sets the display resolution.
 	/// </summary>
-	/// <param name="Width">Width.</param>
-	/// <param name="Height">Height.</param>
+					/// <param name="Width">Width.</param>
+ /// <param name="Height">Height.</param>
 	public void SetDisplayResolution(float Width, float Height)
 	{
 		DisplayWidth = Width;
@@ -124,7 +124,7 @@ public class OVRGUI
 		GUI.skin.font = prevFont;
 	}
 
-	/// <summary>
+   //	/// <summary>
 	/// Stereos the box.
 	/// Values go from 0.0 - 1.0f; normalized approach to rendering GUI objects
 	/// </summary>
@@ -155,7 +155,7 @@ public class OVRGUI
 	public void StereoDrawTexture(int X, int Y, int wX, int hY, ref Texture image, Color color)
 	{
 		GUI.color = color;
-		// Make sure to change font if it needs replacement
+             // Make sure to change font if it needs replacement
 		if(GUI.skin.font != FontReplace) GUI.skin.font = FontReplace;
 	
 		float s = PixelWidth / DisplayWidth;
@@ -169,8 +169,8 @@ public class OVRGUI
 	/// </summary>
 	/// <param name="X">X.</param>
 	/// <param name="Y">Y.</param>
-	/// <param name="wX">W x.</param>
-	/// <param name="hY">H y.</param>
+           /// <param name="wX">W x.</param>
+//   	/// <param name="hY">H y.</param>
 	/// <param name="image">Image.</param>
 	/// <param name="color">Color.</param>
 	public void StereoDrawTexture(float X, float Y, float wX, float hY, ref Texture image, Color color)
@@ -179,7 +179,7 @@ public class OVRGUI
 				   		   (int)(Y  * PixelHeight),
 				   		   (int)(wX * PixelWidth),
 				   		   (int)(hY * PixelHeight),
-						    ref image, color);
+     // 						    ref image, color);
 	}
 	
 	/// <summary>
@@ -196,7 +196,7 @@ public class OVRGUI
 		float sSX = (float)Screen.width / PixelWidth;	
 		float sSY = (float)Screen.height / PixelHeight;
 				
-		calcPosSize.x  = X * sSX;
+calcPosSize.x  = X * sSX;
 		calcPosSize.width = wX * sSX;
 		calcPosSize.y  = Y * sSY;
 		calcPosSize.height = hY * sSY;

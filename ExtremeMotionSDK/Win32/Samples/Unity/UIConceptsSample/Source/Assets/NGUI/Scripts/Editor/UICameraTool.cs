@@ -1,7 +1,7 @@
 ﻿//----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
-//----------------------------------------------
+					//----------------------------------------------
 
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +16,7 @@ public class UICameraTool : EditorWindow
 	Vector2 mScroll = Vector2.zero;
 
 	/// <summary>
-	/// Layer mask field, originally from:
+             /// Layer mask field, originally from:
 	/// http://answers.unity3d.com/questions/60959/mask-field-in-the-editor.html
 	/// </summary>
 
@@ -48,10 +48,10 @@ public class UICameraTool : EditorWindow
 		}
 
 		if (Event.current.type != EventType.MouseDown && Event.current.type != EventType.ExecuteCommand)
-		{
+ //		{
 			if (mask == 0)
 			{
-				layers.Add("Nothing");
+		layers.Add("Nothing");
 			}
 			else if (mask == -1)
 			{
@@ -83,16 +83,15 @@ public class UICameraTool : EditorWindow
 				else
 				{
 					layers.Add("      " + layerName);
-				}
+ }
 				layerNumbers.Add(i);
 			}
 		}
-
-		bool preChange = GUI.changed;
+      		bool preChange = GUI.changed;
 
 		GUI.changed = false;
 
-		int newSelected = 0;
+     //   		int newSelected = 0;
 
 		if (Event.current.type == EventType.MouseDown)
 		{
@@ -100,17 +99,18 @@ public class UICameraTool : EditorWindow
 		}
 
 		if (string.IsNullOrEmpty(label))
-		{
+            {
 			newSelected = EditorGUILayout.Popup(newSelected, layers.ToArray(), EditorStyles.layerMaskField, options);
 		}
 		else
 		{
 			newSelected = EditorGUILayout.Popup(label, newSelected, layers.ToArray(), EditorStyles.layerMaskField, options);
-		}
+			}
 
 		if (GUI.changed && newSelected >= 0)
 		{
 			if (newSelected == 0)
+			{
 			{
 				mask = 0;
 			}
@@ -138,12 +138,12 @@ public class UICameraTool : EditorWindow
 	}
 
 	public static int LayerMaskField (int mask, params GUILayoutOption[] options)
-	{
+					{
 		return LayerMaskField(null, mask, options);
 	}
 
 	/// <summary>
-	/// Refresh the window on selection.
+		/// Refresh the window on selection.
 	/// </summary>
 
 	void OnSelectionChange () { Repaint(); }
@@ -155,8 +155,7 @@ public class UICameraTool : EditorWindow
 	void OnGUI ()
 	{
 		EditorGUIUtility.LookLikeControls(80f);
-
-		List<Camera> list = NGUIEditorTools.FindInScene<Camera>();
+              		List<Camera> list = NGUIEditorTools.FindInScene<Camera>();
 
 		if (list.Count > 0)
 		{
@@ -165,8 +164,8 @@ public class UICameraTool : EditorWindow
 			mScroll = GUILayout.BeginScrollView(mScroll);
 			foreach (Camera cam in list) DrawRow(cam);
 			GUILayout.EndScrollView();
-		}
-		else
+}
+                else
 		{
 			GUILayout.Label("No cameras found in the scene");
 		}
@@ -175,10 +174,11 @@ public class UICameraTool : EditorWindow
 	/// <summary>
 	/// Helper function used to print things in columns.
 	/// </summary>
-
+     //
 	void DrawRow (Camera cam)
 	{
 		if (cam != null) NGUIEditorTools.HighlightLine(new Color(0.6f, 0.6f, 0.6f));
+
 
 		GUILayout.BeginHorizontal();
 		{
@@ -201,8 +201,7 @@ public class UICameraTool : EditorWindow
 
 			bool highlight = (cam == null || Selection.activeGameObject == null) ? false :
 				(0 != (cam.cullingMask & (1 << Selection.activeGameObject.layer)));
-
-			if (enabled)
+ 			if (enabled)
 			{
 				GUI.color = highlight ? new Color(0f, 0.8f, 1f) : Color.white;
 			}
@@ -211,18 +210,18 @@ public class UICameraTool : EditorWindow
 				GUI.color = highlight ? new Color(0f, 0.5f, 0.8f) : Color.grey;
 			}
 
-			string camName, camLayer;
+   //   			string camName, camLayer;
 
 			if (cam == null)
 			{
-				camName = "Camera's Name";
+			camName = "Camera's Name";
 				camLayer = "Layer";
 			}
-			else
-			{
+               else
+   // 			{
 				camName = cam.name + (cam.orthographic ? " (2D)" : " (3D)");
 				camLayer = LayerMask.LayerToName(cam.gameObject.layer);
-			}
+}
 
 #if UNITY_3_4
 			if (GUILayout.Button(camName, EditorStyles.structHeadingLabel, GUILayout.MinWidth(100f)) && cam != null)
@@ -242,7 +241,7 @@ public class UICameraTool : EditorWindow
 				GUILayout.Label("EV", GUILayout.Width(26f));
 			}
 			else
-			{
+{
 				UICamera uic = cam.GetComponent<UICamera>();
 				bool ev = (uic != null && uic.enabled);
 
@@ -266,8 +265,8 @@ public class UICameraTool : EditorWindow
 					NGUIEditorTools.RegisterUndo("Camera Mask Change", cam);
 					cam.cullingMask = mask;
 				}
-			}
-		}
-		GUILayout.EndHorizontal();
 	}
+		}
+     GUILayout.EndHorizontal();
+					}
 }

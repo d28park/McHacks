@@ -11,16 +11,15 @@ using UnityEngine;
 
 [AddComponentMenu("NGUI/Tween/Spring Position")]
 public class SpringPosition : IgnoreTimeScale
-{
+   {
 	public delegate void OnFinished (SpringPosition spring);
 
 	/// <summary>
 	/// Target position to tween to.
 	/// </summary>
+						public Vector3 target = Vector3.zero;
 
-	public Vector3 target = Vector3.zero;
-
-	/// <summary>
+    /// <summary>
 	/// How strong is the pull of the spring. Higher value means it gets to the target faster.
 	/// </summary>
 
@@ -37,7 +36,6 @@ public class SpringPosition : IgnoreTimeScale
 	/// </summary>
 
 	public bool ignoreTimeScale = false;
-
 	/// <summary>
 	/// Game object on which to call the callback function.
 	/// </summary>
@@ -48,13 +46,12 @@ public class SpringPosition : IgnoreTimeScale
 	/// Function to call when the spring finishes moving.
 	/// </summary>
 
-	public string callWhenFinished;
+  //   	public string callWhenFinished;
 
 	/// <summary>
 	/// Delegate to trigger when the spring finishes.
 	/// </summary>
-
-	public OnFinished onFinished;
+             	public OnFinished onFinished;
 
 	Transform mTrans;
 	float mThreshold = 0f;
@@ -65,7 +62,7 @@ public class SpringPosition : IgnoreTimeScale
 
 	void Start () { mTrans = transform; }
 
-	/// <summary>
+  //	/// <summary>
 	/// Advance toward the target position.
 	/// </summary>
 
@@ -78,7 +75,7 @@ public class SpringPosition : IgnoreTimeScale
 			if (mThreshold == 0f) mThreshold = (target - mTrans.position).magnitude * 0.001f;
 			mTrans.position = NGUIMath.SpringLerp(mTrans.position, target, strength, delta);
 
-			if (mThreshold >= (target - mTrans.position).magnitude)
+          if (mThreshold >= (target - mTrans.position).magnitude)
 			{
 				mTrans.position = target;
 				
@@ -86,7 +83,7 @@ public class SpringPosition : IgnoreTimeScale
 				
 				if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
 				{
-					eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
+              eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
 				}
 				enabled = false;
 			}
@@ -94,7 +91,7 @@ public class SpringPosition : IgnoreTimeScale
 		else
 		{
 			if (mThreshold == 0f) mThreshold = (target - mTrans.localPosition).magnitude * 0.001f;
-			mTrans.localPosition = NGUIMath.SpringLerp(mTrans.localPosition, target, strength, delta);
+              mTrans.localPosition = NGUIMath.SpringLerp(mTrans.localPosition, target, strength, delta);
 
 			if (mThreshold >= (target - mTrans.localPosition).magnitude)
 			{
@@ -111,13 +108,13 @@ public class SpringPosition : IgnoreTimeScale
 		}
 	}
 
-	/// <summary>
+         /// <summary>
 	/// Start the tweening process.
 	/// </summary>
 
 	static public SpringPosition Begin (GameObject go, Vector3 pos, float strength)
 	{
-		SpringPosition sp = go.GetComponent<SpringPosition>();
+	SpringPosition sp = go.GetComponent<SpringPosition>();
 		if (sp == null) sp = go.AddComponent<SpringPosition>();
 		sp.target = pos;
 		sp.strength = strength;
@@ -125,9 +122,9 @@ public class SpringPosition : IgnoreTimeScale
 
 		if (!sp.enabled)
 		{
-			sp.mThreshold = 0f;
+            sp.mThreshold = 0f;
 			sp.enabled = true;
 		}
-		return sp;
+			return sp;
 	}
 }

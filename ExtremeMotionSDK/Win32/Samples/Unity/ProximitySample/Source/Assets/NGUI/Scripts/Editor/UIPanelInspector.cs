@@ -10,10 +10,10 @@ using System.Collections.Generic;
 [CustomEditor(typeof(UIPanel))]
 public class UIPanelInspector : Editor
 {
-	/// <summary>
+           /// <summary>
 	/// Handles & interaction.
 	/// </summary>
-
+//   
 	public void OnSceneGUI ()
 	{
 		//Tools.current = Tool.View;
@@ -33,9 +33,9 @@ public class UIPanelInspector : Editor
 			{
 				if (e.keyCode == KeyCode.Escape)
 				{
-					Tools.current = Tool.Move;
+Tools.current = Tool.Move;
 					Selection.activeGameObject = null;
-					e.Use();
+       e.Use();
 				}
 			}
 			break;
@@ -54,8 +54,7 @@ public class UIPanelInspector : Editor
 
 		//NGUIEditorTools.DrawSeparator();
 		EditorGUILayout.Space();
-
-		float alpha = EditorGUILayout.Slider("Alpha", panel.alpha, 0f, 1f);
+             		float alpha = EditorGUILayout.Slider("Alpha", panel.alpha, 0f, 1f);
 
 		if (alpha != panel.alpha)
 		{
@@ -67,7 +66,7 @@ public class UIPanelInspector : Editor
 		{
 			panel.showInPanelTool = !panel.showInPanelTool;
 			EditorUtility.SetDirty(panel);
-			EditorWindow.FocusWindowIfItsOpen<UIPanelTool>();
+         EditorWindow.FocusWindowIfItsOpen<UIPanelTool>();
 		}
 
 		GUILayout.BeginHorizontal();
@@ -76,18 +75,18 @@ public class UIPanelInspector : Editor
 		GUILayout.EndHorizontal();
 
 		if (panel.generateNormals != norms)
-		{
+{
 			panel.generateNormals = norms;
 			panel.UpdateDrawcalls();
 			EditorUtility.SetDirty(panel);
 		}
 
+
 		GUILayout.BeginHorizontal();
 		bool depth = EditorGUILayout.Toggle("Depth Pass", panel.depthPass, GUILayout.Width(100f));
 		GUILayout.Label("Extra draw call, saves fillrate");
 		GUILayout.EndHorizontal();
-
-		if (panel.depthPass != depth)
+							if (panel.depthPass != depth)
 		{
 			panel.depthPass = depth;
 			panel.UpdateDrawcalls();
@@ -95,7 +94,7 @@ public class UIPanelInspector : Editor
 		}
 
 		GUILayout.BeginHorizontal();
-		bool stat = EditorGUILayout.Toggle("Static", panel.widgetsAreStatic, GUILayout.Width(100f));
+//   		bool stat = EditorGUILayout.Toggle("Static", panel.widgetsAreStatic, GUILayout.Width(100f));
 		GUILayout.Label("Check if widgets won't move");
 		GUILayout.EndHorizontal();
 
@@ -110,8 +109,7 @@ public class UIPanelInspector : Editor
 		EditorGUILayout.LabelField("Draw Calls", drawcalls.size.ToString());
 
 		UIPanel.DebugInfo di = (UIPanel.DebugInfo)EditorGUILayout.EnumPopup("Debug Info", panel.debugInfo);
-
-		if (panel.debugInfo != di)
+ 		if (panel.debugInfo != di)
 		{
 			panel.debugInfo = di;
 			EditorUtility.SetDirty(panel);
@@ -135,7 +133,7 @@ public class UIPanelInspector : Editor
 			GUILayout.EndHorizontal();
 
 			GUILayout.BeginHorizontal();
-			GUILayout.Space(80f);
+          GUILayout.Space(80f);
 			Vector2 size = EditorGUILayout.Vector2Field("Size", new Vector2(range.z, range.w));
 			GUILayout.EndHorizontal();
 
@@ -148,8 +146,9 @@ public class UIPanelInspector : Editor
 			range.w = size.y;
 
 			if (panel.clipRange != range)
+			if (panel.clipRange != range)
 			{
-				NGUIEditorTools.RegisterUndo("Clipping Change", panel);
+         NGUIEditorTools.RegisterUndo("Clipping Change", panel);
 				panel.clipRange = range;
 				EditorUtility.SetDirty(panel);
 			}
@@ -192,13 +191,13 @@ public class UIPanelInspector : Editor
 		{
 			NGUIEditorTools.DrawSeparator();
 			EditorGUILayout.ObjectField("Material", dc.material, typeof(Material), false);
-			EditorGUILayout.LabelField("Triangles", dc.triangles.ToString());
+           EditorGUILayout.LabelField("Triangles", dc.triangles.ToString());
 
 			if (clipping != UIDrawCall.Clipping.None && !dc.isClipped)
 			{
 				EditorGUILayout.HelpBox("You must switch this material's shader to Unlit/Transparent Colored or Unlit/Premultiplied Colored in order for clipping to work.",
 					MessageType.Warning);
-			}
+    //   			}
 		}
 	}
 }

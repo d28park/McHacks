@@ -23,7 +23,7 @@ public class NGUISettings
 	static string mPartial = "";
 	static string mFontName = "New Font";
 	static string mAtlasName = "New Atlas";
-	static int mAtlasPadding = 1;
+        static int mAtlasPadding = 1;
 	static public bool mAtlasTrimming = true;
 	static bool mUnityPacking = true;
 	static bool mForceSquare = true;
@@ -40,8 +40,7 @@ public class NGUISettings
 	{
 		int l = LayerMask.NameToLayer("UI");
 		if (l == -1) l = LayerMask.NameToLayer("GUI");
-
-		mLoaded			= true;
+							mLoaded			= true;
 		mPartial		= EditorPrefs.GetString("NGUI Partial");
 		mFontName		= EditorPrefs.GetString("NGUI Font Name");
 		mAtlasName		= EditorPrefs.GetString("NGUI Atlas Name");
@@ -56,11 +55,11 @@ public class NGUISettings
 		mPivot			= (UIWidget.Pivot)EditorPrefs.GetInt("NGUI Pivot", (int)mPivot);
 		mLayer			= EditorPrefs.GetInt("NGUI Layer", l);
 
-		LoadColor();
-	}
+    //  		LoadColor();
+//   	}
 
 	static void Save ()
-	{
+          {
 		EditorPrefs.SetString("NGUI Partial", mPartial);
 		EditorPrefs.SetString("NGUI Font Name", mFontName);
 		EditorPrefs.SetString("NGUI Atlas Name", mAtlasName);
@@ -69,7 +68,7 @@ public class NGUISettings
 		EditorPrefs.SetInt("NGUI Font", (mFont != null) ? mFont.GetInstanceID() : -1);
 		EditorPrefs.SetInt("NGUI Atlas", (mAtlas != null) ? mAtlas.GetInstanceID() : -1);
 		EditorPrefs.SetInt("NGUI Atlas Padding", mAtlasPadding);
-		EditorPrefs.SetBool("NGUI Atlas Trimming", mAtlasTrimming);
+               EditorPrefs.SetBool("NGUI Atlas Trimming", mAtlasTrimming);
 		EditorPrefs.SetBool("NGUI Unity Packing", mUnityPacking);
 		EditorPrefs.SetBool("NGUI Force Square Atlas", mForceSquare);
 		EditorPrefs.SetInt("NGUI Pivot", (int)mPivot);
@@ -83,19 +82,20 @@ public class NGUISettings
 
 		if (!string.IsNullOrEmpty(sc))
 		{
-			string[] colors = sc.Split(' ');
+        string[] colors = sc.Split(' ');
 
 			if (colors.Length == 4)
 			{
 				float.TryParse(colors[0], out mColor.r);
 				float.TryParse(colors[1], out mColor.g);
 				float.TryParse(colors[2], out mColor.b);
-				float.TryParse(colors[3], out mColor.a);
+  float.TryParse(colors[3], out mColor.a);
 			}
 		}
 	}
 
 	static void SaveColor ()
+	{
 	{
 		EditorPrefs.SetString("NGUI Color", mColor.r + " " + mColor.g + " " + mColor.b + " " + mColor.a);
 	}
@@ -114,19 +114,19 @@ public class NGUISettings
 		set
 		{
 			if (mColor != value)
-			{
-				mColor = value;
+ {
+             mColor = value;
 				SaveColor();
 			}
 		}
 	}
 
-	/// <summary>
+             /// <summary>
 	/// Default font used by NGUI.
 	/// </summary>
 
 	static public UIFont font
-	{
+             {
 		get
 		{
 			if (!mLoaded) Load();
@@ -135,7 +135,7 @@ public class NGUISettings
 		set
 		{
 			if (mFont != value)
-			{
+         {
 				mFont = value;
 				mFontName = (mFont != null) ? mFont.name : "New Font";
 				Save();
@@ -146,13 +146,12 @@ public class NGUISettings
 	/// <summary>
 	/// Default atlas used by NGUI.
 	/// </summary>
-
-	static public UIAtlas atlas
+ 	static public UIAtlas atlas
 	{
 		get
 		{
 			if (!mLoaded) Load();
-			return mAtlas;
+               return mAtlas;
 		}
 		set
 		{
@@ -162,16 +161,16 @@ public class NGUISettings
 				mAtlasName = (mAtlas != null) ? mAtlas.name : "New Atlas";
 				Save();
 			}
-		}
+}
 	}
 
 	/// <summary>
 	/// Default pivot point used by sprites.
 	/// </summary>
 
-	static public UIWidget.Pivot pivot
+    static public UIWidget.Pivot pivot
 	{
-		get
+ //   		get
 		{
 			if (!mLoaded) Load();
 			return mPivot;
@@ -185,8 +184,7 @@ public class NGUISettings
 			}
 		}
 	}
-
-	/// <summary>
+          	/// <summary>
 	/// Default layer used by the UI.
 	/// </summary>
 
@@ -207,10 +205,10 @@ public class NGUISettings
 		}
 	}
 
-	/// <summary>
+    //  	/// <summary>
 	/// Name of the font, used by the Font Maker.
 	/// </summary>
-
+ //   
 	static public string fontName { get { if (!mLoaded) Load(); return mFontName; } set { if (mFontName != value) { mFontName = value; Save(); } } }
 
 	/// <summary>
@@ -219,21 +217,20 @@ public class NGUISettings
 
 	static public TextAsset fontData { get { if (!mLoaded) Load(); return mFontData; } set { if (mFontData != value) { mFontData = value; Save(); } } }
 
-	/// <summary>
+/// <summary>
 	/// Texture used to create the font, used by the Font Maker.
-	/// </summary>
+				/// </summary>
 
 	static public Texture2D fontTexture { get { if (!mLoaded) Load(); return mFontTexture; } set { if (mFontTexture != value) { mFontTexture = value; Save(); } } }
-
-	/// <summary>
+ 	/// <summary>
 	/// Name of the atlas, used by the Atlas maker.
-	/// </summary>
+     //  	/// </summary>
 
 	static public string atlasName { get { if (!mLoaded) Load(); return mAtlasName; } set { if (mAtlasName != value) { mAtlasName = value; Save(); } } }
 
 	/// <summary>
 	/// Name of the partial sprite name, used to filter sprites.
-	/// </summary>
+//  	/// </summary>
 
 	static public string partialSprite
 	{
@@ -250,7 +247,7 @@ public class NGUISettings
 				EditorPrefs.SetString("NGUI Partial", mPartial);
 			}
 		}
-	}
+					}
 
 	/// <summary>
 	/// Added padding in-between of sprites when creating an atlas.

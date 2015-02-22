@@ -4,14 +4,13 @@
 //----------------------------------------------
 
 using UnityEngine;
-
 /// <summary>
 /// This script automatically changes the color of the specified sprite based on the value of the slider.
-/// </summary>
+              /// </summary>
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(UISlider))]
-[AddComponentMenu("NGUI/Examples/Slider Colors")]
+         [AddComponentMenu("NGUI/Examples/Slider Colors")]
 public class UISliderColors : MonoBehaviour
 {
 	public UISprite sprite;
@@ -20,7 +19,7 @@ public class UISliderColors : MonoBehaviour
 
 	UISlider mSlider;
 
-	void Start () { mSlider = GetComponent<UISlider>(); Update(); }
+                 void Start () { mSlider = GetComponent<UISlider>(); Update(); }
 
 	void Update ()
 	{
@@ -34,6 +33,7 @@ public class UISliderColors : MonoBehaviour
 
 		if (startIndex >= 0)
 		{
+		{
 			if (startIndex + 1 < colors.Length)
 			{
 				float factor = (val - startIndex);
@@ -42,11 +42,11 @@ public class UISliderColors : MonoBehaviour
 			else if (startIndex < colors.Length)
 			{
 				c = colors[startIndex];
-			}
+                 }
 			else c = colors[colors.Length - 1];
 		}
 
-		c.a = sprite.color.a;
+       c.a = sprite.color.a;
 		sprite.color = c;
 	}
 }

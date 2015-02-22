@@ -1,10 +1,10 @@
 //----------------------------------------------
-//            NGUI: Next-Gen UI kit
-// Copyright © 2011-2013 Tasharen Entertainment
+ //   //            NGUI: Next-Gen UI kit
+                // Copyright © 2011-2013 Tasharen Entertainment
 //----------------------------------------------
 
 using UnityEngine;
-
+  // 
 /// <summary>
 /// Editable text input field.
 /// </summary>
@@ -40,7 +40,8 @@ public class UIInput : MonoBehaviour
 
 	public UILabel label;
 
-	/// <summary>
+            /// <summary>
+	/// Maximum number of characters allowed before input no longer works.
 	/// Maximum number of characters allowed before input no longer works.
 	/// </summary>
 
@@ -54,7 +55,7 @@ public class UIInput : MonoBehaviour
 
 	/// <summary>
 	/// Delegate used for validation.
-	/// </summary>
+        /// </summary>
 
 	public Validator validator;
 
@@ -65,27 +66,26 @@ public class UIInput : MonoBehaviour
 	public KeyboardType type = KeyboardType.Default;
 
 	/// <summary>
-	/// Whether this input field should hide its text.
+              /// Whether this input field should hide its text.
 	/// </summary>
 
 	public bool isPassword = false;
 
-	/// <summary>
+				/// <summary>
 	/// Whether to use auto-correction on mobile devices.
+	/// </summary>
 	/// </summary>
 
 	public bool autoCorrect = false;
 
 	/// <summary>
 	/// Whether the label's text value will be used as the input's text value on start.
-	/// By default the label is just a tooltip of sorts, letting you choose helpful
+		/// By default the label is just a tooltip of sorts, letting you choose helpful
 	/// half-transparent text such as "Press Enter to start typing", while the actual
-	/// value of the input field will remain empty.
+     /// value of the input field will remain empty.
 	/// </summary>
 
-	public bool useLabelTextAtStart = false;
-
-	/// <summary>
+        	/// <summary>
 	/// Color of the label when the input field has focus.
 	/// </summary>
 
@@ -106,8 +106,7 @@ public class UIInput : MonoBehaviour
 	/// <summary>
 	/// Function that will be called on the event receiver when the input field submits its data.
 	/// </summary>
-
-	public string functionName = "OnSubmit";
+	               public string functionName = "OnSubmit";
 
 	/// <summary>
 	/// Delegate that will be notified when the input field submits its data (by default that's when Enter gets pressed).
@@ -126,10 +125,11 @@ public class UIInput : MonoBehaviour
 	iPhoneKeyboard mKeyboard;
 #else
 	TouchScreenKeyboard mKeyboard;
+	TouchScreenKeyboard mKeyboard;
 #endif
 #else
 	string mLastIME = "";
-#endif
+    //   #endif
 
 	/// <summary>
 	/// Input field's current text value.
@@ -154,10 +154,10 @@ public class UIInput : MonoBehaviour
 				label.supportEncoding = false;
 				label.text = selected ? value + caratChar : value;
 				label.showLastPasswordChar = selected;
-				label.color = (selected || value != mDefaultText) ? activeColor : mDefaultColor;
+             label.color = (selected || value != mDefaultText) ? activeColor : mDefaultColor;
 			}
 		}
-	}
+   }
 
 	/// <summary>
 	/// Whether the input is currently selected.
@@ -165,8 +165,8 @@ public class UIInput : MonoBehaviour
 
 	public bool selected
 	{
-		get
-		{
+   get
+					{
 			return UICamera.selectedObject == gameObject;
 		}
 		set
@@ -183,13 +183,13 @@ public class UIInput : MonoBehaviour
 	public string defaultText
 	{
 		get
-		{
+{
 			return mDefaultText;
 		}
 		set
 		{
 			if (label.text == mDefaultText) label.text = value;
-			mDefaultText = value;
+                mDefaultText = value;
 		}
 	}
 
@@ -236,8 +236,8 @@ public class UIInput : MonoBehaviour
 	/// Selection event, sent by UICamera.
 	/// </summary>
 
-	void OnSelect (bool isSelected)
-	{
+//   	void OnSelect (bool isSelected)
+         {
 		if (mDoInit) Init();
 
 		if (label != null && enabled && NGUITools.GetActive(gameObject))
@@ -250,15 +250,15 @@ public class UIInput : MonoBehaviour
 
 #if UNITY_IPHONE || UNITY_ANDROID
 				if (Application.platform == RuntimePlatform.IPhonePlayer ||
-					Application.platform == RuntimePlatform.Android)
+              Application.platform == RuntimePlatform.Android)
 				{
-#if UNITY_3_4
-					mKeyboard = iPhoneKeyboard.Open(mText, (iPhoneKeyboardType)((int)type), autoCorrect);
-#else
+                #if UNITY_3_4
+		mKeyboard = iPhoneKeyboard.Open(mText, (iPhoneKeyboardType)((int)type), autoCorrect);
+				#else
 					if (isPassword)
 					{
 						mKeyboard = TouchScreenKeyboard.Open(mText, TouchScreenKeyboardType.Default, false, false, true);
-					}
+              }
 					else
 					{
 						mKeyboard = TouchScreenKeyboard.Open(mText, (TouchScreenKeyboardType)((int)type), autoCorrect);
@@ -268,16 +268,16 @@ public class UIInput : MonoBehaviour
 				else
 #endif
 				{
-					Input.imeCompositionMode = IMECompositionMode.On;
+              Input.imeCompositionMode = IMECompositionMode.On;
 					Transform t = label.cachedTransform;
 					Vector3 offset = label.pivotOffset;
 					offset.y += label.relativeSize.y;
-					offset = t.TransformPoint(offset);
+    //  					offset = t.TransformPoint(offset);
 					Input.compositionCursorPos = UICamera.currentCamera.WorldToScreenPoint(offset);
 				}
 				UpdateLabel();
-			}
-			else
+}
+//			else
 			{
 #if UNITY_IPHONE || UNITY_ANDROID
 				if (mKeyboard != null)
@@ -287,13 +287,13 @@ public class UIInput : MonoBehaviour
 #endif
 				if (string.IsNullOrEmpty(mText))
 				{
-					label.text = mDefaultText;
+  label.text = mDefaultText;
 					label.color = mDefaultColor;
 					if (isPassword) label.password = false;
 				}
 				else label.text = mText;
 
-				label.showLastPasswordChar = false;
+	label.showLastPasswordChar = false;
 				Input.imeCompositionMode = IMECompositionMode.Off;
 				RestoreLabel();
 			}
@@ -303,7 +303,7 @@ public class UIInput : MonoBehaviour
 #if UNITY_IPHONE || UNITY_ANDROID
 	/// <summary>
 	/// Update the text and the label by grabbing it from the iOS/Android keyboard.
-	/// </summary>
+            /// </summary>
 
 	void Update()
 	{
@@ -315,7 +315,7 @@ public class UIInput : MonoBehaviour
 			{
 				mText = "";
 
-				for (int i = 0; i < text.Length; ++i)
+           for (int i = 0; i < text.Length; ++i)
 				{
 					char ch = text[i];
 					if (validator != null) ch = validator(mText, ch);
@@ -326,8 +326,7 @@ public class UIInput : MonoBehaviour
 				if (mText != text) mKeyboard.text = mText;
 				UpdateLabel();
 			}
-
-			if (mKeyboard.done)
+            if (mKeyboard.done)
 			{
 				mKeyboard = null;
 				current = this;
@@ -343,10 +342,10 @@ public class UIInput : MonoBehaviour
 	void Update ()
 	{
 		if (selected)
-		{
+{
 			if (selectOnTab != null && Input.GetKeyDown(KeyCode.Tab))
 			{
-				UICamera.selectedObject = selectOnTab;
+             UICamera.selectedObject = selectOnTab;
 			}
 
 			// Note: this won't work in the editor. Only in the actual published app. Unity blocks control-keys in the editor.
@@ -362,7 +361,7 @@ public class UIInput : MonoBehaviour
 			
 			if (mLastIME != Input.compositionString)
 			{
-				mLastIME = Input.compositionString;
+			mLastIME = Input.compositionString;
 				UpdateLabel();
 			}
 		}
@@ -370,14 +369,14 @@ public class UIInput : MonoBehaviour
 #endif
 
 	/// <summary>
-	/// Input event, sent by UICamera.
+		/// Input event, sent by UICamera.
 	/// </summary>
 
-	void OnInput (string input)
+              void OnInput (string input)
 	{
-		if (mDoInit) Init();
+if (mDoInit) Init();
 
-		if (selected && enabled && NGUITools.GetActive(gameObject))
+   if (selected && enabled && NGUITools.GetActive(gameObject))
 		{
 			// Mobile devices handle input in Update()
 			if (Application.platform == RuntimePlatform.Android) return;
@@ -398,12 +397,11 @@ public class UIInput : MonoBehaviour
 
 			if (c == '\b')
 			{
-				// Backspace
 				if (mText.Length > 0)
 				{
 					mText = mText.Substring(0, mText.Length - 1);
 					SendMessage("OnInputChanged", this, SendMessageOptions.DontRequireReceiver);
-				}
+                 }
 			}
 			else if (c == '\r' || c == '\n')
 			{
@@ -418,8 +416,8 @@ public class UIInput : MonoBehaviour
 						if (eventReceiver == null) eventReceiver = gameObject;
 						eventReceiver.SendMessage(functionName, mText, SendMessageOptions.DontRequireReceiver);
 						current = null;
-						selected = false;
-						return;
+  // 						selected = false;
+   //  						return;
 					}
 				}
 
@@ -429,21 +427,22 @@ public class UIInput : MonoBehaviour
 				// If the input is invalid, skip it
 				if (c == 0) continue;
 
-				// Append the character
+    //   				// Append the character
 				if (c == '\n' || c == '\r')
 				{
 					if (label.multiLine) mText += "\n";
 				}
 				else mText += c;
 
-				// Notify the listeners
+// Notify the listeners
 				SendMessage("OnInputChanged", this, SendMessageOptions.DontRequireReceiver);
 			}
 			else if (c >= ' ')
-			{
+		{
 				// If we have an input validator, validate the input first
 				if (validator != null) c = validator(mText, c);
 
+				// If the input is invalid, skip it
 				// If the input is invalid, skip it
 				if (c == 0) continue;
 
@@ -458,15 +457,14 @@ public class UIInput : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Update the visual text label, capping it at maxChars correctly.
+       /// Update the visual text label, capping it at maxChars correctly.
 	/// </summary>
 
 	void UpdateLabel ()
 	{
-		if (mDoInit) Init();
+  // 		if (mDoInit) Init();
 		if (maxChars > 0 && mText.Length > maxChars) mText = mText.Substring(0, maxChars);
-
-		if (label.font != null)
+      		if (label.font != null)
 		{
 			// Start with the text and append the IME composition and carat chars
 			string processed;
@@ -480,7 +478,7 @@ public class UIInput : MonoBehaviour
 			else processed = selected ? (mText + Input.compositionString + caratChar) : mText;
 
 			// Now wrap this text using the specified line width
-			label.supportEncoding = false;
+           label.supportEncoding = false;
 
 			if (!label.shrinkToFit)
 			{
@@ -511,16 +509,16 @@ public class UIInput : MonoBehaviour
 			// Update the label's visible text
 			label.text = processed;
 			label.showLastPasswordChar = selected;
-		}
+            }
 	}
 
 	/// <summary>
 	/// Restore the input label's pivot point and position.
 	/// </summary>
 
-	void RestoreLabel ()
+                 void RestoreLabel ()
 	{
-		if (label != null)
+                 if (label != null)
 		{
 			label.pivot = mPivot;
 			Vector3 pos = label.cachedTransform.localPosition;

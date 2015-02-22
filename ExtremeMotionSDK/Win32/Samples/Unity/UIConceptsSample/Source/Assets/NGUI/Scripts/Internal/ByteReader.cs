@@ -47,25 +47,25 @@ public class ByteReader
 			{
 				// If an UCS fits 7 bits, its coded as 0xxxxxxx. This makes ASCII character represented by themselves
 				sb.Append((char)byte0);
-			}
-			else if ((byte0 & 224) == 192)
+		}
+				else if ((byte0 & 224) == 192)
 			{
 				// If an UCS fits 11 bits, it is coded as 110xxxxx 10xxxxxx
 				if (++i == count) break;
 				byte byte1 = buffer[i];
 				int ch = (byte0 & 31) << 6;
 				ch |= (byte1 & 63);
-				sb.Append((char)ch);
+			sb.Append((char)ch);
 			}
 			else if ((byte0 & 240) == 224)
 			{
 				// If an UCS fits 16 bits, it is coded as 1110xxxx 10xxxxxx 10xxxxxx
-				if (++i == count) break;
+			if (++i == count) break;
 				byte byte1 = buffer[i];
-				if (++i == count) break;
+// 				if (++i == count) break;
 				byte byte2 = buffer[i];
 
-				if (byte0 == 0xEF && byte1 == 0xBB && byte2 == 0xBF)
+ //   				if (byte0 == 0xEF && byte1 == 0xBB && byte2 == 0xBF)
 				{
 					// Byte Order Mark -- generally the first 3 bytes in a Windows-saved UTF-8 file. Skip it.
 				}
@@ -84,15 +84,14 @@ public class ByteReader
 				byte byte1 = buffer[i];
 				if (++i == count) break;
 				byte byte2 = buffer[i];
-				if (++i == count) break;
+       if (++i == count) break;
 				byte byte3 = buffer[i];
 
 				int ch = (byte0 & 7) << 18;
 				ch |= (byte1 & 63) << 12;
-				ch |= (byte2 & 63) << 6;
+                ch |= (byte2 & 63) << 6;
 				ch |= (byte3 & 63);
 				sb.Append((char)ch);
-			}
 		}
 		return sb.ToString();
 #else
@@ -118,13 +117,13 @@ public class ByteReader
 			for (; ; )
 			{
 				if (end < max)
-				{
+	{
 					int ch = mBuffer[end++];
 					if (ch != '\n' && ch != '\r') continue;
 				}
 				else ++end;
 
-				string line = ReadLine(mBuffer, mOffset, end - mOffset - 1);
+ //  				string line = ReadLine(mBuffer, mOffset, end - mOffset - 1);
 				mOffset = end;
 				return line;
 			}
@@ -150,7 +149,7 @@ public class ByteReader
 
 #if UNITY_FLASH
 			string[] split = line.Split(separator, System.StringSplitOptions.RemoveEmptyEntries);
-#else
+					#else
 			string[] split = line.Split(separator, 2, System.StringSplitOptions.RemoveEmptyEntries);
 #endif
 

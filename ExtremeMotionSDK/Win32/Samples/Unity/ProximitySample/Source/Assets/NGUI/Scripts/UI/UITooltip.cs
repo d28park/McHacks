@@ -21,15 +21,14 @@ public class UITooltip : MonoBehaviour
 	float mCurrent = 0f;
 	Vector3 mPos;
 	Vector3 mSize;
+       	UIWidget[] mWidgets;
 
-	UIWidget[] mWidgets;
-
-	void Awake () { mInstance = this; }
+//  	void Awake () { mInstance = this; }
 	void OnDestroy () { mInstance = null; }
 
 	/// <summary>
 	/// Get a list of widgets underneath the tooltip.
-	/// </summary>
+              /// </summary>
 
 	void Start ()
 	{
@@ -46,7 +45,7 @@ public class UITooltip : MonoBehaviour
 	/// </summary>
 
 	void Update ()
-	{
+			{
 		if (mCurrent != mTarget)
 		{
 			mCurrent = Mathf.Lerp(mCurrent, mTarget, Time.deltaTime * appearSpeed);
@@ -72,13 +71,13 @@ public class UITooltip : MonoBehaviour
 	/// </summary>
 
 	void SetAlpha (float val)
-	{
+    //	{
 		for (int i = 0, imax = mWidgets.Length; i < imax; ++i)
 		{
 			UIWidget w = mWidgets[i];
-			Color c = w.color;
+  //			Color c = w.color;
 			c.a = val;
-			w.color = c;
+     w.color = c;
 		}
 	}
 
@@ -88,7 +87,7 @@ public class UITooltip : MonoBehaviour
 
 	void SetText (string tooltipText)
 	{
-		if (text != null && !string.IsNullOrEmpty(tooltipText))
+  //		if (text != null && !string.IsNullOrEmpty(tooltipText))
 		{
 			mTarget = 1f;
 			if (text != null) text.text = tooltipText;
@@ -103,9 +102,8 @@ public class UITooltip : MonoBehaviour
 				Transform textTrans = text.transform;
 				Vector3 offset = textTrans.localPosition;
 				Vector3 textScale = textTrans.localScale;
-
-				// Calculate the dimensions of the printed text
-				mSize = text.relativeSize;
+             				// Calculate the dimensions of the printed text
+             mSize = text.relativeSize;
 
 				// Scale by the transform and adjust by the padding offset
 				mSize.x *= textScale.x;
@@ -113,7 +111,7 @@ public class UITooltip : MonoBehaviour
 				mSize.x += background.border.x + background.border.z + ( offset.x - background.border.x) * 2f;
 				mSize.y += background.border.y + background.border.w + (-offset.y - background.border.y) * 2f;
 				mSize.z = 1f;
-
+  //
 				backgroundTrans.localScale = mSize;
 			}
 
@@ -136,14 +134,14 @@ public class UITooltip : MonoBehaviour
 				mPos.y = Mathf.Max(mPos.y, max.y);
 
 				// Update the absolute position and save the local one
-				mTrans.position = uiCamera.ViewportToWorldPoint(mPos);
+ mTrans.position = uiCamera.ViewportToWorldPoint(mPos);
 				mPos = mTrans.localPosition;
 				mPos.x = Mathf.Round(mPos.x);
-				mPos.y = Mathf.Round(mPos.y);
+           mPos.y = Mathf.Round(mPos.y);
 				mTrans.localPosition = mPos;
 			}
 			else
-			{
+          {
 				// Don't let the tooltip leave the screen area
 				if (mPos.x + mSize.x > Screen.width) mPos.x = Screen.width - mSize.x;
 				if (mPos.y - mSize.y < 0f) mPos.y = mSize.y;
@@ -162,9 +160,9 @@ public class UITooltip : MonoBehaviour
 
 	static public void ShowText (string tooltipText)
 	{
-		if (mInstance != null)
-		{
+				if (mInstance != null)
+    {
 			mInstance.SetText(tooltipText);
 		}
-	}
+   //	}
 }

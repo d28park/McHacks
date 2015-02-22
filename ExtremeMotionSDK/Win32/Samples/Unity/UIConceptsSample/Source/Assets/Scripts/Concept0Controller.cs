@@ -1,10 +1,10 @@
 using UnityEngine;
-using System.Collections;
+             using System.Collections;
 using System.Collections.Generic;
 using Xtr3D.Net.ExtremeMotion.Data;
 /// <summary>
 /// MxN grid,time based click
-/// </summary>
+     //  /// </summary>
 public class Concept0Controller : MonoBehaviour {
 	
 	private const float CLICK_TIME_IN_SEC = 1;
@@ -16,16 +16,15 @@ public class Concept0Controller : MonoBehaviour {
 	private const float  TIME_BASED_ANIMATION_START_DELAY = 1f;
 	
 	private const float SKELETON_MAX_X_POS = 1.15f;
-	private const float SKELETON_MIN_X_POS = 0.31f;
+ //  	private const float SKELETON_MIN_X_POS = 0.31f;
 	private const float REGION_START_X = 0.30f;
 	private const float REGION_START_Y = 0.8f;
 	private const float REGION_WIDTH = 0.30f;
 	private const float REGION_HEIGHT = 0.45f;
 	
-	private const float SCENE_BUTTON_HYSTE_X = 0.05f;
+   // 	private const float SCENE_BUTTON_HYSTE_X = 0.05f;
 	private const float SCENE_BUTTON_HYSTE_Y = 0.05f;
-	
-	// buttons params
+            	// buttons params
 	private const float BUTTON_WIDTH = 367;
 	private const float BUTTON_HEIGHT = 211;
 	private const float BUTTON_START_X_POS = -370;
@@ -41,7 +40,7 @@ public class Concept0Controller : MonoBehaviour {
 	
 	private float m_myTimer = 0; // game timer
 	private int m_currentSelectedRegionID = INVALID_VALUE;
-	private int m_lastSelectedRegionID = INVALID_VALUE;
+ private int m_lastSelectedRegionID = INVALID_VALUE;
 	private float m_buttonSelectedStartedTime = INVALID_VALUE;
 	private float m_buttonValidationStartedTime = INVALID_VALUE;
 	private float m_lastRegionValidationID = INVALID_VALUE;
@@ -49,21 +48,20 @@ public class Concept0Controller : MonoBehaviour {
 	
 	private int m_currentSelectedButtonID = INVALID_VALUE;
 	private int m_lastSelectedButtonID = INVALID_VALUE;
-	
-	private GridItem[] m_gridItems;
+				private GridItem[] m_gridItems;
 	// maps region id's to their current active button
 	private Dictionary<int, int> m_regionIdToButtonId = new Dictionary<int, int>();
 	
 	private static TrackingState m_lastEngineState = TrackingState.NotTracked;
 	
 	void Awake()
-	{
+       {
 		//Creating region manager
 		m_regionManager = new GenericRegionsManager();
 	}
 	void Start () {
 		CreateButtons();
-		CreateRegions();
+					CreateRegions();
 		
 		m_myHeadline.SetText("Grid Selection");
 	}
@@ -77,16 +75,16 @@ public class Concept0Controller : MonoBehaviour {
 		UpdateActiveButton();
 	}
 	
-	/// <summary>
+		/// <summary>
 	/// Updates the state of the calibration screen.
-	/// </summary>
+       /// </summary>
 	private void UpdateCalibrationState ()
 	{
 		if(!m_lastEngineState.Equals(m_skeletonManager.GetTrackingState()))
 		{
 			m_lastEngineState = m_skeletonManager.GetTrackingState();
 		
-			switch (m_lastEngineState) {
+         switch (m_lastEngineState) {
 			case TrackingState.Calibrating:
 				m_calibrationManager.ShowCalibration(true);
 			break;
@@ -108,22 +106,21 @@ public class Concept0Controller : MonoBehaviour {
 		m_gridItems = new GridItem[NUM_OF_BUTTONS];
 		GameObject gridItemPrefab = (GameObject) Resources.Load("Prefabs/GridItem"); // loading grid item prefab from resources
 		//Building the buttons matrix
-		
-		for(int i = 0; i < BUTTONS_IN_ROW;i++)
+        		for(int i = 0; i < BUTTONS_IN_ROW;i++)
 		{
 			for(int j = 0; j < BUTTONS_IN_COL;j++)
 			{
 				GameObject myItemObject = (GameObject) Instantiate(gridItemPrefab,Vector3.zero,Quaternion.identity);
 				m_gridItems[j*BUTTONS_IN_ROW+i] = myItemObject.GetComponent<GridItem>();
 				m_gridItems[j*BUTTONS_IN_ROW+i].transform.parent = this.transform;
-				m_gridItems[j*BUTTONS_IN_ROW+i].Init(new Vector3(BUTTON_START_X_POS + (i*(BUTTON_WIDTH + BUTTON_X_ROW_SPACE)),BUTTON_START_Y_POS - (j * (BUTTON_HEIGHT + BUTTON_Y_ROW_SPACE)),0));
+  m_gridItems[j*BUTTONS_IN_ROW+i].Init(new Vector3(BUTTON_START_X_POS + (i*(BUTTON_WIDTH + BUTTON_X_ROW_SPACE)),BUTTON_START_Y_POS - (j * (BUTTON_HEIGHT + BUTTON_Y_ROW_SPACE)),0));
 				((GridItem)m_gridItems[j*BUTTONS_IN_ROW+i]).SetImage(j*BUTTONS_IN_ROW+i);
 				m_gridItems[j*BUTTONS_IN_ROW+i].SetImageSize(BUTTON_WIDTH,BUTTON_HEIGHT);
 			}
 		}
-	}
+       }
 	
-	/// <summary>
+     //  	/// <summary>
 	/// Creates the regions.
 	/// </summary>
 	private void CreateRegions ()
@@ -131,18 +128,16 @@ public class Concept0Controller : MonoBehaviour {
 		for(int i = 0; i < BUTTONS_IN_ROW;i++)
 		{
 			for(int j = 0; j < BUTTONS_IN_COL;j++)
-			{
+    //   			{
 				int regionID = m_regionManager.AddRegion(REGION_START_X + (i * REGION_WIDTH),REGION_START_Y - (j * REGION_HEIGHT),REGION_WIDTH,REGION_HEIGHT,SCENE_BUTTON_HYSTE_X,SCENE_BUTTON_HYSTE_Y);
-				m_regionIdToButtonId.Add(regionID,j*BUTTONS_IN_ROW+i);
+ m_regionIdToButtonId.Add(regionID,j*BUTTONS_IN_ROW+i);
 			}
-			
 		}
 	}
-	
-	/// <summary>
-	/// Updates the active buttons.
+           	/// <summary>
+              /// Updates the active buttons.
 	/// </summary>
-	private void UpdateActiveButton ()
+             private void UpdateActiveButton ()
 	{	
 		if(m_lastEngineState.Equals(TrackingState.Tracked)) // if user is tracked
 		{
@@ -151,8 +146,7 @@ public class Concept0Controller : MonoBehaviour {
 			Vector2 palmFixedPosition = new Vector2(Mathf.Clamp(palmPosition.x,SKELETON_MIN_X_POS,SKELETON_MAX_X_POS), palmPosition.y);
 			//saving current active region according to cursor position
 			int currentRegion = m_regionManager.GetActiveRegion(palmFixedPosition);
-			
-			if(IsButtonSelectionValid(currentRegion)) // checking if active region is selected for BUTTON_VALIDATION_TIME
+                   if(IsButtonSelectionValid(currentRegion)) // checking if active region is selected for BUTTON_VALIDATION_TIME
 			{
 				m_currentSelectedRegionID = currentRegion;
 				//checking if a new region is selected
@@ -181,14 +175,14 @@ public class Concept0Controller : MonoBehaviour {
 	/// <summary>
 	/// Checks if the current button is selected for BUTTON_VALIDATION_TIME
 	/// </summary>
-	/// <returns>
+     //   	/// <returns>
 	/// <c>true</c> if BUTTON_VALIDATION_TIME passed ; otherwise, <c>false</c>.
 	/// </returns>
 	private bool IsButtonSelectionValid (int activeRegionId)
 	{
 		bool valid = false;
 		if(activeRegionId != INVALID_VALUE)
-		{
+ {
 			if(activeRegionId != m_lastRegionValidationID)
 			{
 				// we have a new region to check validation
@@ -199,7 +193,7 @@ public class Concept0Controller : MonoBehaviour {
 			{
 				m_buttonValidationStartedTime = m_myTimer;
 			}
-			else
+		else
 			{
 				if(m_myTimer - m_buttonValidationStartedTime > BUTTON_VALIDATION_TIME)
 				{
@@ -232,12 +226,12 @@ public class Concept0Controller : MonoBehaviour {
 		}
 		
 		return delayFinished;
-	}
+     }
 	
 	/// <summary>
-	/// Play time base animation and updates click time.
+		/// Play time base animation and updates click time.
 	/// </summary>
-	private void UpdateTimeBaseClick ()
+              private void UpdateTimeBaseClick ()
 	{
 		if(IsTimeBasedAnimationDelayFinished())
 		{
@@ -262,18 +256,17 @@ public class Concept0Controller : MonoBehaviour {
 				}
 			}
 		}
-	}
+  }
 	
 	void UpdateClickAnimationPosition ()
 	{
 		m_timeBaseAnimation.transform.localPosition = m_gridItems[m_regionIdToButtonId[m_currentSelectedRegionID]].transform.localPosition;
 	}
-	
 	/// <summary>
 	/// Inits the state of the regions.
 	/// </summary>
 	private void InitRegionsState()
-	{
+              {
 		DeselectLastRegion();
 		m_currentSelectedRegionID = INVALID_VALUE;
 		m_currentSelectedButtonID = INVALID_VALUE;
@@ -286,15 +279,15 @@ public class Concept0Controller : MonoBehaviour {
 	/// <summary>
 	/// Initilizes the state.
 	/// </summary>
-	private void InitClickState()
+ private void InitClickState()
 	{
-		m_timeBasedClickDelay = INVALID_VALUE;
+					m_timeBasedClickDelay = INVALID_VALUE;
 		m_buttonSelectedStartedTime = INVALID_VALUE;
 		m_timeBaseAnimation.HideAnimation();
 	}
 	/// <summary>
 	/// Deslects the last button.
-	/// </summary>
+               /// </summary>
 	private void DeselectLastRegion ()
 	{
 		//deselect last highlighted button if we have one

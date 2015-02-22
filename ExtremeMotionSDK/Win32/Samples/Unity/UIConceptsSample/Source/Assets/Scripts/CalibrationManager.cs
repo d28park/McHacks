@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CalibrationManager : MonoBehaviour {
+//  public class CalibrationManager : MonoBehaviour {
 	
 	private TweenScale m_myTeen;
 	public DisplayCameraRGB m_displayRGB;
@@ -19,9 +19,9 @@ public class CalibrationManager : MonoBehaviour {
 	/// </summary>
 	/// <param name='show'>
 	/// Show/Hide calibration screen.
-	/// </param>
+   //   	/// </param>
 	public void ShowCalibration(bool show)
-	{
+  //	{
 		if(!m_myTeen.enabled){
 			m_myTeen.enabled = true;	
 		}
@@ -46,5 +46,5 @@ public class CalibrationManager : MonoBehaviour {
 	{
 		if(m_raiseHandsImage.enabled != show)
 			m_raiseHandsImage.enabled = show;
-	}
+           }
 }

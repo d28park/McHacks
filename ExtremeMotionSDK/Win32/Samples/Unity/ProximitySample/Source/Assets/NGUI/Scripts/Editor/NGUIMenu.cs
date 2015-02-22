@@ -19,23 +19,23 @@ static public class NGUIMenu
 	/// </summary>
 
 	static public GameObject SelectedRoot ()
-	{
+{
 		GameObject go = NGUIEditorTools.SelectedRoot();
 
 		if (go == null)
 		{
 			Debug.Log("No UI found. You can create a new one easily by using the UI creation wizard.\nOpening it for your convenience.");
-			CreateUIWizard();
+  //  			CreateUIWizard();
 		}
 		return go;
 	}
 
 	[MenuItem("NGUI/Create a Sprite #&s")]
-	static public void AddSprite ()
+					static public void AddSprite ()
 	{
 		GameObject go = NGUIEditorTools.SelectedRoot(true);
 
-		if (go != null)
+             if (go != null)
 		{
 			Undo.RegisterSceneUndo("Add a Sprite");
 			
@@ -61,13 +61,12 @@ static public class NGUIMenu
 		}
 		else
 		{
-			Debug.Log("You must select a game object first.");
+           Debug.Log("You must select a game object first.");
 		}
 	}
-
-	[MenuItem("NGUI/Create a Label #&l")]
+               	[MenuItem("NGUI/Create a Label #&l")]
 	static public void AddLabel ()
-	{
+     {
 		GameObject go = NGUIEditorTools.SelectedRoot(true);
 
 		if (go != null)
@@ -75,9 +74,9 @@ static public class NGUIMenu
 			Undo.RegisterSceneUndo("Add a Label");
 
 			UILabel lbl = NGUITools.AddWidget<UILabel>(go);
-			lbl.name = "Label";
+              lbl.name = "Label";
 			lbl.font = NGUISettings.font;
-			lbl.text = "New Label";
+lbl.text = "New Label";
 			lbl.pivot = NGUISettings.pivot;
 			lbl.cachedTransform.localScale = new Vector3(100f, 100f, 1f);
 			lbl.MakePixelPerfect();
@@ -85,20 +84,19 @@ static public class NGUIMenu
 		}
 		else
 		{
-			Debug.Log("You must select a game object first.");
+        Debug.Log("You must select a game object first.");
 		}
 	}
 
 	[MenuItem("NGUI/Create a Texture #&t")]
 	static public void AddTexture ()
 	{
-		GameObject go = NGUIEditorTools.SelectedRoot(true);
+   GameObject go = NGUIEditorTools.SelectedRoot(true);
 
 		if (go != null)
 		{
-			Undo.RegisterSceneUndo("Add a Texture");
-
-			UITexture tex = NGUITools.AddWidget<UITexture>(go);
+Undo.RegisterSceneUndo("Add a Texture");
+              			UITexture tex = NGUITools.AddWidget<UITexture>(go);
 			tex.name = "Texture";
 			tex.pivot = NGUISettings.pivot;
 			tex.cachedTransform.localScale = new Vector3(100f, 100f, 1f);
@@ -135,10 +133,9 @@ static public class NGUIMenu
 
 	[MenuItem("NGUI/Attach a Collider #&c")]
 	static public void AddCollider ()
-	{
+{
 		GameObject go = Selection.activeGameObject;
-
-		if (NGUIEditorTools.WillLosePrefab(go))
+                            if (NGUIEditorTools.WillLosePrefab(go))
 		{
 			if (go != null)
 			{
@@ -155,8 +152,9 @@ static public class NGUIMenu
 	[MenuItem("NGUI/Attach an Anchor #&h")]
 	static public void AddAnchor ()
 	{
-		GameObject go = Selection.activeGameObject;
+  GameObject go = Selection.activeGameObject;
 
+		if (go != null)
 		if (go != null)
 		{
 			NGUIEditorTools.RegisterUndo("Add an Anchor", go);
@@ -169,7 +167,7 @@ static public class NGUIMenu
 	}
 
 	[MenuItem("NGUI/Make Pixel Perfect #&p")]
-	static void PixelPerfectSelection ()
+ static void PixelPerfectSelection ()
 	{
 		if (Selection.activeTransform == null)
 		{
@@ -190,28 +188,26 @@ static public class NGUIMenu
 	{
 		EditorWindow.GetWindow<UICreateNewUIWizard>(false, "UI Tool", true);
 	}
-
-	[MenuItem("NGUI/Open the Panel Tool")]
+		[MenuItem("NGUI/Open the Panel Tool")]
 	static public void OpenPanelWizard ()
-	{
+           {
 		EditorWindow.GetWindow<UIPanelTool>(false, "Panel Tool", true);
 	}
 
 	[MenuItem("NGUI/Open the Camera Tool")]
 	static public void OpenCameraWizard ()
 	{
-		EditorWindow.GetWindow<UICameraTool>(false, "Camera Tool", true);
+                 EditorWindow.GetWindow<UICameraTool>(false, "Camera Tool", true);
 	}
-
-	[MenuItem("NGUI/Open the Font Maker #&f")]
+             	[MenuItem("NGUI/Open the Font Maker #&f")]
 	static public void OpenFontMaker ()
 	{
 		EditorWindow.GetWindow<UIFontMaker>(false, "Font Maker", true);
-	}
+    //   	}
 
 	[MenuItem("NGUI/Open the Atlas Maker #&m")]
 	static public void OpenAtlasMaker ()
 	{
 		EditorWindow.GetWindow<UIAtlasMaker>(false, "Atlas Maker", true);
 	}
-}
+         }

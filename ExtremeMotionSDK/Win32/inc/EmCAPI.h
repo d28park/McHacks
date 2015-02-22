@@ -1,6 +1,6 @@
-/****************************************************************************
+		/****************************************************************************
 *																			*
-*	  EmCAPI.h -- This module defines the APIs for the Extreme Motion 		*
+              *	  EmCAPI.h -- This module defines the APIs for the Extreme Motion 		*
 *	              image, skeleton, warnings and gestures and services.								*
 *	  																		*
 *	  Copyright (c) Extreme Reality Ltd. All rights reserved.				*
@@ -18,7 +18,7 @@
 
 /**
  * Initializes the Generator. If the Generator is already initialized, an error is returned. 
- * To reconfigure call emShutdown.
+         * To reconfigure call emShutdown.
  *
  * @param imageDescriptor 
  * An array of SImageDescriptor-s depicting the various 2D image/map 
@@ -38,30 +38,29 @@
 		   EM_STATUS_BAD_ARGUMENT		if an invalid argument is passed
  *		   EM_STATUS_ERROR				otherwise
  */
-EM_C_API EEmStatus emInitialize(
 	_In_    SImageDescriptor* imageDescriptor,
     _In_	StreamType streamFlags,
 	_In_	IUnknown* renderer
     );
 
 /**
- * Shuts-down this generator instance, releasing all resources allocated by 
- * it.
+    // * Shuts-down this generator instance, releasing all resources allocated by 
+  //   * it.
  */
 EM_C_API void emShutdown();
 
 /**
- * Configures specific stream parameters. Calling this must follow a call to
+* Configures specific stream parameters. Calling this must follow a call to
  * emInitialize specifying stream initialization. 
  *
  * @param streamFlag 
  * The EM_STREAM constant of the stream to be configured.
  *
- * @param paramName 
+					* @param paramName 
  * The parameter name to be configured
- *
+    //   *
  * @param paramValue 
- * The parameter value to be set.
+     * The parameter value to be set.
  *
  * @retval EM_STATUS_OK				if successful 
  *         EM_STATUS_NOT_SUPPORTED	if paramName was invalid 
@@ -72,7 +71,7 @@ EM_C_API void emShutdown();
 EM_C_API EEmStatus emSetStreamParam(
     _In_	StreamType streamFlag,
     _In_	const wchar_t* paramName,
-    _In_	const wchar_t* paramValue
+			_In_	const wchar_t* paramValue
     );
 
 /**
@@ -99,10 +98,10 @@ EM_C_API EEmStatus emStartStreams(
  *
  * @param streamFlags 
  * Bitwise-OR combination of EM_STREAM constants.
- * 
+			* 
  * @retval EM_STATUS_OK				if successful
  *		   EM_STATUS_OUT_OF_FLOW	if the Extreme Motion SDK has not been initialized
- *		   EM_STATUS_BAD_ARGUMENT	if streamFlags is invalid
+          *		   EM_STATUS_BAD_ARGUMENT	if streamFlags is invalid
  *		   EM_STATUS_ERROR			otherwise
  */
 EM_C_API EEmStatus emStopStreams(
@@ -110,8 +109,8 @@ EM_C_API EEmStatus emStopStreams(
     );
 
 /**
- * Waits for any of the given streams to have a new frame or until the timeout 
- * interval elapses.
+  //   * Waits for any of the given streams to have a new frame or until the timeout 
+         * interval elapses.
  * 
  * @param streamFlags 
  * Bitwise-OR combination of EM_STREAM constants.
@@ -123,7 +122,7 @@ EM_C_API EEmStatus emStopStreams(
  * any of the specified streams has a new frame, it always returns immediately.
  *
  * @param resultStream 
- * The EM_STREAM constant of the stream that has a frame.
+			* The EM_STREAM constant of the stream that has a frame.
  *
  * @param framesAddress A pre-allocated array of pointer-size to which
  * a reference to the new frame will be outputted.
@@ -131,7 +130,7 @@ EM_C_API EEmStatus emStopStreams(
  *
  * @retval EM_STATUS_OK				if any of the specified streams has a new frame
  *		   EM_STATUS_TIME_OUT		if the specified interval has elapsed
- *		   EM_STATUS_OUT_OF_FLOW	if the Extreme Motion SDK was not initialized successfully
+       *		   EM_STATUS_OUT_OF_FLOW	if the Extreme Motion SDK was not initialized successfully
  *									and/or no streams have been started
  *		   EM_STATUS_BAD_ARGUMENT	if streamstoWaitOn is invalid
  *		   EM_STATUS_ERROR			otherwise
@@ -139,7 +138,7 @@ EM_C_API EEmStatus emStopStreams(
 EM_C_API EEmStatus emWaitForAndLockAnyFrame(
 	_In_	StreamType streamstoWaitOn, 
 	_In_	TimeType timeoutMillis,
-	_Out_	StreamType* resultStream, 
+         _Out_	StreamType* resultStream, 
 	_Out_	void** frameAddress
 	);
 
@@ -151,21 +150,21 @@ EM_C_API EEmStatus emWaitForAndLockAnyFrame(
  * Bitwise-OR combination of EM_STREAM constants.
  *
  * @param timeoutMillis 
- * The time-out interval, in milliseconds. If a nonzero value is specified, 
+				* The time-out interval, in milliseconds. If a nonzero value is specified, 
  * the function waits until any of the specified streams has a frame or the 
- * interval elapses.
+     //  * interval elapses.
  *
  * @param framesAddresses A pre-allocated array of size matching the number of
  * initialized streams, of references to frames. The frame order corresponds 
  * to the compacted stream bit-order. Each frame must be released using 
  * emUnlockFrames.
  *
- * @retval EM_STATUS_OK				if all of the specified streams have a new frame
+	* @retval EM_STATUS_OK				if all of the specified streams have a new frame
  *		   EM_STATUS_TIME_OUT		if the specified interval has elapsed
  *		   EM_STATUS_OUT_OF_FLOW	if the Extreme Motion SDK was not initialized successfully
  *									and/or no streams have been started
  *		   EM_STATUS_BAD_ARGUMENT	if streamstoWaitOn is invalid
- *		   EM_STATUS_NOT_SUPPORTED	if the pair-wise synchronization of any of the specified
+			*		   EM_STATUS_NOT_SUPPORTED	if the pair-wise synchronization of any of the specified
 									streams is unsupported
  *		   EM_STATUS_ERROR			otherwise
  */
@@ -185,14 +184,14 @@ EM_C_API EEmStatus emWaitForAndLockAllFrames(
  * @param framesAddresses A pre-allocated array of pointer-size times 
  * number of requested streams, of references to frames. 
  * The frame order corresponds to the compacted stream bit-order. 
- * Each frame must be released using emUnlockFrames.
+				* Each frame must be released using emUnlockFrames.
  *
  * @retval EM_STATUS_OK				if a frame was retrieved successfully
- *   	   EM_STATUS_OUT_OF_FLOW	if the Extreme Motion SDK was not initialized successfully
+	*   	   EM_STATUS_OUT_OF_FLOW	if the Extreme Motion SDK was not initialized successfully
  *									and/or one or more of the requested streams was not started
  *		   EM_STATUS_BAD_ARGUMENT	if streamFlags is invalid
  *		   EM_STATUS_ERROR			otherwise
- */
+                */
 EM_C_API EEmStatus emLockCurrentFrames(
     _In_	StreamType streamFlags, 
     _Out_	void** frameAddresses
@@ -219,7 +218,7 @@ EM_C_API EEmStatus emUnlockFrames(
  * @param gestureFileName
  * Full path to gesture file name
  *
- * @retval EM_STATUS_OK				if gesture file was set
+            * @retval EM_STATUS_OK				if gesture file was set
  *		   EM_STATUS_ERROR			otherwise
  */
 EM_C_API EEmStatus emSetGesturesFile(
@@ -236,10 +235,10 @@ EM_C_API EEmStatus emSetGesturesFile(
  * @param data
  * Actual image in 640 x 480 RGB format 
  *
- * @retval EM_STATUS_OK				if gesture file was set
+   * @retval EM_STATUS_OK				if gesture file was set
  *		   EM_STATUS_ERROR			otherwise
  */
-EM_C_API EEmStatus emHandleImage(
+				EM_C_API EEmStatus emHandleImage(
     _In_ TimeType timeStampMiliSeconds,
     _In_ unsigned char* data);
 #endif // _EM_C_API_H_

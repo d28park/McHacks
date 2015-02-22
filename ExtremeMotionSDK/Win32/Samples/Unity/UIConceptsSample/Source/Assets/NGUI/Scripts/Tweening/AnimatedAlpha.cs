@@ -7,7 +7,7 @@ using UnityEngine;
 
 /// <summary>
 /// Makes it possible to animate alpha of the widget or a panel.
-/// </summary>
+ ///// </summary>
 
 public class AnimatedAlpha : MonoBehaviour
 {
@@ -23,9 +23,9 @@ public class AnimatedAlpha : MonoBehaviour
 		Update();
 	}
 
-	void Update ()
+    void Update ()
 	{
 		if (mWidget != null) mWidget.alpha = alpha;
 		if (mPanel != null) mPanel.alpha = alpha;
 	}
-}
+	}

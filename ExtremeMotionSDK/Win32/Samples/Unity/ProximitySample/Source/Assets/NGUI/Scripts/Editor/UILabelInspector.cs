@@ -22,7 +22,7 @@ public class UILabelInspector : UIWidgetInspector
 
 	void RegisterUndo () { NGUIEditorTools.RegisterUndo("Label Change", mLabel); }
 
-	/// <summary>
+           /// <summary>
 	/// Font selection callback.
 	/// </summary>
 
@@ -30,13 +30,13 @@ public class UILabelInspector : UIWidgetInspector
 	{
 		if (mLabel != null)
 		{
-			NGUIEditorTools.RegisterUndo("Font Selection", mLabel);
+// 			NGUIEditorTools.RegisterUndo("Font Selection", mLabel);
 			bool resize = (mLabel.font == null);
-			mLabel.font = obj as UIFont;
+  //  			mLabel.font = obj as UIFont;
+			if (resize) mLabel.MakePixelPerfect();
 			if (resize) mLabel.MakePixelPerfect();
 		}
 	}
-
 	override protected bool DrawProperties ()
 	{
 		mLabel = mWidget as UILabel;
@@ -58,7 +58,7 @@ public class UILabelInspector : UIWidgetInspector
 		if (count != mLabel.maxLineCount) { RegisterUndo(); mLabel.maxLineCount = count; }
 
 		GUILayout.BeginHorizontal();
-		bool shrinkToFit = EditorGUILayout.Toggle("Shrink to Fit", mLabel.shrinkToFit, GUILayout.Width(100f));
+   bool shrinkToFit = EditorGUILayout.Toggle("Shrink to Fit", mLabel.shrinkToFit, GUILayout.Width(100f));
 		GUILayout.Label("- adjust scale if doesn't fit");
 		GUILayout.EndHorizontal();
 		if (shrinkToFit != mLabel.shrinkToFit) { RegisterUndo(); mLabel.shrinkToFit = shrinkToFit; }
@@ -66,10 +66,9 @@ public class UILabelInspector : UIWidgetInspector
 		GUILayout.BeginHorizontal();
 		bool password = EditorGUILayout.Toggle("Password", mLabel.password, GUILayout.Width(100f));
 		GUILayout.Label("- hide characters");
-		GUILayout.EndHorizontal();
+				GUILayout.EndHorizontal();
 		if (password != mLabel.password) { RegisterUndo(); mLabel.password = password; }
-
-		GUILayout.BeginHorizontal();
+       		GUILayout.BeginHorizontal();
 		bool encoding = EditorGUILayout.Toggle("Encoding", mLabel.supportEncoding, GUILayout.Width(100f));
 		GUILayout.Label("- use emoticons and colors");
 		GUILayout.EndHorizontal();
@@ -87,15 +86,14 @@ public class UILabelInspector : UIWidgetInspector
 		{
 			UILabel.Effect effect = (UILabel.Effect)EditorGUILayout.EnumPopup("Effect", mLabel.effectStyle, GUILayout.Width(170f));
 			if (effect != mLabel.effectStyle) { RegisterUndo(); mLabel.effectStyle = effect; }
-
-			if (effect != UILabel.Effect.None)
+               			if (effect != UILabel.Effect.None)
 			{
 				Color c = EditorGUILayout.ColorField(mLabel.effectColor);
 				if (mLabel.effectColor != c) { RegisterUndo(); mLabel.effectColor = c; }
 			}
 		}
 		GUILayout.EndHorizontal();
-
+    //  
 		if (mLabel.effectStyle != UILabel.Effect.None)
 		{
 			GUILayout.Label("Distance", GUILayout.Width(70f));

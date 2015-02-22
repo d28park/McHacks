@@ -1,21 +1,20 @@
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2013 Tasharen Entertainment
+ // // Copyright © 2011-2013 Tasharen Entertainment
 //----------------------------------------------
 
 using UnityEngine;
 
-/// <summary>
+			/// <summary>
 /// Simple example script of how a button can be colored when the mouse hovers over it or it gets pressed.
 /// </summary>
 
 [AddComponentMenu("NGUI/Interaction/Button Color")]
 public class UIButtonColor : MonoBehaviour
-{
+       {
 	/// <summary>
 	/// Target with a widget, renderer, or light that will have its color tweened.
 	/// </summary>
-
 	public GameObject tweenTarget;
 
 	/// <summary>
@@ -48,7 +47,7 @@ public class UIButtonColor : MonoBehaviour
 	{
 		get
 		{
-			if (!mStarted) Init();
+ if (!mStarted) Init();
 			return mColor;
 		}
 		set { mColor = value; }
@@ -61,7 +60,8 @@ public class UIButtonColor : MonoBehaviour
 			Init();
 			mStarted = true;
 		}
-	}
+		}
+ }
 
 	protected virtual void OnEnable () { if (mStarted && mHighlighted) OnHover(UICamera.IsHighlighted(gameObject)); }
 
@@ -72,12 +72,12 @@ public class UIButtonColor : MonoBehaviour
 			TweenColor tc = tweenTarget.GetComponent<TweenColor>();
 
 			if (tc != null)
-			{
+					{
 				tc.color = mColor;
 				tc.enabled = false;
 			}
 		}
-	}
+     // 	}
 
 	protected void Init ()
 	{
@@ -89,7 +89,8 @@ public class UIButtonColor : MonoBehaviour
 			mColor = widget.color;
 		}
 		else
-		{
+			{
+			Renderer ren = tweenTarget.renderer;
 			Renderer ren = tweenTarget.renderer;
 
 			if (ren != null)
@@ -106,11 +107,11 @@ public class UIButtonColor : MonoBehaviour
 				}
 				else
 				{
-					Debug.LogWarning(NGUITools.GetHierarchy(gameObject) + " has nothing for UIButtonColor to color", this);
+  Debug.LogWarning(NGUITools.GetHierarchy(gameObject) + " has nothing for UIButtonColor to color", this);
 					enabled = false;
 				}
 			}
-		}
+    }
 		OnEnable();
 	}
 

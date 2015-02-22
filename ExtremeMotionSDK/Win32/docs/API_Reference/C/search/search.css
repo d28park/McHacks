@@ -1,7 +1,6 @@
 /*---------------- Search Box */
-
 #FSearchBox {
-    float: left;
+					float: left;
 }
 
 #MSearchBox {
@@ -28,7 +27,7 @@
 }
 
 #MSearchSelect {
-    display:block;
+   display:block;
     position:absolute;
     width:20px;
     height:19px;
@@ -51,7 +50,7 @@
     width:111px;
     margin-left:20px;
     padding-left:4px;
-    color: #909090;
+	color: #909090;
     outline: none;
     font: 9pt Arial, Verdana, sans-serif;
 }
@@ -88,7 +87,7 @@
 
 .right #MSearchClose {
     right: 2px;
-}
+		}
 
 .MSearchBoxActive #MSearchField {
     color: #000000;
@@ -98,7 +97,7 @@
 
 #MSearchSelectWindow {
     display: none;
-    position: absolute;
+position: absolute;
     left: 0; top: 0;
     border: 1px solid #90A5CE;
     background-color: #F9FAFC;
@@ -108,7 +107,8 @@
     -moz-border-radius: 4px;
     -webkit-border-top-left-radius: 4px;
     -webkit-border-top-right-radius: 4px;
-    -webkit-border-bottom-left-radius: 4px;
+       -webkit-border-bottom-left-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
     -webkit-border-bottom-right-radius: 4px;
     -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
 }
@@ -116,13 +116,11 @@
 .SelectItem {
     font: 8pt Arial, Verdana, sans-serif;
     padding-left:  2px;
-    padding-right: 12px;
     border: 0px;
 }
-
-span.SelectionMark {
+   span.SelectionMark {
     margin-right: 4px;
-    font-family: monospace;
+                font-family: monospace;
     outline-style: none;
     text-decoration: none;
 }
@@ -131,7 +129,7 @@ a.SelectItem {
     display: block;
     outline-style: none;
     color: #000000; 
-    text-decoration: none;
+        text-decoration: none;
     padding-left:   6px;
     padding-right: 12px;
 }
@@ -180,7 +178,7 @@ iframe#MSearchResults {
     padding-left: 1ex;
 }
 
-.SRPage .SREntry {
+ .SRPage .SREntry {
     font-size: 8pt;
     padding: 1px 5px;
 }
@@ -199,17 +197,17 @@ body.SRPage {
 
 .SRSymbol {
     font-weight: bold; 
-    color: #425E97;
+                color: #425E97;
     font-family: Arial, Verdana, sans-serif;
     text-decoration: none;
     outline: none;
-}
+ }
 
 a.SRScope {
     display: block;
     color: #425E97; 
     font-family: Arial, Verdana, sans-serif;
-    text-decoration: none;
+				text-decoration: none;
     outline: none;
 }
 
@@ -225,14 +223,14 @@ span.SRScope {
 .SRPage .SRStatus {
     padding: 2px 5px;
     font-size: 8pt;
-    font-style: italic;
+               font-style: italic;
 }
 
 .SRResult {
     display: none;
 }
 
-DIV.searchresults {
+            DIV.searchresults {
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -248,7 +246,7 @@ DIV.searchresults {
    padding: 5px 5px 3px 5px;
    background-image: url("../tab_a.png");
    background-repeat: repeat-x;
-   text-shadow: 0 1px 1px #000000;
+         text-shadow: 0 1px 1px #000000;
 }
 
 .pages {
@@ -264,7 +262,6 @@ DIV.searchresults {
 #searchresults {
     margin-bottom: 20px;
 }
-
 .searchpages {
     margin-top: 10px;
 }
