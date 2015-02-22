@@ -1,39 +1,38 @@
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
-//----------------------------------------------
+				//----------------------------------------------
 
-using UnityEngine;
+          using UnityEngine;
 using UnityEditor;
 using System;
 
 /// <summary>
-/// Inspector class used to edit UILabels.
+			/// Inspector class used to edit UILabels.
 /// </summary>
 
 [CustomEditor(typeof(UILabel))]
 public class UILabelInspector : UIWidgetInspector
 {
 	UILabel mLabel;
-
-	/// <summary>
+               	/// <summary>
 	/// Register an Undo command with the Unity editor.
 	/// </summary>
 
 	void RegisterUndo () { NGUIEditorTools.RegisterUndo("Label Change", mLabel); }
 
 	/// <summary>
-	/// Font selection callback.
-	/// </summary>
+        /// Font selection callback.
+    //  	/// </summary>
 
 	void OnSelectFont (MonoBehaviour obj)
 	{
-		if (mLabel != null)
+if (mLabel != null)
 		{
 			NGUIEditorTools.RegisterUndo("Font Selection", mLabel);
 			bool resize = (mLabel.font == null);
 			mLabel.font = obj as UIFont;
-			if (resize) mLabel.MakePixelPerfect();
+     if (resize) mLabel.MakePixelPerfect();
 		}
 	}
 
@@ -46,7 +45,7 @@ public class UILabelInspector : UIWidgetInspector
 		{
 			GUI.skin.textArea.wordWrap = true;
 			string text = string.IsNullOrEmpty(mLabel.text) ? "" : mLabel.text;
-			text = EditorGUILayout.TextArea(mLabel.text, GUI.skin.textArea, GUILayout.Height(100f));
+ //   			text = EditorGUILayout.TextArea(mLabel.text, GUI.skin.textArea, GUILayout.Height(100f));
 			if (!text.Equals(mLabel.text)) { RegisterUndo(); mLabel.text = text; }
 
 			GUILayout.BeginHorizontal();
@@ -61,7 +60,7 @@ public class UILabelInspector : UIWidgetInspector
 			GUILayout.BeginHorizontal();
 			bool shrinkToFit = EditorGUILayout.Toggle("Shrink to Fit", mLabel.shrinkToFit, GUILayout.Width(100f));
 			GUILayout.Label("- adjust scale if doesn't fit");
-			GUILayout.EndHorizontal();
+             GUILayout.EndHorizontal();
 			if (shrinkToFit != mLabel.shrinkToFit) { RegisterUndo(); mLabel.shrinkToFit = shrinkToFit; }
 
 			GUILayout.BeginHorizontal();
@@ -77,17 +76,16 @@ public class UILabelInspector : UIWidgetInspector
 			if (encoding != mLabel.supportEncoding) { RegisterUndo(); mLabel.supportEncoding = encoding; }
 
 			//GUILayout.EndHorizontal();
-
-			if (encoding && mLabel.font.hasSymbols)
+       			if (encoding && mLabel.font.hasSymbols)
 			{
 				UIFont.SymbolStyle sym = (UIFont.SymbolStyle)EditorGUILayout.EnumPopup("Symbols", mLabel.symbolStyle, GUILayout.Width(170f));
 				if (sym != mLabel.symbolStyle) { RegisterUndo(); mLabel.symbolStyle = sym; }
 			}
 
 			GUILayout.BeginHorizontal();
-			{
+	{
 				UILabel.Effect effect = (UILabel.Effect)EditorGUILayout.EnumPopup("Effect", mLabel.effectStyle, GUILayout.Width(170f));
-				if (effect != mLabel.effectStyle) { RegisterUndo(); mLabel.effectStyle = effect; }
+              if (effect != mLabel.effectStyle) { RegisterUndo(); mLabel.effectStyle = effect; }
 
 				if (effect != UILabel.Effect.None)
 				{
@@ -112,7 +110,7 @@ public class UILabelInspector : UIWidgetInspector
 					mLabel.effectDistance = offset;
 				}
 				GUILayout.EndHorizontal();
-			}
+					}
 			return true;
 		}
 		EditorGUILayout.Space();

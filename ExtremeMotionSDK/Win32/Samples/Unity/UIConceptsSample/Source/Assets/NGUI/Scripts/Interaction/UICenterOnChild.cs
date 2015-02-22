@@ -3,11 +3,10 @@ using UnityEngine;
 /// <summary>
 /// Ever wanted to be able to auto-center on an object within a draggable panel?
 /// Attach this script to the container that has the objects to center on as its children.
-/// </summary>
-
-[AddComponentMenu("NGUI/Interaction/Center On Child")]
+            /// </summary>
+                 [AddComponentMenu("NGUI/Interaction/Center On Child")]
 public class UICenterOnChild : MonoBehaviour
-{
+        {
 	/// <summary>
 	/// The strength of the spring.
 	/// </summary>
@@ -28,9 +27,8 @@ public class UICenterOnChild : MonoBehaviour
 	/// </summary>
 
 	public GameObject centeredObject { get { return mCenteredObject; } }
-
-	void OnEnable () { Recenter(); }
-	void OnDragFinished () { if (enabled) Recenter(); }
+    	void OnEnable () { Recenter(); }
+               void OnDragFinished () { if (enabled) Recenter(); }
 
 	/// <summary>
 	/// Recenter the draggable list on the center-most child.
@@ -55,14 +53,14 @@ public class UICenterOnChild : MonoBehaviour
 				if (mDrag.horizontalScrollBar != null)
 					mDrag.horizontalScrollBar.onDragFinished = OnDragFinished;
 
-				if (mDrag.verticalScrollBar != null)
+	if (mDrag.verticalScrollBar != null)
 					mDrag.verticalScrollBar.onDragFinished = OnDragFinished;
 			}
 		}
 		if (mDrag.panel == null) return;
 
 		// Calculate the panel's center in world coordinates
-		Vector4 clip = mDrag.panel.clipRange;
+    //   		Vector4 clip = mDrag.panel.clipRange;
 		Transform dt = mDrag.panel.cachedTransform;
 		Vector3 center = dt.localPosition;
 		center.x += clip.x;
@@ -75,7 +73,7 @@ public class UICenterOnChild : MonoBehaviour
 
 		float min = float.MaxValue;
 		Transform closest = null;
-		Transform trans = transform;
+					Transform trans = transform;
 
 		// Determine the closest child
 		for (int i = 0, imax = trans.childCount; i < imax; ++i)
@@ -90,12 +88,12 @@ public class UICenterOnChild : MonoBehaviour
 			}
 		}
 
-		if (closest != null)
+               if (closest != null)
 		{
 			mCenteredObject = closest.gameObject;
 
-			// Figure out the difference between the chosen child and the panel's center in local coordinates
-			Vector3 cp = dt.InverseTransformPoint(closest.position);
+// Figure out the difference between the chosen child and the panel's center in local coordinates
+                Vector3 cp = dt.InverseTransformPoint(closest.position);
 			Vector3 cc = dt.InverseTransformPoint(center);
 			Vector3 offset = cp - cc;
 
@@ -103,8 +101,8 @@ public class UICenterOnChild : MonoBehaviour
 			if (mDrag.scale.x == 0f) offset.x = 0f;
 			if (mDrag.scale.y == 0f) offset.y = 0f;
 			if (mDrag.scale.z == 0f) offset.z = 0f;
-
-			// Spring the panel to this calculated position
+     //   
+    //   			// Spring the panel to this calculated position
 			SpringPanel.Begin(mDrag.gameObject, dt.localPosition - offset, springStrength).onFinished = onFinished;
 		}
 		else mCenteredObject = null;

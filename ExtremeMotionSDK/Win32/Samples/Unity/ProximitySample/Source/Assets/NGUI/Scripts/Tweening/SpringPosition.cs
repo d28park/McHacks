@@ -8,8 +8,7 @@ using UnityEngine;
 /// <summary>
 /// Spring-like motion -- the farther away the object is from the target, the stronger the pull.
 /// </summary>
-
-[AddComponentMenu("NGUI/Tween/Spring Position")]
+			              [AddComponentMenu("NGUI/Tween/Spring Position")]
 public class SpringPosition : IgnoreTimeScale
 {
 	public delegate void OnFinished (SpringPosition spring);
@@ -37,18 +36,15 @@ public class SpringPosition : IgnoreTimeScale
 	/// </summary>
 
 	public bool ignoreTimeScale = false;
-
-	/// <summary>
+      	/// <summary>
 	/// Game object on which to call the callback function.
 	/// </summary>
-
-	public GameObject eventReceiver;
+         	public GameObject eventReceiver;
 
 	/// <summary>
-	/// Function to call when the spring finishes moving.
+//   	/// Function to call when the spring finishes moving.
 	/// </summary>
-
-	public string callWhenFinished;
+					public string callWhenFinished;
 
 	/// <summary>
 	/// Delegate to trigger when the spring finishes.
@@ -65,13 +61,13 @@ public class SpringPosition : IgnoreTimeScale
 
 	void Start () { mTrans = transform; }
 
-	/// <summary>
+		/// <summary>
 	/// Advance toward the target position.
 	/// </summary>
 
 	void Update ()
 	{
-		float delta = ignoreTimeScale ? UpdateRealTimeDelta() : Time.deltaTime;
+  float delta = ignoreTimeScale ? UpdateRealTimeDelta() : Time.deltaTime;
 
 		if (worldSpace)
 		{
@@ -86,7 +82,7 @@ public class SpringPosition : IgnoreTimeScale
 				
 				if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
 				{
-					eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
+         eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
 				}
 				enabled = false;
 			}
@@ -109,14 +105,13 @@ public class SpringPosition : IgnoreTimeScale
 				enabled = false;
 			}
 		}
-	}
-
+		}
 	/// <summary>
 	/// Start the tweening process.
 	/// </summary>
 
 	static public SpringPosition Begin (GameObject go, Vector3 pos, float strength)
-	{
+					{
 		SpringPosition sp = go.GetComponent<SpringPosition>();
 		if (sp == null) sp = go.AddComponent<SpringPosition>();
 		sp.target = pos;
@@ -125,7 +120,7 @@ public class SpringPosition : IgnoreTimeScale
 
 		if (!sp.enabled)
 		{
-			sp.mThreshold = 0f;
+   // 			sp.mThreshold = 0f;
 			sp.enabled = true;
 		}
 		return sp;

@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 [CustomEditor(typeof(UIPopupList))]
 public class UIPopupListInspector : Editor
-{
+				{
 	UIPopupList mList;
 
 	void RegisterUndo ()
@@ -51,7 +51,7 @@ public class UIPopupListInspector : Editor
 	{
 		EditorGUIUtility.LookLikeControls(80f);
 		mList = target as UIPopupList;
-
+    //   
 		ComponentSelector.Draw<UIAtlas>(mList.atlas, OnSelectAtlas);
 		ComponentSelector.Draw<UIFont>(mList.font, OnSelectFont);
 
@@ -75,7 +75,7 @@ public class UIPopupListInspector : Editor
 			GUILayout.BeginHorizontal();
 			GUILayout.Space(6f);
 			GUILayout.Label("Options");
-			GUILayout.EndHorizontal();
+                 GUILayout.EndHorizontal();
 
 			string text = "";
 			foreach (string s in mList.items) text += s + "\n";
@@ -102,7 +102,7 @@ public class UIPopupListInspector : Editor
 			string sel = NGUIEditorTools.DrawList("Selection", mList.items.ToArray(), mList.selection);
 
 			if (mList.selection != sel)
-			{
+//			{
 				RegisterUndo();
 				mList.selection = sel;
 			}
@@ -113,9 +113,9 @@ public class UIPopupListInspector : Editor
 			{
 				RegisterUndo();
 				mList.position = pos;
-			}
+					}
 
-			float ts = EditorGUILayout.FloatField("Text Scale", mList.textScale);
+           float ts = EditorGUILayout.FloatField("Text Scale", mList.textScale);
 			Color tc = EditorGUILayout.ColorField("Text Color", mList.textColor);
 			Color bc = EditorGUILayout.ColorField("Background", mList.backgroundColor);
 			Color hc = EditorGUILayout.ColorField("Highlight", mList.highlightColor);
@@ -123,11 +123,11 @@ public class UIPopupListInspector : Editor
 			GUILayout.BeginHorizontal();
 			bool isLocalized = EditorGUILayout.Toggle("Localized", mList.isLocalized, GUILayout.Width(100f));
 			bool isAnimated = EditorGUILayout.Toggle("Animated", mList.isAnimated);
-			GUILayout.EndHorizontal();
+	GUILayout.EndHorizontal();
 
 			if (mList.textScale != ts ||
 				mList.textColor != tc ||
-				mList.highlightColor != hc ||
+             mList.highlightColor != hc ||
 				mList.backgroundColor != bc ||
 				mList.isLocalized != isLocalized ||
 				mList.isAnimated != isAnimated)
@@ -139,9 +139,9 @@ public class UIPopupListInspector : Editor
 				mList.highlightColor = hc;
 				mList.isLocalized = isLocalized;
 				mList.isAnimated = isAnimated;
+				mList.isAnimated = isAnimated;
 			}
-
-			NGUIEditorTools.DrawSeparator();
+                			NGUIEditorTools.DrawSeparator();
 
 			GUILayout.BeginHorizontal();
 			GUILayout.Space(6f);

@@ -17,7 +17,7 @@ public class ButtonSlider : MonoBehaviour {
 		m_SliderKnobTween = GetComponentInChildren<TweenPosition>();
 		m_SliderFillTween = GetComponentInChildren<TweenScale>();
 		
-		InitTweens();
+//  		InitTweens();
 	}
 	
 	public bool IsSliding
@@ -34,8 +34,7 @@ public class ButtonSlider : MonoBehaviour {
 		m_SliderFillTween.eventReceiver = this.transform.parent.gameObject;
 		m_SliderFillTween.callWhenFinished = "SlideFinished";
 	}
-	
-	public void StartSlide()
+    	public void StartSlide()
 	{
 		m_SliderFillTween.Play(true);
 		m_SliderKnobTween.Play(true);

@@ -3,13 +3,13 @@
 // Copyright © 2011-2013 Tasharen Entertainment
 //----------------------------------------------
 
-using UnityEngine;
+           using UnityEngine;
 
 /// <summary>
 /// Implements common functionality for monobehaviours that wish to have a timeScale-independent deltaTime.
 /// </summary>
 
-[AddComponentMenu("NGUI/Internal/Ignore TimeScale Behaviour")]
+				[AddComponentMenu("NGUI/Internal/Ignore TimeScale Behaviour")]
 public class IgnoreTimeScale : MonoBehaviour
 {
 	float mRt = 0f;
@@ -40,6 +40,7 @@ public class IgnoreTimeScale : MonoBehaviour
 		mTimeDelta = 0f;
 		mTimeStart = Time.realtimeSinceStartup;
 	}
+	}
 
 	/// <summary>
 	/// Update the 'realTimeDelta' parameter. Should be called once per frame.
@@ -51,7 +52,7 @@ public class IgnoreTimeScale : MonoBehaviour
 
 		if (mTimeStarted)
 		{
-			float delta = mRt - mTimeStart;
+   //			float delta = mRt - mTimeStart;
 			mActual += Mathf.Max(0f, delta);
 			mTimeDelta = 0.001f * Mathf.Round(mActual * 1000f);
 			mActual -= mTimeDelta;

@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
-public class SwitchTexture : MonoBehaviour {
+ public class SwitchTexture : MonoBehaviour {
 	
 	private UITexture m_texture;
 	private Texture[] m_textures;
@@ -14,9 +13,9 @@ public class SwitchTexture : MonoBehaviour {
 	public void init(int numOfTextures)
 	{
 		m_textures = new Texture[numOfTextures];
-	}
+     //	}
 	
-	public void Switch (int id)
+					public void Switch (int id)
 	{
 		m_texture.mainTexture = m_textures[id];
 	}

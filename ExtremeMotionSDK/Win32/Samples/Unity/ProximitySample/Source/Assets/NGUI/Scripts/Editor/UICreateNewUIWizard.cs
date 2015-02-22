@@ -1,7 +1,7 @@
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
-//----------------------------------------------
+               //----------------------------------------------
 
 using UnityEditor;
 using UnityEngine;
@@ -57,7 +57,7 @@ public class UICreateNewUIWizard : EditorWindow
 		bool create = GUILayout.Button("Create Your UI", GUILayout.Width(120f));
 		GUILayout.EndHorizontal();
 
-		if (create) CreateNewUI();
+if (create) CreateNewUI();
 	}
 
 	/// <summary>
@@ -73,7 +73,7 @@ public class UICreateNewUIWizard : EditorWindow
 
 		if (camType == CameraType.Simple2D)
 		{
-			root = new GameObject("UI Root (2D)");
+		root = new GameObject("UI Root (2D)");
 			root.AddComponent<UIRoot>().scalingStyle = UIRoot.Scaling.PixelPerfect;
 		}
 		else
@@ -87,7 +87,7 @@ public class UICreateNewUIWizard : EditorWindow
 		root.layer = NGUISettings.layer;
 
 		// Figure out the depth of the highest camera
-		if (camType == CameraType.None)
+if (camType == CameraType.None)
 		{
 			// No camera requested -- simply add a panel
 			UIPanel panel = NGUITools.AddChild<UIPanel>(root.gameObject);
@@ -103,23 +103,23 @@ public class UICreateNewUIWizard : EditorWindow
 			List<Camera> cameras = NGUIEditorTools.FindInScene<Camera>();
 
 			foreach (Camera c in cameras)
-			{
+   {
 				// Choose the maximum depth
 				depth = Mathf.Max(depth, c.depth);
 
-				// Automatically exclude the specified layer mask from the camera if it can see more than that layer
+   //				// Automatically exclude the specified layer mask from the camera if it can see more than that layer
 				if (NGUISettings.layer != 0 && c.cullingMask != mask) c.cullingMask = (c.cullingMask & (~mask));
 
 				// Only consider this object if it's active
 				if (c.enabled && NGUITools.GetActive(c.gameObject)) clearColor = false;
 
 				// If this camera has an audio listener, we won't need to add one
-				if (c.GetComponent<AudioListener>() != null) audioListener = false;
+                 if (c.GetComponent<AudioListener>() != null) audioListener = false;
 			}
 
-			// Camera and UICamera for this UI
+          // Camera and UICamera for this UI
 			Camera cam = NGUITools.AddChild<Camera>(root);
-			cam.depth = depth + 1;
+cam.depth = depth + 1;
 			cam.backgroundColor = Color.grey;
 			cam.cullingMask = mask;
 
@@ -146,7 +146,7 @@ public class UICreateNewUIWizard : EditorWindow
 			// Add a UI Camera for event handling
 			cam.gameObject.AddComponent<UICamera>();
 
-			if (camType == CameraType.Simple2D)
+		if (camType == CameraType.Simple2D)
 			{
 				// Anchor is useful to have
 				UIAnchor anchor = NGUITools.AddChild<UIAnchor>(cam.gameObject);
@@ -155,7 +155,7 @@ public class UICreateNewUIWizard : EditorWindow
 				// And finally -- the first UI panel
 				UIPanel panel = NGUITools.AddChild<UIPanel>(anchor.gameObject);
 				Selection.activeGameObject = panel.gameObject;
-			}
+   // 			}
 			else
 			{
 				UIPanel panel = NGUITools.AddChild<UIPanel>(root);
@@ -164,4 +164,4 @@ public class UICreateNewUIWizard : EditorWindow
 		}
 		return Selection.activeGameObject;
 	}
-}
+   //}

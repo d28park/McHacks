@@ -8,8 +8,7 @@ using UnityEngine;
 /// <summary>
 /// Simple script that lets you localize a UIWidget.
 /// </summary>
-
-[RequireComponent(typeof(UIWidget))]
+	[RequireComponent(typeof(UIWidget))]
 [AddComponentMenu("NGUI/UI/Localize")]
 public class UILocalize : MonoBehaviour
 {
@@ -30,7 +29,7 @@ public class UILocalize : MonoBehaviour
 
 	/// <summary>
 	/// Localize the widget on enable, but only if it has been started already.
-	/// </summary>
+		/// </summary>
 
 	void OnEnable () { if (mStarted && Localization.instance != null) Localize(); }
 
@@ -69,7 +68,7 @@ public class UILocalize : MonoBehaviour
 			else lbl.text = val;
 		}
 		else if (sp != null)
-		{
+				{
 			sp.spriteName = val;
 			sp.MakePixelPerfect();
 		}

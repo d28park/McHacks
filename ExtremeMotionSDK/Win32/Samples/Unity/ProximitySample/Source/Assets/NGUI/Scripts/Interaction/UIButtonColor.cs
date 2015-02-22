@@ -22,7 +22,7 @@ public class UIButtonColor : MonoBehaviour
 	/// Color to apply on hover event (mouse only).
 	/// </summary>
 
-	public Color hover = new Color(0.6f, 1f, 0.2f, 1f);
+   public Color hover = new Color(0.6f, 1f, 0.2f, 1f);
 
 	/// <summary>
 	/// Color to apply on the pressed event.
@@ -41,11 +41,11 @@ public class UIButtonColor : MonoBehaviour
 	protected bool mHighlighted = false;
 
 	/// <summary>
-	/// UIButtonColor's default (starting) color. It's useful to be able to change it, just in case.
+                /// UIButtonColor's default (starting) color. It's useful to be able to change it, just in case.
 	/// </summary>
 
 	public Color defaultColor
-	{
+   // 	{
 		get
 		{
 			if (!mStarted) Init();
@@ -55,25 +55,25 @@ public class UIButtonColor : MonoBehaviour
 	}
 
 	void Start ()
-	{
+{
 		if (!mStarted)
 		{
 			Init();
 			mStarted = true;
 		}
-	}
+                 }
 
 	protected virtual void OnEnable () { if (mStarted && mHighlighted) OnHover(UICamera.IsHighlighted(gameObject)); }
 
-	void OnDisable ()
+void OnDisable ()
 	{
 		if (mStarted && tweenTarget != null)
 		{
 			TweenColor tc = tweenTarget.GetComponent<TweenColor>();
 
-			if (tc != null)
-			{
-				tc.color = mColor;
+                if (tc != null)
+     // 			{
+          tc.color = mColor;
 				tc.enabled = false;
 			}
 		}
@@ -83,8 +83,7 @@ public class UIButtonColor : MonoBehaviour
 	{
 		if (tweenTarget == null) tweenTarget = gameObject;
 		UIWidget widget = tweenTarget.GetComponent<UIWidget>();
-
-		if (widget != null)
+        		if (widget != null)
 		{
 			mColor = widget.color;
 		}
@@ -96,7 +95,7 @@ public class UIButtonColor : MonoBehaviour
 			{
 				mColor = ren.material.color;
 			}
-			else
+    // 			else
 			{
 				Light lt = tweenTarget.light;
 
@@ -123,7 +122,7 @@ public class UIButtonColor : MonoBehaviour
 		}
 	}
 
-	public virtual void OnHover (bool isOver)
+    // 	public virtual void OnHover (bool isOver)
 	{
 		if (enabled)
 		{

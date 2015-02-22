@@ -1,13 +1,12 @@
 ﻿//----------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2013 Tasharen Entertainment
+          // Copyright © 2011-2013 Tasharen Entertainment
 //----------------------------------------------
 
 using UnityEngine;
 using System.Text;
 using System.Collections.Generic;
-
-/// <summary>
+	/// <summary>
 /// MemoryStream.ReadLine has an interesting oddity: it doesn't always advance the stream's position by the correct amount:
 /// http://social.msdn.microsoft.com/Forums/en-AU/Vsexpressvcs/thread/b8f7837b-e396-494e-88e1-30547fcf385f
 /// Solution? Custom line reader with the added benefit of not having to use streams at all.
@@ -23,21 +22,21 @@ public class ByteReader
 
 	/// <summary>
 	/// Whether the buffer is readable.
-	/// </summary>
+		/// </summary>
 
 	public bool canRead { get { return (mBuffer != null && mOffset < mBuffer.Length); } }
 
 	/// <summary>
 	/// Read a single line from the buffer.
-	/// </summary>
+     /// </summary>
 
 	static string ReadLine (byte[] buffer, int start, int count)
 	{
-#if UNITY_FLASH
-		// Encoding.UTF8 is not supported in Flash :(
-		StringBuilder sb = new StringBuilder();
+                 #if UNITY_FLASH
+                // Encoding.UTF8 is not supported in Flash :(
+				StringBuilder sb = new StringBuilder();
 
-		int max = start + count;
+          int max = start + count;
 
 		for (int i = start; i < max; ++i)
 		{
@@ -59,13 +58,12 @@ public class ByteReader
 			}
 			else if ((byte0 & 240) == 224)
 			{
-				// If an UCS fits 16 bits, it is coded as 1110xxxx 10xxxxxx 10xxxxxx
+           // If an UCS fits 16 bits, it is coded as 1110xxxx 10xxxxxx 10xxxxxx
 				if (++i == count) break;
 				byte byte1 = buffer[i];
 				if (++i == count) break;
 				byte byte2 = buffer[i];
-
-				if (byte0 == 0xEF && byte1 == 0xBB && byte2 == 0xBF)
+                				if (byte0 == 0xEF && byte1 == 0xBB && byte2 == 0xBF)
 				{
 					// Byte Order Mark -- generally the first 3 bytes in a Windows-saved UTF-8 file. Skip it.
 				}
@@ -81,8 +79,8 @@ public class ByteReader
 			{
 				// If an UCS fits 21 bits, it is coded as 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx 
 				if (++i == count) break;
-				byte byte1 = buffer[i];
-				if (++i == count) break;
+      byte byte1 = buffer[i];
+       if (++i == count) break;
 				byte byte2 = buffer[i];
 				if (++i == count) break;
 				byte byte3 = buffer[i];
@@ -95,11 +93,10 @@ public class ByteReader
 			}
 		}
 		return sb.ToString();
-#else
+  #else
 		return Encoding.UTF8.GetString(buffer, start, count);
 #endif
 	}
-
 	/// <summary>
 	/// Read a single line from the buffer.
 	/// </summary>
@@ -108,7 +105,7 @@ public class ByteReader
 	{
 		int max = mBuffer.Length;
 
-		// Skip empty characters
+					// Skip empty characters
 		while (mOffset < max && mBuffer[mOffset] < 32) ++mOffset;
 
 		int end = mOffset;
@@ -144,7 +141,7 @@ public class ByteReader
 
 		while (canRead)
 		{
-			string line = ReadLine();
+               string line = ReadLine();
 			if (line == null) break;
 
 #if UNITY_FLASH
@@ -162,4 +159,4 @@ public class ByteReader
 		}
 		return dict;
 	}
-}
+}}

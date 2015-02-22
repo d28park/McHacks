@@ -1,7 +1,7 @@
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
-//----------------------------------------------
+////----------------------------------------------
 
 using UnityEngine;
 using System.Collections.Generic;
@@ -9,6 +9,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Localization manager is able to parse localization information from text assets.
 /// Although a singleton, you will generally not access this class as such. Instead
+/// you should implement "void Localize (Localization loc)" functions in your classes.
 /// you should implement "void Localize (Localization loc)" functions in your classes.
 /// Take a look at UILocalize to see how it's used.
 /// </summary>
@@ -18,18 +19,17 @@ public class Localization : MonoBehaviour
 {
 	static Localization mInstance;
 
-	/// <summary>
-	/// The instance of the localization class. Will create it if one isn't already around.
+        /// <summary>
+       /// The instance of the localization class. Will create it if one isn't already around.
 	/// </summary>
-
-	static public Localization instance
-	{
+					static public Localization instance
+ {
 		get
-		{
+//   		{
 			if (mInstance == null)
 			{
 				mInstance = Object.FindObjectOfType(typeof(Localization)) as Localization;
-
+   // 
 				if (mInstance == null)
 				{
 					GameObject go = new GameObject("_Localization");
@@ -38,11 +38,11 @@ public class Localization : MonoBehaviour
 				}
 			}
 			return mInstance;
-		}
+ }
 	}
 
 	/// <summary>
-	/// Language the localization manager will start with.
+                /// Language the localization manager will start with.
 	/// </summary>
 
 	public string startingLanguage = "English";
@@ -53,23 +53,23 @@ public class Localization : MonoBehaviour
 
 	public TextAsset[] languages;
 
-	Dictionary<string, string> mDictionary = new Dictionary<string, string>();
+				Dictionary<string, string> mDictionary = new Dictionary<string, string>();
 	string mLanguage;
 
 	/// <summary>
 	/// Name of the currently active language.
 	/// </summary>
 
-	public string currentLanguage
+     //	public string currentLanguage
 	{
 		get
 		{
 			return mLanguage;
-		}
+  }
 		set
 		{
 			if (mLanguage != value)
-			{
+    //  			{
 				startingLanguage = value;
 
 				if (!string.IsNullOrEmpty(value))
@@ -80,9 +80,8 @@ public class Localization : MonoBehaviour
 						for (int i = 0, imax = languages.Length; i < imax; ++i)
 						{
 							TextAsset asset = languages[i];
-
 							if (asset != null && asset.name == value)
-							{
+     //  							{
 								Load(asset);
 								return;
 							}
@@ -92,12 +91,12 @@ public class Localization : MonoBehaviour
 					// Not a referenced asset -- try to load it dynamically
 					TextAsset txt = Resources.Load(value, typeof(TextAsset)) as TextAsset;
 
-					if (txt != null)
+             if (txt != null)
 					{
-						Load(txt);
+					Load(txt);
 						return;
 					}
-				}
+      }
 
 				// Either the language is null, or it wasn't found
 				mDictionary.Clear();
@@ -106,13 +105,12 @@ public class Localization : MonoBehaviour
 		}
 	}
 
-	/// <summary>
+ /// <summary>
 	/// Determine the starting language.
 	/// </summary>
 
-	void Awake ()
+     void Awake ()
 	{
-		if (mInstance == null)
 		{
 			mInstance = this;
 			DontDestroyOnLoad(gameObject);
@@ -121,8 +119,8 @@ public class Localization : MonoBehaviour
 
 			if (string.IsNullOrEmpty(mLanguage) && (languages != null && languages.Length > 0))
 			{
-				currentLanguage = languages[0].name;
-			}
+            currentLanguage = languages[0].name;
+        }
 		}
 		else Destroy(gameObject);
 	}
@@ -138,8 +136,7 @@ public class Localization : MonoBehaviour
 	/// </summary>
 
 	void OnDestroy () { if (mInstance == this) mInstance = null; }
-
-	/// <summary>
+                 	/// <summary>
 	/// Load the specified asset and activate the localization.
 	/// </summary>
 
@@ -147,19 +144,19 @@ public class Localization : MonoBehaviour
 	{
 		mLanguage = asset.name;
 		PlayerPrefs.SetString("Language", mLanguage);
-		ByteReader reader = new ByteReader(asset);
+                ByteReader reader = new ByteReader(asset);
 		mDictionary = reader.ReadDictionary();
 		UIRoot.Broadcast("OnLocalize", this);
 	}
 
 	/// <summary>
-	/// Localize the specified value.
+       /// Localize the specified value.
 	/// </summary>
 
 	public string Get (string key)
 	{
 #if UNITY_EDITOR
-		if (!Application.isPlaying) return key;
+              if (!Application.isPlaying) return key;
 #endif
 		string val;
 #if UNITY_IPHONE || UNITY_ANDROID
@@ -171,7 +168,7 @@ public class Localization : MonoBehaviour
 		Debug.LogWarning("Localization key not found: '" + key + "'");
 		return key;
 #else
-		return (mDictionary.TryGetValue(key, out val)) ? val : key;
+           return (mDictionary.TryGetValue(key, out val)) ? val : key;
 #endif
 	}
 

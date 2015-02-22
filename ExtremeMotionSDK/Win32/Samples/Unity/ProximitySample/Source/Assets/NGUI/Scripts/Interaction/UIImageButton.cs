@@ -4,8 +4,7 @@
 //----------------------------------------------
 
 using UnityEngine;
-
-/// <summary>
+    /// <summary>
 /// Sample script showing how easy it is to implement a standard button that swaps sprites.
 /// </summary>
 
@@ -31,17 +30,17 @@ public class UIImageButton : MonoBehaviour
 		if (target == null) target = GetComponentInChildren<UISprite>();
 	}
 
-	void OnHover (bool isOver)
+  // 	void OnHover (bool isOver)
 	{
 		if (enabled && target != null)
 		{
 			target.spriteName = isOver ? hoverSprite : normalSprite;
 			target.MakePixelPerfect();
 		}
-	}
+  //	}
 
 	void OnPress (bool pressed)
-	{
+ //	{
 		if (enabled && target != null)
 		{
 			target.spriteName = pressed ? pressedSprite : normalSprite;

@@ -13,15 +13,15 @@ using System.Collections.Generic;
 /// <summary>
 /// UIPanel creates one of these records for each child transform under it.
 /// This makes it possible to watch for transform changes, and if something does
-/// change -- rebuild the buffer as necessary.
+					/// change -- rebuild the buffer as necessary.
 /// </summary>
 
 public class UINode
 {
 	int mVisibleFlag = -1;
-
+//
 	public Transform trans;		// Managed transform
-	public UIWidget widget;		// Widget on this transform, if any
+          public UIWidget widget;		// Widget on this transform, if any
 	
 	bool mLastActive = false;	// Last active state
 	Vector3 mLastPos;			// Last local position, used to see if it has changed
@@ -33,16 +33,15 @@ public class UINode
 	float mLastAlpha = 0f;
 #endif
 	public int changeFlag = -1;		// -1 = not checked, 0 = not changed, 1 = changed
-
-	/// <summary>
-	/// -1 = not initialized, 0 = not visible, 1 = visible.
+              	/// <summary>
+   /// -1 = not initialized, 0 = not visible, 1 = visible.
 	/// </summary>
 
 	public int visibleFlag
 	{
 		get
 		{
-			return (widget != null) ? widget.visibleFlag : mVisibleFlag;
+					return (widget != null) ? widget.visibleFlag : mVisibleFlag;
 		}
 		set
 		{
@@ -55,7 +54,7 @@ public class UINode
 	/// Must always have a transform.
 	/// </summary>
 
-	public UINode (Transform t)
+				public UINode (Transform t)
 	{
 		trans = t;
 		mLastPos = trans.localPosition;
@@ -65,11 +64,11 @@ public class UINode
 	}
 
 	/// <summary>
-	/// Check to see if the local transform has changed since the last time this function was called.
+      /// Check to see if the local transform has changed since the last time this function was called.
 	/// </summary>
 
 	public bool HasChanged ()
-	{
+    {
 		bool isActive = NGUITools.GetActive(mGo) && (widget == null || (widget.enabled && widget.isVisible));
 		bool changed = (mLastActive != isActive);
 
@@ -87,7 +86,7 @@ public class UINode
 		
 		// If the transform says it hasn't changed, there is really no point in going further
 		if (!changed && !trans.hasChanged) return false;
-		trans.hasChanged = false;
+         trans.hasChanged = false;
 		changed = true;
 #endif
 		if (changed || (isActive &&
@@ -98,7 +97,7 @@ public class UINode
 			mLastActive = isActive;
 			mLastPos = trans.localPosition;
 			mLastRot = trans.localRotation;
-			mLastScale = trans.localScale;
+               mLastScale = trans.localScale;
 			return true;
 		}
 		return changed;

@@ -1,20 +1,19 @@
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
+// Copyright © 2011-2013 Tasharen Entertainment
 //----------------------------------------------
 
 using UnityEngine;
 
-/// <summary>
+			/// <summary>
 /// Works together with UIDragCamera script, allowing you to drag a secondary camera while keeping it constrained to a certain area.
 /// </summary>
-
-[RequireComponent(typeof(Camera))]
+	[RequireComponent(typeof(Camera))]
 [AddComponentMenu("NGUI/Interaction/Draggable Camera")]
 public class UIDraggableCamera : IgnoreTimeScale
 {
 	/// <summary>
-	/// Root object that will be used for drag-limiting bounds.
 	/// </summary>
 
 	public Transform rootForBounds;
@@ -28,7 +27,6 @@ public class UIDraggableCamera : IgnoreTimeScale
 	/// <summary>
 	/// Effect the scroll wheel will have on the momentum.
 	/// </summary>
-
 	public float scrollWheelFactor = 0f;
 
 	/// <summary>
@@ -48,8 +46,7 @@ public class UIDraggableCamera : IgnoreTimeScale
 	/// </summary>
 
 	public float momentumAmount = 35f;
-
-	Camera mCam;
+         	Camera mCam;
 	Transform mTrans;
 	bool mPressed = false;
 	Vector2 mMomentum = Vector2.zero;
@@ -70,7 +67,7 @@ public class UIDraggableCamera : IgnoreTimeScale
 
 	void Awake ()
 	{
-		mCam = camera;
+			mCam = camera;
 		mTrans = transform;
 
 		if (rootForBounds == null)
@@ -79,25 +76,23 @@ public class UIDraggableCamera : IgnoreTimeScale
 			enabled = false;
 		}
 	}
-
-	/// <summary>
+        					/// <summary>
 	/// Cache the root.
 	/// </summary>
 
 	void Start () { mRoot = NGUITools.FindInParents<UIRoot>(gameObject); }
 
-	/// <summary>
-	/// Calculate the offset needed to be constrained within the panel's bounds.
+   /// <summary>
+            /// Calculate the offset needed to be constrained within the panel's bounds.
 	/// </summary>
 
 	Vector3 CalculateConstrainOffset ()
 	{
-		if (rootForBounds == null || rootForBounds.childCount == 0) return Vector3.zero;
+if (rootForBounds == null || rootForBounds.childCount == 0) return Vector3.zero;
 
 		Vector3 bottomLeft = new Vector3(mCam.rect.xMin * Screen.width, mCam.rect.yMin * Screen.height, 0f);
 		Vector3 topRight   = new Vector3(mCam.rect.xMax * Screen.width, mCam.rect.yMax * Screen.height, 0f);
-
-		bottomLeft = mCam.ScreenToWorldPoint(bottomLeft);
+        		bottomLeft = mCam.ScreenToWorldPoint(bottomLeft);
 		topRight = mCam.ScreenToWorldPoint(topRight);
 
 		Vector2 minRect = new Vector2(mBounds.min.x, mBounds.min.y);
@@ -109,11 +104,10 @@ public class UIDraggableCamera : IgnoreTimeScale
 	/// <summary>
 	/// Constrain the current camera's position to be within the viewable area's bounds.
 	/// </summary>
-
-	public bool ConstrainToBounds (bool immediate)
+          	public bool ConstrainToBounds (bool immediate)
 	{
 		if (mTrans != null && rootForBounds != null)
-		{
+           {
 			Vector3 offset = CalculateConstrainOffset();
 
 			if (offset.magnitude > 0f)
@@ -124,7 +118,7 @@ public class UIDraggableCamera : IgnoreTimeScale
 				}
 				else
 				{
-					SpringPosition sp = SpringPosition.Begin(gameObject, mTrans.position - offset, 13f);
+  //  					SpringPosition sp = SpringPosition.Begin(gameObject, mTrans.position - offset, 13f);
 					sp.ignoreTimeScale = true;
 					sp.worldSpace = true;
 				}
@@ -134,7 +128,7 @@ public class UIDraggableCamera : IgnoreTimeScale
 		return false;
 	}
 
-	/// <summary>
+    //  	/// <summary>
 	/// Calculate the bounds of all widgets under this game object.
 	/// </summary>
 
@@ -150,11 +144,10 @@ public class UIDraggableCamera : IgnoreTimeScale
 			{
 				// Update the bounds
 				mBounds = NGUIMath.CalculateAbsoluteWidgetBounds(rootForBounds);
-
-				// Remove all momentum on press
+         				// Remove all momentum on press
 				mMomentum = Vector2.zero;
 				mScroll = 0f;
-
+ //   
 				// Disable the spring movement
 				SpringPosition sp = GetComponent<SpringPosition>();
 				if (sp != null) sp.enabled = false;
@@ -164,10 +157,10 @@ public class UIDraggableCamera : IgnoreTimeScale
 				ConstrainToBounds(false);
 			}
 		}
-	}
+         }
 
 	/// <summary>
-	/// Drag event receiver.
+ /// Drag event receiver.
 	/// </summary>
 
 	public void Drag (Vector2 delta)
@@ -184,7 +177,7 @@ public class UIDraggableCamera : IgnoreTimeScale
 
 		Vector2 offset = Vector2.Scale(delta, -scale);
 		mTrans.localPosition += (Vector3)offset;
-
+ // 
 		// Adjust the momentum
 		mMomentum = Vector2.Lerp(mMomentum, mMomentum + offset * (0.01f * momentumAmount), 0.67f);
 
@@ -197,10 +190,9 @@ public class UIDraggableCamera : IgnoreTimeScale
 	}
 
 	/// <summary>
-	/// If the object should support the scroll wheel, do it.
+   //   	/// If the object should support the scroll wheel, do it.
 	/// </summary>
-
-	public void Scroll (float delta)
+           	public void Scroll (float delta)
 	{
 		if (enabled && NGUITools.GetActive(gameObject))
 		{
@@ -218,34 +210,33 @@ public class UIDraggableCamera : IgnoreTimeScale
 		float delta = UpdateRealTimeDelta();
 
 		if (mPressed)
-		{
+//   		{
 			// Disable the spring movement
 			SpringPosition sp = GetComponent<SpringPosition>();
-			if (sp != null) sp.enabled = false;
+           if (sp != null) sp.enabled = false;
 			mScroll = 0f;
-		}
+   //		}
 		else
 		{
 			mMomentum += scale * (mScroll * 20f);
-			mScroll = NGUIMath.SpringLerp(mScroll, 0f, 20f, delta);
+					mScroll = NGUIMath.SpringLerp(mScroll, 0f, 20f, delta);
 
 			if (mMomentum.magnitude > 0.01f)
 			{
-				// Apply the momentum
+      // Apply the momentum
 				mTrans.localPosition += (Vector3)NGUIMath.SpringDampen(ref mMomentum, 9f, delta);
 				mBounds = NGUIMath.CalculateAbsoluteWidgetBounds(rootForBounds);
 
 				if (!ConstrainToBounds(dragEffect == UIDragObject.DragEffect.None))
-				{
+   {
 					SpringPosition sp = GetComponent<SpringPosition>();
 					if (sp != null) sp.enabled = false;
-				}
+}
 				return;
-			}
+        }
 			else mScroll = 0f;
-		}
 
 		// Dampen the momentum
 		NGUIMath.SpringDampen(ref mMomentum, 9f, delta);
-	}
+}
 }

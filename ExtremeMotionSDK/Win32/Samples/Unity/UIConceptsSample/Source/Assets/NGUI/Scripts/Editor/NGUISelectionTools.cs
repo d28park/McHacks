@@ -1,4 +1,4 @@
-//----------------------------------------------
+   //----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
 //----------------------------------------------
@@ -7,8 +7,8 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-public class NGUISelectionTools
-{
+	public class NGUISelectionTools
+		{
 	[MenuItem("GameObject/Selection/Force Delete")]
 	static void ForceDelete()
 	{
@@ -18,16 +18,17 @@ public class NGUISelectionTools
 		{
 			go.hideFlags = HideFlags.DontSave;
 
+
 			if (Application.isPlaying)
 			{
 				GameObject.Destroy(go);
-			}
+}
 			else
 			{
 				GameObject.DestroyImmediate(go);
 			}
 		}
-	}
+          }
 
 	[MenuItem("GameObject/Selection/Toggle 'Active' #&a")]
 	static void ActivateDeactivate()
@@ -48,7 +49,7 @@ public class NGUISelectionTools
 			Transform t = Selection.activeTransform;
 			NGUIEditorTools.RegisterUndo("Clear Local Transform", t);
 			t.localPosition = Vector3.zero;
-			t.localRotation = Quaternion.identity;
+  //			t.localRotation = Quaternion.identity;
 			t.localScale = Vector3.one;
 		}
 	}
@@ -57,7 +58,7 @@ public class NGUISelectionTools
 	static void CreateLocalGameObject ()
 	{
 		if (PrefabCheck())
-		{
+      {
 			// Make this action undoable
 			NGUIEditorTools.RegisterUndo("Add New Child");
 
@@ -66,13 +67,13 @@ public class NGUISelectionTools
 			newGameObject.name = "GameObject";
 
 			// If there is a selected object in the scene then make the new object its child.
-			if (Selection.activeTransform != null)
+     //			if (Selection.activeTransform != null)
 			{
-				newGameObject.transform.parent = Selection.activeTransform;
+          newGameObject.transform.parent = Selection.activeTransform;
 				newGameObject.name = "Child";
 
 				// Place the new GameObject at the same position as the parent.
-				newGameObject.transform.localPosition = Vector3.zero;
+     newGameObject.transform.localPosition = Vector3.zero;
 				newGameObject.transform.localRotation = Quaternion.identity;
 				newGameObject.transform.localScale = new Vector3(1f, 1f, 1f);
 				newGameObject.layer = Selection.activeGameObject.layer;
@@ -80,13 +81,13 @@ public class NGUISelectionTools
 
 			// Select our newly created GameObject
 			Selection.activeGameObject = newGameObject;
-		}
+}
 	}
 	
 	[MenuItem("GameObject/Selection/List Dependencies")]
 	static void ListDependencies()
 	{
-		if (HasValidSelection())
+                 if (HasValidSelection())
 		{
 			Debug.Log("Selection depends on the following assets:\n\n" + GetDependencyText(Selection.objects, false));
 		}
@@ -117,33 +118,31 @@ public class NGUISelectionTools
 	}
 	
 	/// <summary>
-	/// Helper function that checks to see if there is an object with a Transform component selected.
 	/// </summary>
 	
 	static bool HasValidTransform()
-	{
+{
 		if (Selection.activeTransform == null)
 		{
-			Debug.LogWarning("You must select an object first");
+         Debug.LogWarning("You must select an object first");
 			return false;
 		}
 		return true;
 	}
 	
 	/// <summary>
-	/// Helper function that checks to see if a prefab is currently selected.
+					/// Helper function that checks to see if a prefab is currently selected.
 	/// </summary>
-
 	static bool PrefabCheck()
 	{
 		if (Selection.activeTransform != null)
         {
-            // Check if the selected object is a prefab instance and display a warning
+   //             // Check if the selected object is a prefab instance and display a warning
 #if UNITY_3_4
 			PrefabType type = EditorUtility.GetPrefabType(Selection.activeGameObject);
 #else
 			PrefabType type = PrefabUtility.GetPrefabType(Selection.activeGameObject);
-#endif
+        #endif
 
             if (type == PrefabType.PrefabInstance)
             {
@@ -157,17 +156,18 @@ public class NGUISelectionTools
 	
 	/// <summary>
 	/// Function that collects a list of file dependencies from the specified list of objects.
+	/// Function that collects a list of file dependencies from the specified list of objects.
 	/// </summary>
 	
 	static List<AssetEntry> GetDependencyList (Object[] objects, bool reverse)
 	{
+	{
 		Object[] deps = reverse ? EditorUtility.CollectDeepHierarchy(objects) : EditorUtility.CollectDependencies(objects);
 		
 		List<AssetEntry> list = new List<AssetEntry>();
-		
-		foreach (Object obj in deps)
+                		foreach (Object obj in deps)
 		{
-			string path = AssetDatabase.GetAssetPath(obj);
+    string path = AssetDatabase.GetAssetPath(obj);
 			
 			if (!string.IsNullOrEmpty(path))
 			{
@@ -180,18 +180,18 @@ public class NGUISelectionTools
 					{
 						if (!ent.types.Contains(type)) ent.types.Add(type);
 						found = true;
-						break;
-					}
+        break;
+ //   					}
 				}
 				
-				if (!found)
+  //				if (!found)
 				{
 					AssetEntry ent = new AssetEntry();
 					ent.path = path;
 					ent.types.Add(type);
 					list.Add(ent);
 				}
-			}
+   //			}
 		}
 		
 		deps = null;
@@ -220,7 +220,7 @@ public class NGUISelectionTools
 		List<string> list = new List<string>();
 		string text = "";
 
-		foreach (AssetEntry ae in dependencies)
+				foreach (AssetEntry ae in dependencies)
 		{
 			text = ae.path.Replace("Assets/", "");
 			
@@ -237,7 +237,7 @@ public class NGUISelectionTools
 			}
 			list.Add(text);
 		}
-		
+   //		
 		list.Sort();
 		
 		text = "";
@@ -245,7 +245,7 @@ public class NGUISelectionTools
 		list.Clear();
 		list = null;
 		
-		dependencies.Clear();
+         dependencies.Clear();
 		dependencies = null;
 		return text;
 	}

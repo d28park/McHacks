@@ -5,8 +5,7 @@
 
 using UnityEngine;
 using System.Collections.Generic;
-
-/// <summary>
+		/// <summary>
 /// Very simple sprite animation. Attach to a sprite and specify a bunch of sprite names and it will cycle through them.
 /// </summary>
 
@@ -31,7 +30,7 @@ public class UISpriteAnimation : MonoBehaviour
 
 	public int frames { get { return mSpriteNames.Count; } }
 
-	/// <summary>
+    /// <summary>
 	/// Animation framerate.
 	/// </summary>
 
@@ -48,12 +47,11 @@ public class UISpriteAnimation : MonoBehaviour
 	/// </summary>
 
 	public bool loop { get { return mLoop; } set { mLoop = value; } }
-
-	/// <summary>
+          	/// <summary>
 	/// Returns is the animation is still playing or not
 	/// </summary>
 
-	public bool isPlaying { get { return mActive; } }
+  public bool isPlaying { get { return mActive; } }
 
 	/// <summary>
 	/// Rebuild the sprite list first thing.
@@ -66,7 +64,7 @@ public class UISpriteAnimation : MonoBehaviour
 	/// </summary>
 
 	void Update ()
-	{
+				{
 		if (mActive && mSpriteNames.Count > 1 && Application.isPlaying && mFPS > 0f)
 		{
 			mDelta += Time.deltaTime;
@@ -84,7 +82,7 @@ public class UISpriteAnimation : MonoBehaviour
 
 				if (mActive)
 				{
-					mSprite.spriteName = mSpriteNames[mIndex];
+                mSprite.spriteName = mSpriteNames[mIndex];
 					mSprite.MakePixelPerfect();
 				}
 			}
@@ -105,16 +103,15 @@ public class UISpriteAnimation : MonoBehaviour
 			List<UIAtlas.Sprite> sprites = mSprite.atlas.spriteList;
 
 			for (int i = 0, imax = sprites.Count; i < imax; ++i)
-			{
+  //   			{
 				UIAtlas.Sprite sprite = sprites[i];
 
 				if (string.IsNullOrEmpty(mPrefix) || sprite.name.StartsWith(mPrefix))
-				{
 					mSpriteNames.Add(sprite.name);
 				}
 			}
 			mSpriteNames.Sort();
-		}
+             }
 	}
 	
 	/// <summary>

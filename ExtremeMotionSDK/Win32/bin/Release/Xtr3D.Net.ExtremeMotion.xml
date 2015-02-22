@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
+      <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Xtr3D.Net.ExtremeMotion</name>
+   <name>Xtr3D.Net.ExtremeMotion</name>
     </assembly>
     <members>
         <member name="F:Xtr3D.Net.ExtremeMotion.Gesture.BaseGesture.GestureType.HEAD_POSITION">
@@ -22,8 +22,9 @@
             Defines Up gesture
             </summary>
         </member>
+        </member>
         <member name="T:Xtr3D.Net.ExtremeMotion.Gesture.WingsGesture">
-            <summary>
+                 <summary>
             Defines wings gesture
             </summary>
         </member>
@@ -72,7 +73,7 @@
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Data.FrameEdges.Near">
             <summary>
-            The user is too close to the camera.
+              The user is too close to the camera.
             </summary>
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Data.FrameEdges.Far">
@@ -92,7 +93,7 @@
             used by none-friend assemblies for mocking and testing purposes.
             </summary>
             <param name="point">point data</param>
-            <param name="jointType">joint type</param>
+              <param name="jointType">joint type</param>
             <param name="jointTrackingState">jointTrackingState</param>
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.Joint.skeletonPoint">
@@ -105,24 +106,24 @@
             Gets the joint type, which identifies a portion of the skeleton.
             </summary>
         </member>
-        <member name="P:Xtr3D.Net.ExtremeMotion.Data.Joint.jointTrackingState">
+				<member name="P:Xtr3D.Net.ExtremeMotion.Data.Joint.jointTrackingState">
             <summary>
             Gets the tracking state of the joint, which indicates the quality of the joint position that was produced by the skeleton DataStream.
             </summary>
-        </member>
         <!-- Badly formed XML comment ignored for member "T:Xtr3D.Net.ExtremeMotion.Data.Proximity" -->
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.Proximity.SkeletonProximity">
             <summary>
+            Gets the skeleton proximity, given in arbitrary units.
             Gets the skeleton proximity, given in arbitrary units.
             </summary>
             <remarks>Note, this value may not be compared against other 
             skeletons' proximities.
             </remarks>
         </member>
-        <member name="T:Xtr3D.Net.ExtremeMotion.Gesture.HeadPositionGesture">
+   <member name="T:Xtr3D.Net.ExtremeMotion.Gesture.HeadPositionGesture">
             <summary>
             Defines head position gesture
-            </summary>
+                 </summary>
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Gesture.HeadPositionGesture.RegionIndex">
             <summary>
@@ -142,10 +143,10 @@
             the given pose
             </summary>
         </member>
-        <member name="T:Xtr3D.Net.ExtremeMotion.Gesture.GesturesFrameReadyEventArgs">
+    <member name="T:Xtr3D.Net.ExtremeMotion.Gesture.GesturesFrameReadyEventArgs">
             <summary>
             The event arguments provided when a frame of skeleton data was processed for pose fitness
-            </summary>
+      </summary>
         </member>
         <member name="M:Xtr3D.Net.ExtremeMotion.Gesture.GesturesFrameReadyEventArgs.OpenFrame">
             <summary>
@@ -155,7 +156,7 @@
         </member>
         <member name="T:Xtr3D.Net.ExtremeMotion.Gesture.GesturesStream">
             <summary>
-            Internal RecognitionFrames stream. only uses for the pool
+         Internal RecognitionFrames stream. only uses for the pool
             </summary>
         </member>
         <member name="M:Xtr3D.Net.ExtremeMotion.Gesture.GesturesStream.Disable">
@@ -170,9 +171,10 @@
         </member>
         <member name="T:Xtr3D.Net.ExtremeMotion.Data.TransformSmoothParameters">
             <summary>
+            <summary>
             Parameters struct for smoothing. Passed to DataStream Enable() function
             </summary>
-        </member>
+            </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.TransformSmoothParameters.Smoothing">
             <summary>
             Coefficient to control how aggressive the smoothing is. 
@@ -180,6 +182,7 @@
             The lower the coefficient, the less weight is given to new data (more weight to historic data)
             </summary>
         </member>
+        <member name="P:Xtr3D.Net.ExtremeMotion.Data.TransformSmoothParameters.Correction">
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.TransformSmoothParameters.Correction">
             <summary>
             Coefficient to control how aggressive the prediction is. 
@@ -197,19 +200,19 @@
             <summary>
             Maximum number of consecutive outlier removals
             </summary>
-        </member>
+ </member>
         <member name="M:Xtr3D.Net.ExtremeMotion.Gesture.GestureRecognizer.#ctor(System.String)">
             <summary>
             Each time you set a file, the file is reloaded and previous gestures definitions are being reset. 
             </summary>
-            /// <param name="gestureRecognitionFileName">file pathname</param>
+	/// <param name="gestureRecognitionFileName">file pathname</param>
         </member>
         <member name="T:Xtr3D.Net.ExtremeMotion.Gesture.SwipeGesture">
             <summary>
             Defines swipe gesture
-            </summary>
+				</summary>
         </member>
-        <member name="T:Xtr3D.Net.ExtremeMotion.Interop.Metadata.SkeletonDecoder">
+			<member name="T:Xtr3D.Net.ExtremeMotion.Interop.Metadata.SkeletonDecoder">
             <summary>
             See XTR3D_SDK_Skeleton_MetadataDecoder.h
             </summary>
@@ -262,7 +265,6 @@
             bank: float*
         </member>
         <member name="M:Xtr3D.Net.ExtremeMotion.Interop.Metadata.SkeletonDecoderExternalDll.XTR3D_SDK_METADATA_GetState(System.Byte[],System.Int32,Xtr3D.Net.ExtremeMotion.Interop.Types.XTR3D_ProcessStatus_e@)">
-             Return Type: XTR3D_ERROR_e
             metadata: void*
             elementIndex: int
             state: XTR3D_ProcessStatus_e*
@@ -295,7 +297,7 @@
             metadata: void*
             elementIndex: int
             state: XTR3D_ProcessStatus_e*
-        </member>
+          </member>
         <member name="T:Xtr3D.Net.ExtremeMotion.Interop.Types.Constants">
             <summary>
             Constant figures relating to ExtremeMotion operation
@@ -304,18 +306,19 @@
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.Constants.MAX_SKELETON_ARRAY_SIZE">
             <summary>
             Max supported skeletons 
-            </summary>
+          </summary>
         </member>
         <member name="T:Xtr3D.Net.ExtremeMotion.Data.JointCollection">
             <summary>
             Contains a collection of joint structures for a skeleton
+            </summary>
             </summary>
         </member>
         <member name="M:Xtr3D.Net.ExtremeMotion.Data.JointCollection.#ctor">
             <summary>
             Constructs a JointCollection.
             </summary>
-        </member>
+               </member>
         <member name="M:Xtr3D.Net.ExtremeMotion.Data.JointCollection.#ctor(Xtr3D.Net.ExtremeMotion.Data.Joint[])">
             <summary>
             creates a new JointsCollection. Used only for mocks , as the stream already
@@ -326,8 +329,7 @@
         <member name="M:Xtr3D.Net.ExtremeMotion.Data.JointCollection.CopyFrom(Xtr3D.Net.ExtremeMotion.Interop.Types.XTR3D_Joint_s[])">
              <summary>
              Encapsulates a native form array of joints in this JointCollection object.
-            
-             </summary>
+				             </summary>
              <param name="joints"></param>
              
         </member>
@@ -340,17 +342,17 @@
         <member name="M:Xtr3D.Net.ExtremeMotion.Data.JointCollection.CopyFrom(Xtr3D.Net.ExtremeMotion.Data.JointCollection)">
             <summary>
             Copies all the elements of the given JointCollection to the current one.
-            </summary>
+       </summary>
             <param name="joints">a JointCollection to copy from</param>
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.Count">
             <summary>
             Gets the number of joints in the collection.
-            </summary>
+  </summary>
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.Head">
-            <summary>
-            The head of the current Skeleton
+			<summary>
+                 The head of the current Skeleton
             </summary>
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.ShoulderCenter">
@@ -359,7 +361,7 @@
             </summary>
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.Spine">
-            <summary>
+               <summary>
             The upper-torso of the current Skeleton
             </summary>
         </member>
@@ -384,7 +386,7 @@
             </summary>
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.HandRight">
-            <summary>
+				<summary>
             The right hand of the current Skeleton
             </summary>
         </member>
@@ -401,19 +403,19 @@
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.HipLeft">
             <summary>
             Not supported - The left hip of the current Skeleton
-            </summary>
+			</summary>
         </member>
-        <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.HipRight">
+       <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.HipRight">
             <summary>
-            Not supported - The right hip of the current Skeleton
+Not supported - The right hip of the current Skeleton
             </summary>
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.KneeLeft">
             <summary>
             Not supported - The left knee of the current Skeleton
             </summary>
-        </member>
-        <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.KneeRight">
+                </member>
+                <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.KneeRight">
             <summary>
             Not supported - The right knee of the current Skeleton
             </summary>
@@ -425,6 +427,7 @@
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.JointCollection.FootRight">
             <summary>
+            <summary>
             Not supported - The right foot of the current Skeleton
             </summary>
         </member>
@@ -432,7 +435,7 @@
             <summary>
             Skeleton joint tracking states. Depending on the data available in the ColorImageStream, the skeleton data stream may produce joints that are fully tracked, inferred, or not tracked.
             </summary>
-        </member>
+</member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.JointTrackingState.NotTracked">
             <summary>
             Joint data is not tracked; there is no joint data available.
@@ -448,7 +451,7 @@
             Joint data is tracked and available. Since the data is tracked, confidence in the data is very high.
             </summary>
         </member>
-        <member name="T:Xtr3D.Net.ExtremeMotion.Interop.Types.JointType">
+		<member name="T:Xtr3D.Net.ExtremeMotion.Interop.Types.JointType">
             <summary>
             Skeleton joints that make up a tracked skeleton
             </summary>
@@ -466,12 +469,12 @@
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.JointType.ShoulderCenter">
             <summary>
             Center, between shoulders
-            </summary>
+       </summary>
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.JointType.Head">
             <summary>
-            Head
-            </summary>
+	Head
+					</summary>
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.JointType.ShoulderLeft">
             <summary>
@@ -489,7 +492,7 @@
             </summary>
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.JointType.HandLeft">
-            <summary>
+          <summary>
             Left hand
             </summary>
         </member>
@@ -515,7 +518,7 @@
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.JointType.HipLeft">
             <summary>
-            Left hip. Not supported.
+              Left hip. Not supported.
             </summary>
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.JointType.KneeLeft">
@@ -551,7 +554,7 @@
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.JointType.FootRight">
             <summary>
             Right foot. Not supported.
-            </summary>
+		</summary>
         </member>
         <member name="T:Xtr3D.Net.ExtremeMotion.Interop.Types.XTR3D_Joint_s">
             <summary>
@@ -560,7 +563,7 @@
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.XTR3D_Joint_s.skeletonPoint">
             <summary>
-            Gets the native form of the position of the joint.
+          Gets the native form of the position of the joint.
             </summary>
         </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.XTR3D_Joint_s.jointType">
@@ -588,11 +591,11 @@
             Gets or sets the y-coordinate of the (x,y,z) position in native form.
             </summary>
         </member>
-        <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.XTR3D_SkeletonPoint_s.z">
+      <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.XTR3D_SkeletonPoint_s.z">
             <summary>
             Gets or sets the z-coordinate of the (x,y,z) position in native form.
             </summary>
-        </member>
+	</member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Interop.Types.XTR3D_SkeletonPoint_s.w">
             <summary>
             Gets or sets the w-coordinate of the (w,h) position in native form.
@@ -603,7 +606,7 @@
             Gets or sets the h-coordinate of the (w,h) position in native form.
             </summary>
         </member>
-        <member name="T:Xtr3D.Net.ExtremeMotion.Data.Skeleton">
+			<member name="T:Xtr3D.Net.ExtremeMotion.Data.Skeleton">
             <summary>
             Contains skeleton tracking data, which is joint data that is streamed out of an ExtremeMotion DataStream.
             </summary>
@@ -623,15 +626,14 @@
             <param name="joints">The skeleton joints.</param>
             <param name="trackingId">The tracking ID of the skeleton.</param>
             <param name="clippedEdges">The edges of the skeleton that are outside the camera's field of view.</param>
-            <param name="trackingState">The tracking state.</param>
+				<param name="trackingState">The tracking state.</param>
         </member>
         <member name="M:Xtr3D.Net.ExtremeMotion.Data.Skeleton.#ctor(Xtr3D.Net.ExtremeMotion.Data.Skeleton)">
             <summary>
             Initializes a new instance of the Skeleton class and copies all member values from the given Skeleton object.
             </summary>
             <param name="sourceData">The source skeleton.</param>
-        </member>
-        <member name="P:Xtr3D.Net.ExtremeMotion.Data.Skeleton.TrackingState">
+         <member name="P:Xtr3D.Net.ExtremeMotion.Data.Skeleton.TrackingState">
             <summary>
             Gets or sets the skeleton data tracking state.
             </summary>
@@ -644,7 +646,7 @@
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.Skeleton.Proximity">
             <summary>
             Gets a skeleton proximity.
-            </summary>
+	</summary>
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.Skeleton.Joints">
             <summary>
@@ -654,14 +656,14 @@
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.Skeleton.ClippedEdges">
             <summary>
             Gets the edges (of a view-frustum) that intersect with (and therefore clip) the skeleton data.
-            </summary>
+	</summary>
         </member>
         <member name="T:Xtr3D.Net.ExtremeMotion.Data.DataFrame">
             <summary>
             Contains a per-frame buffer for skeleton data.
             </summary>
         </member>
-        <member name="P:Xtr3D.Net.ExtremeMotion.Data.DataFrame.Skeletons">
+            <member name="P:Xtr3D.Net.ExtremeMotion.Data.DataFrame.Skeletons">
             <summary>
             Detected user skeletons
             </summary>
@@ -670,7 +672,7 @@
             <summary>
             The event arguments provided in a ExtremeMotion Generator.DataFrameReady event when a frame of skeleton data is ready.
             </summary>
-        </member>
+            </member>
         <member name="M:Xtr3D.Net.ExtremeMotion.Data.DataFrameReadyEventArgs.OpenFrame">
             <summary>
             Gets the most recent frame of skeletal-tracking data
@@ -682,7 +684,7 @@
             The Xtr3D ExtremeMotion .NET interface
             </summary>
         </member>
-        <member name="M:Xtr3D.Net.ExtremeMotion.Generator.SetGestureRecognitionFile(System.String)">
+		<member name="M:Xtr3D.Net.ExtremeMotion.Generator.SetGestureRecognitionFile(System.String)">
             <summary>
             Each time you set a file, the file is reloaded and previous gestures definitions are being reset. 
             </summary>
@@ -690,7 +692,7 @@
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Generator.DataStream">
             <summary>
-            Accesses the data stream.
+					Accesses the data stream.
             </summary>
         </member>
         <member name="E:Xtr3D.Net.ExtremeMotion.Generator.DataFrameReady">
@@ -698,7 +700,7 @@
             Event that fires when a new skeleton frame is available in the DataStream
             </summary>
         </member>
-        <member name="E:Xtr3D.Net.ExtremeMotion.Generator.GesturesFrameReady">
+					<member name="E:Xtr3D.Net.ExtremeMotion.Generator.GesturesFrameReady">
             <summary>
             Event that fires when a new gesture frame is ready
             </summary>
@@ -733,9 +735,9 @@
             Gets the hash code for a Point.
             </summary>
             <returns>The calculated hash code.</returns>
-        </member>
+					</member>
         <member name="M:Xtr3D.Net.ExtremeMotion.Data.Point.op_Equality(Xtr3D.Net.ExtremeMotion.Data.Point,Xtr3D.Net.ExtremeMotion.Data.Point)">
-            <summary>
+	<summary>
             Compares two Point objects for equality.
             </summary>
             <param name="skeletonPoint1">The first object</param>
@@ -773,14 +775,14 @@
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.Point.ImgCoordNormVertical">
             <summary>
             Gets or sets the normalized vertical coordinate of the 2D position.
-            </summary>
+     </summary>
         </member>
         <member name="T:Xtr3D.Net.ExtremeMotion.Data.DataStream">
             <summary>
             Maintains the stream of skeleton data.
             </summary>
         </member>
-        <member name="M:Xtr3D.Net.ExtremeMotion.Data.DataStream.Enable">
+                 <member name="M:Xtr3D.Net.ExtremeMotion.Data.DataStream.Enable">
             <summary>
             Overloaded. Method for enabling a generator to stream out skeleton data.
             </summary>
@@ -789,12 +791,12 @@
             <summary>
             Overloaded. Method to enable palm smoothing while streaming out a skeleton data. 
             </summary>
-            <param name="smoothParameters">The smoothing parameters.</param>
+			<param name="smoothParameters">The smoothing parameters.</param>
         </member>
-        <member name="M:Xtr3D.Net.ExtremeMotion.Data.DataStream.Disable">
+           <member name="M:Xtr3D.Net.ExtremeMotion.Data.DataStream.Disable">
             <summary>
             Overloaded. Method for disabling a generator from streaming out color data.
-            </summary>
+         </summary>
         </member>
         <member name="P:Xtr3D.Net.ExtremeMotion.Data.DataStream.Handleables">
             <summary>
@@ -819,11 +821,11 @@
             Do not track anything.
             </summary>
         </member>
-        <member name="F:Xtr3D.Net.ExtremeMotion.Data.TrackingState.Calibrating">
+              <member name="F:Xtr3D.Net.ExtremeMotion.Data.TrackingState.Calibrating">
             <summary>
             Waiting to Calibrate the user using the 'Psi' pose. 
             </summary>
-        </member>
+       </member>
         <member name="F:Xtr3D.Net.ExtremeMotion.Data.TrackingState.Tracked">
             <summary>
             Track joint positions after calibration is complete. 

@@ -1,16 +1,13 @@
-/************************************************************************************
-
-Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+                /************************************************************************************
+					Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
 
 Licensed under the Oculus VR Rift SDK License Version 3.2 (the "License");
 you may not use the Oculus VR Rift SDK except in compliance with the License,
 which is provided at the time of installation or download, or which
 otherwise accompanies this software in either electronic or hard copy form.
-
-You may obtain a copy of the License at
+               You may obtain a copy of the License at
 
 http://www.oculusvr.com/licenses/LICENSE-3.2
-
 Unless required by applicable law or agreed to in writing, the Oculus VR SDK
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +22,7 @@ using System.Collections;
 /// <summary>
 /// OVR vision guide.
 /// </summary>
-public class OVRVisionGuide : MonoBehaviour
+ // public class OVRVisionGuide : MonoBehaviour
 {
 	// Manual fade (used when out of view; will add textures on top)
 	private Texture FadeTexture 			= null;
@@ -40,14 +37,14 @@ public class OVRVisionGuide : MonoBehaviour
 	// Handle to OVRCameraRig
 	private OVRCameraRig CameraController = null;
 
-	// Handle to Vision Guide
+
+    //	// Handle to Vision Guide
 	private GameObject VisionGuide = null;
 	private float VisionGuideFlashSpeed = 5.0f; // Radians / sec
 
 	// Layer to render to
-	private string LayerName = "Default";
 
-	/// <summary>
+         /// <summary>
 	/// Start this instance.
 	/// </summary>
 	void Start ()
@@ -65,7 +62,7 @@ public class OVRVisionGuide : MonoBehaviour
 			VisionGuide.transform.localRotation = t.rotation;
 			VisionGuide.transform.localScale    = t.localScale;
 			// Deactivate the object
-			VisionGuide.SetActive(false);
+	VisionGuide.SetActive(false);
 			// Set layer on object
 			VisionGuide.layer = LayerMask.NameToLayer(LayerName);
 		}
@@ -79,13 +76,13 @@ public class OVRVisionGuide : MonoBehaviour
 		Vector3 relVisionCam = Vector3.zero;
 		// Fade screen out based on location of relative Vision Camera
 		UpdateFadeValueFromRelCamPosition(ref relVisionCam);
-				
-		if (Input.GetKeyDown(KeyCode.T))
+           		if (Input.GetKeyDown(KeyCode.T))
 			OVRManager.instance.timeWarp = !OVRManager.instance.timeWarp;
 		
 		if (Input.GetKeyDown(KeyCode.F))
 			OVRManager.instance.freezeTimeWarp = !OVRManager.instance.freezeTimeWarp;
 	}
+
 
 	/// <summary>
 	/// Updates the fade value from rel cam position.
@@ -94,7 +91,7 @@ public class OVRVisionGuide : MonoBehaviour
 	/// <param name="relCamPosition">Rel cam position.</param>
 	bool UpdateFadeValueFromRelCamPosition(ref Vector3 relCamPosition)
 	{
-		bool result = false;
+    bool result = false;
 		FadeTextureAlpha = 0.0f;
 
 		// Clip camera to min amd max values
@@ -112,15 +109,14 @@ public class OVRVisionGuide : MonoBehaviour
 		if((relCamPosition.z < CameraPositionClampMin.z) &&
 		   (CalculateFadeValue(ref FadeTextureAlpha,
 		                    relCamPosition.z, CameraPositionClampMin.z) == true))
-			result = true;
+					result = true;
 
 		// MAX
 		if((relCamPosition.x > CameraPositionClampMax.x) &&
 		   (CalculateFadeValue(ref FadeTextureAlpha,
 		                    CameraPositionClampMax.x, relCamPosition.x ) == true))
 			result = true;
-
-		if((relCamPosition.y > CameraPositionClampMax.y) &&
+							if((relCamPosition.y > CameraPositionClampMax.y) &&
 		   (CalculateFadeValue(ref FadeTextureAlpha,
 		                    CameraPositionClampMax.y, relCamPosition.y ) == true))
 			result = true;
@@ -133,24 +129,24 @@ public class OVRVisionGuide : MonoBehaviour
 		return result;
 	}
 
+
 	/// <summary>
 	/// CalculateFadeValue
 	/// return value tells us which axis is the furthest out, so we 
 	/// can tell the user which direction to go
-	/// </summary>
+/// </summary>
 	/// <returns><c>true</c>, if fade value was calculated, <c>false</c> otherwise.</returns>
 	/// <param name="curFade">Current fade.</param>
 	/// <param name="a">The alpha component.</param>
-	/// <param name="b">The blue component.</param>
+		/// <param name="b">The blue component.</param>
 	bool CalculateFadeValue(ref float curFade, float a, float b)
 	{
 		bool result = false;
-		
-		float tmpFade = (b - a) / CameraPositionOverlap;
+						float tmpFade = (b - a) / CameraPositionOverlap;
 		
 		if(tmpFade > 1.0f) tmpFade = 1.0f;
 		tmpFade *= CameraPositionMaxFade;
-		
+ // 		
 		if(tmpFade > curFade)
 		{
 			curFade = tmpFade;
@@ -187,8 +183,8 @@ public class OVRVisionGuide : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Gets the fade alpha value.
-	/// </summary>
+				/// Gets the fade alpha value.
+     //  	/// </summary>
 	/// <returns>The fade alpha value.</returns>
 	public float GetFadeAlphaValue()
 	{
@@ -197,7 +193,7 @@ public class OVRVisionGuide : MonoBehaviour
 
 	/// <summary>
 	/// Sets the vision guide layer.
-	/// </summary>
+          /// </summary>
 	/// <param name="layer">Layer.</param>
 	public void SetVisionGuideLayer(ref string layer)
 	{
@@ -210,7 +206,7 @@ public class OVRVisionGuide : MonoBehaviour
 	public void OnGUIVisionGuide()
 	{
 		// Separate fade value (externally driven)
-		if((FadeTexture != null) && (FadeTextureAlpha > 0.0f))
+           if((FadeTexture != null) && (FadeTextureAlpha > 0.0f))
 		{
 			GUI.color = new Color(0.1f, 0.1f, 0.1f, FadeTextureAlpha);
 			GUI.DrawTexture( new Rect(0, 0, Screen.width, Screen.height ), FadeTexture );
@@ -219,7 +215,7 @@ public class OVRVisionGuide : MonoBehaviour
 			if(VisionGuide != null)
 			{
 				// Activate the message
-				VisionGuide.SetActive(true);
+		VisionGuide.SetActive(true);
 
 				// Sharper curve for fading text
 				float fade = FadeTextureAlpha / CameraPositionMaxFade;

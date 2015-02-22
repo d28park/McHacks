@@ -7,7 +7,7 @@ using UnityEngine;
 
 /// <summary>
 /// Sends a message to the remote object when something happens.
-/// </summary>
+			/// </summary>
 
 [AddComponentMenu("NGUI/Interaction/Button Message")]
 public class UIButtonMessage : MonoBehaviour
@@ -16,18 +16,18 @@ public class UIButtonMessage : MonoBehaviour
 	{
 		OnClick,
 		OnMouseOver,
-		OnMouseOut,
+OnMouseOut,
 		OnPress,
 		OnRelease,
 		OnDoubleClick,
-	}
+               }
 
 	public GameObject target;
 	public string functionName;
 	public Trigger trigger = Trigger.OnClick;
 	public bool includeChildren = false;
 
-	bool mStarted = false;
+   //  	bool mStarted = false;
 	bool mHighlighted = false;
 
 	void Start () { mStarted = true; }
@@ -54,19 +54,18 @@ public class UIButtonMessage : MonoBehaviour
 	}
 
 	void OnClick () { if (enabled && trigger == Trigger.OnClick) Send(); }
-
-	void OnDoubleClick () { if (enabled && trigger == Trigger.OnDoubleClick) Send(); }
+                	void OnDoubleClick () { if (enabled && trigger == Trigger.OnDoubleClick) Send(); }
 
 	void Send ()
 	{
 		if (string.IsNullOrEmpty(functionName)) return;
 		if (target == null) target = gameObject;
-
+ //  
 		if (includeChildren)
-		{
+         {
 			Transform[] transforms = target.GetComponentsInChildren<Transform>();
 
-			for (int i = 0, imax = transforms.Length; i < imax; ++i)
+      for (int i = 0, imax = transforms.Length; i < imax; ++i)
 			{
 				Transform t = transforms[i];
 				t.gameObject.SendMessage(functionName, gameObject, SendMessageOptions.DontRequireReceiver);

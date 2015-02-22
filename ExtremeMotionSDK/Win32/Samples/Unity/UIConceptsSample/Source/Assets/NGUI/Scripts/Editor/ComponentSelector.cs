@@ -1,4 +1,4 @@
-//----------------------------------------------
+           //----------------------------------------------
 //            NGUI: Next-Gen UI kit
 // Copyright © 2011-2013 Tasharen Entertainment
 //----------------------------------------------
@@ -13,20 +13,19 @@ using System.Collections.Generic;
 /// </summary>
 
 public class ComponentSelector : ScriptableWizard
-{
-	public delegate void OnSelectionCallback (MonoBehaviour obj);
+			{
+          public delegate void OnSelectionCallback (MonoBehaviour obj);
 
 	System.Type mType;
 	OnSelectionCallback mCallback;
 	MonoBehaviour[] mObjects;
-
-	/// <summary>
+          	/// <summary>
 	/// Draw a button + object selection combo filtering specified types.
 	/// </summary>
 
-	static public void Draw<T> (string buttonName, T obj, OnSelectionCallback cb, params GUILayoutOption[] options) where T : MonoBehaviour
+               static public void Draw<T> (string buttonName, T obj, OnSelectionCallback cb, params GUILayoutOption[] options) where T : MonoBehaviour
 	{
-		GUILayout.BeginHorizontal();
+     //		GUILayout.BeginHorizontal();
 		bool show = GUILayout.Button(buttonName, "DropDownButton", GUILayout.Width(76f));
 #if !UNITY_3_4
 		GUILayout.BeginVertical();
@@ -44,12 +43,13 @@ public class ComponentSelector : ScriptableWizard
 		if (show) Show<T>(cb);
 		else if (o != obj) cb(o);
 	}
-
-	/// <summary>
+ 	/// <summary>
 	/// Draw a button + object selection combo filtering specified types.
+	/// </summary>
 	/// </summary>
 
 	static public void Draw<T> (T obj, OnSelectionCallback cb, params GUILayoutOption[] options) where T : MonoBehaviour
+	{
 	{
 		Draw<T>(NGUITools.GetName<T>(), obj, cb, options);
 	}
@@ -57,14 +57,14 @@ public class ComponentSelector : ScriptableWizard
 	/// <summary>
 	/// Show the selection wizard.
 	/// </summary>
-
+ //
 	static void Show<T> (OnSelectionCallback cb) where T : MonoBehaviour
 	{
 		System.Type type = typeof(T);
 		ComponentSelector comp = ScriptableWizard.DisplayWizard<ComponentSelector>("Select " + type.ToString());
 		comp.mType = type;
 		comp.mCallback = cb;
-		comp.mObjects = Resources.FindObjectsOfTypeAll(type) as MonoBehaviour[];
+    // 		comp.mObjects = Resources.FindObjectsOfTypeAll(type) as MonoBehaviour[];
 	}
 
 	/// <summary>
@@ -79,7 +79,7 @@ public class ComponentSelector : ScriptableWizard
 
 		if (mObjects.Length == 0)
 		{
-			EditorGUILayout.HelpBox("No recently used " + mType.ToString() + " components found.\nTry drag & dropping one instead, or creating a new one.", MessageType.Info);
+   EditorGUILayout.HelpBox("No recently used " + mType.ToString() + " components found.\nTry drag & dropping one instead, or creating a new one.", MessageType.Info);
 
 			bool isDone = false;
 
@@ -101,7 +101,7 @@ public class ComponentSelector : ScriptableWizard
 				{
 					EditorWindow.GetWindow<UIAtlasMaker>(false, "Atlas Maker", true);
 					isDone = true;
-				}
+					}
 			}
 
 			GUILayout.FlexibleSpace();
@@ -114,9 +114,9 @@ public class ComponentSelector : ScriptableWizard
 
 			foreach (MonoBehaviour o in mObjects)
 			{
-				if (DrawObject(o))
+			if (DrawObject(o))
 				{
-					sel = o;
+	sel = o;
 				}
 			}
 

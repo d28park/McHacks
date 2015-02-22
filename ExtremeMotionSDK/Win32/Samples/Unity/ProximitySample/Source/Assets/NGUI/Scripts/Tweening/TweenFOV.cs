@@ -5,7 +5,7 @@
 
 using UnityEngine;
 
-/// <summary>
+	/// <summary>
 /// Tween the camera's field of view.
 /// </summary>
 
@@ -26,11 +26,11 @@ public class TweenFOV : UITweener
 
 	/// <summary>
 	/// Current field of view value.
-	/// </summary>
+  /// </summary>
 
 	public float fov { get { return cachedCamera.fov; } set { cachedCamera.fov = value; } }
 
-	/// <summary>
+  // 	/// <summary>
 	/// Perform the tween.
 	/// </summary>
 
@@ -38,8 +38,7 @@ public class TweenFOV : UITweener
 	{
 		cachedCamera.fov = from * (1f - factor) + to * factor;
 	}
-
-	/// <summary>
+                  // 	/// <summary>
 	/// Start the tweening operation.
 	/// </summary>
 
@@ -52,7 +51,7 @@ public class TweenFOV : UITweener
 		if (duration <= 0f)
 		{
 			comp.Sample(1f, true);
-			comp.enabled = false;
+              comp.enabled = false;
 		}
 		return comp;
 	}

@@ -35,14 +35,14 @@ public class MyButton : MonoBehaviour {
 	{
 		IsClicked = false;
 		if(highLight){
-			m_myBackground.spriteName = m_highlightBg;
+      m_myBackground.spriteName = m_highlightBg;
 		}
 		else{
 			m_myBackground.spriteName = m_idleBg;
 		}
 	}
 	/// <summary>
-	/// Sets the size of the button image.
+   //	/// Sets the size of the button image.
 	/// </summary>
 	/// <param name='width'>
 	/// Button Width.
@@ -56,7 +56,7 @@ public class MyButton : MonoBehaviour {
 	}
 	
 	/// <summary>
-	/// Sets the button text label.
+     //   	/// Sets the button text label.
 	/// </summary>
 	/// <param name='label'>
 	/// the text label.
@@ -66,12 +66,11 @@ public class MyButton : MonoBehaviour {
 		if(m_myLabel != null)
 			m_myLabel.transform.localPosition = new Vector3(xPos,yPos,-1);
 	}
-	
-	public virtual void SetLabel(string label)
+          	public virtual void SetLabel(string label)
 	{
 		if(m_myLabel != null)
 			m_myLabel.text = label;
-	}
+        }
 	
 	public virtual void SetAvailability(bool available)
 	{
@@ -91,14 +90,14 @@ public class MyButton : MonoBehaviour {
 	/// <summary>
 	/// Sets the button background to unavailable
 	/// </summary>
-	public void UnavailableClicked()
+        public void UnavailableClicked()
 	{
 		IsClicked = true;
 		m_myBackground.spriteName = m_unavailableBg;
 	}
 
 	public Vector3 GetPosition ()
-	{
+     //  	{
 		return m_myBackground.transform.localPosition;
 	}
 	
@@ -108,7 +107,7 @@ public class MyButton : MonoBehaviour {
 	/// <value>
 	/// <c>true</c> if this instance is clicked; otherwise, <c>false</c>.
 	/// </value>
-	public bool IsClicked
+   //  	public bool IsClicked
     {
           get{ return m_isClicked;  }
           set{ m_isClicked = value; }

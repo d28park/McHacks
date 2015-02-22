@@ -22,17 +22,15 @@ class HoveringTranslator
 
     // General
     private const float INVALID_POINT_VAL = -1.0f;            // Invalid value (initialization value)
-    
     // CheckIfLongerArm
     private const int HISTORY_SIZE_LONG_ARM_LEN = 10;         // The buffer size that keeps the informations of frames with longer arm
     private const int NUM_FRAMES_TO_DETECT_LONGER_ARM = 100;  // Maximal history length for which average arm length is computed
     private int       m_frameCounter;                         // Counter of frame number
-    private float[]   m_longArmLenHist;                       // Arm length history array
+     //     private float[]   m_longArmLenHist;                       // Arm length history array
     private float[]   m_longArmLenProximityHist;              // Proximity history array
     private int[]     m_longArmLenFramesHist;                 // Frames counter array
     private int       m_bufferLongArmLenInd;                  // Buffer index (cyclic)
-
-    // StableShoulder
+			    // StableShoulder
     private Point m_shoulderCurrPoint;                        // Current shoulder point
     private Point m_shoulderPrevPoint;                        // Previous shoulder point
     private float m_initialArmLength_Norm;                    // Initialized arm length
@@ -42,12 +40,12 @@ class HoveringTranslator
     private float m_movementThresh;                           // Used to stabilize the shoulder location to get a stable ROI. Defines the minimal movement distance of shoulder from its current location
     private float m_proximityThreshold;                       // Used to change the arm length if the current proximity exceeds the last stable proximity by this threshold
     private float m_alpha;                                    // Defines the coefficient for the linear interpolation between the previous shoulder and the current
-    private bool  m_isShoulderStatic;                         // Indicates if the shoulder is static
+//       private bool  m_isShoulderStatic;                         // Indicates if the shoulder is static
 
     // SetROI
     private float m_ROIwidthInArmUnits;                       // The ROI width measured in number of arms units
     private float m_ROIheightInArmUnits;                      // The ROI height measured in number of arms units   
-    private float m_ROIdistFromShouldXArmUnits;               // The ROI horizontal distance from the right shoulder measured in number of arms units     
+              private float m_ROIdistFromShouldXArmUnits;               // The ROI horizontal distance from the right shoulder measured in number of arms units     
     private float m_ROIdistFromShouldYArmUnits;               // The ROI vertical distance from the right shoulder measured in number of arms units
     private float m_leftMostROI_Norm;                         // Upper val of the ROI    
     private float m_upperMostROI_Norm;                        // Left most val of the ROI
@@ -61,14 +59,13 @@ class HoveringTranslator
     private Point m_prevPalm;                                 // The output of the palm from the previous frame (after performing delay)
     private Point m_prevAlgPalm;                              // The palm from the previous frame without delay
     private int   m_identicalPalmLoactionCounter;             // Counts the number of frames that the palm is static
-
-    public HoveringTranslator()
+	    public HoveringTranslator()
     {
         m_prevPalm.ImgCoordNormHorizontal = INVALID_POINT_VAL;
         m_prevPalm.ImgCoordNormVertical = INVALID_POINT_VAL;
         m_prevAlgPalm.ImgCoordNormHorizontal = INVALID_POINT_VAL;
         m_prevAlgPalm.ImgCoordNormVertical = INVALID_POINT_VAL;
-        m_identicalPalmLoactionCounter = 0;
+         m_identicalPalmLoactionCounter = 0;
         m_outsideScreenCounter = 0;
     }
 
@@ -77,7 +74,7 @@ class HoveringTranslator
 
         LoadParameters();
 
-        float shoulderX_Norm = joints.ShoulderRight.skeletonPoint.ImgCoordNormHorizontal;
+                 float shoulderX_Norm = joints.ShoulderRight.skeletonPoint.ImgCoordNormHorizontal;
         float shoulderY_Norm = joints.ShoulderRight.skeletonPoint.ImgCoordNormVertical;
 		
 		m_initialArmLength_Norm = CalcArmLengthFromJoints(joints);
@@ -128,8 +125,8 @@ class HoveringTranslator
         OutlierCorrector(ref x, ref y, joints);
 
         // Update the arm (according to the proximity) and stable the shoulder
-        StableShoulder(skeletonProximty, joints);
-
+     //        StableShoulder(skeletonProximty, joints);
+    //   
         // Set the ROI using the stable shoulder
         SetROI(m_shoulderCurrPoint.ImgCoordNormHorizontal, m_shoulderCurrPoint.ImgCoordNormVertical);
 
@@ -144,8 +141,8 @@ class HoveringTranslator
 
         return;
     }
-
-    /// <summary>
+     //
+               /// <summary>
     /// set activation area position
     /// </summary>
     private void SetROI(float shoulderX_Norm, float shoulderY_Norm)
@@ -160,10 +157,10 @@ class HoveringTranslator
     /// This function checks if the length of the arm is longer than in calibration and updates the actual size. 
     /// </summary>
     private void CheckIfLongerArm(JointCollection joints, float skeletonProximty)
-    {
+ {
         // Increase the frame counter
         m_frameCounter++;
-        // Compute the current arm length
+	// Compute the current arm length
         float tmpArmLen = CalcArmLengthFromJoints(joints);
         // Normalized the initial arm length (from calibration) to fit the current distance from camera 
         float initialArmLength_NormToProximity = m_initialArmLength_Norm  * (m_initialProximty / skeletonProximty);
@@ -171,9 +168,9 @@ class HoveringTranslator
         if (tmpArmLen > initialArmLength_NormToProximity && tmpArmLen < 1.4 * initialArmLength_NormToProximity)
         {
             // Compute the new index in the cyclic array
-            m_bufferLongArmLenInd = (m_bufferLongArmLenInd - 1 + HISTORY_SIZE_LONG_ARM_LEN) % HISTORY_SIZE_LONG_ARM_LEN;
+		m_bufferLongArmLenInd = (m_bufferLongArmLenInd - 1 + HISTORY_SIZE_LONG_ARM_LEN) % HISTORY_SIZE_LONG_ARM_LEN;
             // Keep the relevant information of this frame in different arrays
-            m_longArmLenHist[m_bufferLongArmLenInd] = tmpArmLen;
+      m_longArmLenHist[m_bufferLongArmLenInd] = tmpArmLen;
             m_longArmLenProximityHist[m_bufferLongArmLenInd] = skeletonProximty;
             m_longArmLenFramesHist[m_bufferLongArmLenInd] = m_frameCounter;
         }
@@ -181,13 +178,13 @@ class HoveringTranslator
         int numFramesInHistory = m_longArmLenFramesHist[m_bufferLongArmLenInd] - m_longArmLenFramesHist[(m_bufferLongArmLenInd - 1 + HISTORY_SIZE_LONG_ARM_LEN) % HISTORY_SIZE_LONG_ARM_LEN];
         // Only updates the arm length if not more than NUM_FRAMES_TO_DETECT_LONGER_ARM frames have passed since the first longer arm was detected.
         if (numFramesInHistory < NUM_FRAMES_TO_DETECT_LONGER_ARM && numFramesInHistory != 0)
-        {
-            // Average the information of the longer arms array
+ {
+     //             // Average the information of the longer arms array
             float meanLen = 0.0f;
-            float meanProximity = 0.0f;
+float meanProximity = 0.0f;
             for (int i = 0; i < HISTORY_SIZE_LONG_ARM_LEN; i++)
             {
-                meanLen += m_longArmLenHist[i];
+       meanLen += m_longArmLenHist[i];
                 meanProximity += m_longArmLenProximityHist[i];
                 m_longArmLenFramesHist[i] = -1000;
             }
@@ -219,9 +216,9 @@ class HoveringTranslator
 
         // The movement threshold is proportional to arm length
         float currMovementThresh = m_movementThresh * m_currArmLength_Norm;
-		float distToPrevShoulder = euclidDist(joints.ShoulderRight.skeletonPoint, m_shoulderPrevPoint);
+   float distToPrevShoulder = euclidDist(joints.ShoulderRight.skeletonPoint, m_shoulderPrevPoint);
         // Update the right shoulder point like "hysteresis".  
-        if (distToPrevShoulder > currMovementThresh || !m_isShoulderStatic)
+			if (distToPrevShoulder > currMovementThresh || !m_isShoulderStatic)
         {
             m_isShoulderStatic = false;
             // If got here, than the shoulder is not static and therefore also small movement can move the shoulder 
@@ -237,7 +234,7 @@ class HoveringTranslator
                 m_shoulderCurrPoint.ImgCoordNormVertical = m_shoulderPrevPoint.ImgCoordNormVertical * (1 - m_alpha) + joints.ShoulderRight.skeletonPoint.ImgCoordNormVertical * m_alpha;
             }
         }
-        else
+     //        else
         {
             // The shoulder keeps its value from previous frame
             m_shoulderCurrPoint = m_shoulderPrevPoint;
@@ -246,9 +243,9 @@ class HoveringTranslator
     }
 
     /// <summary>
-    /// Check For impossible positions for example elbow above hand is short.
+              /// Check For impossible positions for example elbow above hand is short.
     /// </summary>
-    private void OutlierCorrector(ref float x, ref float y, JointCollection joints )
+					private void OutlierCorrector(ref float x, ref float y, JointCollection joints )
     {
         // x and y are the palm joints
         if (y > joints.ElbowRight.skeletonPoint.ImgCoordNormVertical + 0.05 && CalcArmLengthFromJoints(joints) < m_initialArmLength_Norm*0.7)
@@ -294,7 +291,7 @@ class HoveringTranslator
     /// <summary>
     /// This function delays the output in order to generate a smoother output by preforming a linear interpolation (moving 1/m_smoothDelay of the distance each frame)
     /// </summary>
-    private void SmoothOutput(ref float x, ref float y)
+				private void SmoothOutput(ref float x, ref float y)
     {
         
         // Happens only in first frame. m_prevPalm (x and y) are initialized to INVALID_POINT_VAL
@@ -311,15 +308,15 @@ class HoveringTranslator
         currAlgPalm.ImgCoordNormVertical = y;
         
         // Adding a linear interpolation. Moving 1/m_smoothDelay of the distance each frame.
+        // Adding a linear interpolation. Moving 1/m_smoothDelay of the distance each frame.
         currDelta.ImgCoordNormHorizontal = (x - m_prevPalm.ImgCoordNormHorizontal) / m_smoothDelay;
         currDelta.ImgCoordNormVertical = (y - m_prevPalm.ImgCoordNormVertical) / m_smoothDelay;
-
-        // If alg position is static for m_smoothDelay*3 frames then set it to the static location.
+                // If alg position is static for m_smoothDelay*3 frames then set it to the static location.
         if (m_prevAlgPalm.ImgCoordNormHorizontal == x && m_prevAlgPalm.ImgCoordNormVertical == y)
         {
-            if (m_identicalPalmLoactionCounter > m_smoothDelay*3)
+        if (m_identicalPalmLoactionCounter > m_smoothDelay*3)
             {
-                currDelta.ImgCoordNormHorizontal = (x - m_prevPalm.ImgCoordNormHorizontal);
+               currDelta.ImgCoordNormHorizontal = (x - m_prevPalm.ImgCoordNormHorizontal);
                 currDelta.ImgCoordNormVertical = (y - m_prevPalm.ImgCoordNormVertical);
                 m_identicalPalmLoactionCounter = 0;
             }
@@ -341,26 +338,26 @@ class HoveringTranslator
         x = m_prevPalm.ImgCoordNormHorizontal + currDelta.ImgCoordNormHorizontal;
         y = m_prevPalm.ImgCoordNormVertical + currDelta.ImgCoordNormVertical;
 
-        // Update the previous output
+     // Update the previous output
         m_prevPalm.ImgCoordNormHorizontal = x;
         m_prevPalm.ImgCoordNormVertical = y;
 
     }
-
+     //  
     /// <summary>
     /// This function changes the palm location coordinates to fit the ROI
     /// </summary>
     private void NormalizeToROI(ref float x, ref float y)
     {
-        // Reduce the ROI when approach the boundaries of the image
-        const float marginFromEdges = 0.05f;
+ // Reduce the ROI when approach the boundaries of the image
+					const float marginFromEdges = 0.05f;
         // The ROI shouldn't reach the left and upper edges of the image.
         m_leftMostROI_Norm = Math.Max(m_leftMostROI_Norm, marginFromEdges);
         m_upperMostROI_Norm = Math.Max(m_upperMostROI_Norm, marginFromEdges);
 
         // Subtract (1 - marginFromEdges) - <m_leftMostROI_Norm | m_upperMostROI_Norm> so ROI won't reach the right and bottom edges of the image.
         m_ROIwidth_Norm =  Math.Max(Math.Min(m_ROIwidth_Norm,  (1 - marginFromEdges) - m_leftMostROI_Norm),  0);
-        m_ROIheight_Norm = Math.Max(Math.Min(m_ROIheight_Norm, (1 - marginFromEdges) - m_upperMostROI_Norm), 0);
+	m_ROIheight_Norm = Math.Max(Math.Min(m_ROIheight_Norm, (1 - marginFromEdges) - m_upperMostROI_Norm), 0);
 
         // Compute the new palm values in the ROI
         // 0.001f to make sure we don't divide by zero.
@@ -381,7 +378,7 @@ class HoveringTranslator
         {
             m_outsideScreenCounter = 0;
             m_outsideScreen = false;
-        }
+   }
 		#if UNITY_STANDALONE_WIN 
         System.Console.WriteLine(y);
 		#endif

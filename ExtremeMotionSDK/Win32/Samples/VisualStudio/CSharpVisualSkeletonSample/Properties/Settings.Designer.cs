@@ -4,11 +4,10 @@
 //     Runtime Version:4.0.30319.296
 //
 //     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
+                 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-namespace CSharpVisualSkeletonSample.Properties {
+             namespace CSharpVisualSkeletonSample.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -21,10 +20,9 @@ namespace CSharpVisualSkeletonSample.Properties {
             get {
                 return defaultInstance;
             }
-        }
+		}
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool EnableSmoothing {
             get {
@@ -49,7 +47,7 @@ namespace CSharpVisualSkeletonSample.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.4")]
+[global::System.Configuration.DefaultSettingValueAttribute("0.4")]
         public float CorrectionCoeff {
             get {
                 return ((float)(this["CorrectionCoeff"]));
@@ -83,4 +81,4 @@ namespace CSharpVisualSkeletonSample.Properties {
             }
         }
     }
-}
+        }

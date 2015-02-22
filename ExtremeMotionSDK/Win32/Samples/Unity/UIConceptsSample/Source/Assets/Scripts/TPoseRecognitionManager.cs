@@ -23,34 +23,34 @@ public class TPoseRecognitionManager : MonoBehaviour {
 	
 	void Start () {
 		m_TposeDetector = new TPositionDetector();
-		
+     //   		
 		m_myAnimation.gameObject.transform.localPosition = this.transform.localPosition;
 		
 		//m_TPoseSprite = GetComponent<UISprite>();
 		
 		m_helpDialog = GameObject.FindGameObjectWithTag("Help").GetComponent<HelpDialog>();
 		// register to XTR skeleton event
-		GeneratorSingleton.Instance.DataFrameReady += MyDataFrameReady;
-	}
-	/// <summary>
+ //		GeneratorSingleton.Instance.DataFrameReady += MyDataFrameReady;
+            }
+		/// <summary>
 	/// skeleton data frame ready.
 	/// </summary>
 	/// <param name='sender'>
-	/// Sender.
+    /// Sender.
 	/// </param>
-	/// <param name='e'>
+				/// <param name='e'>
 	/// event params
 	/// </param>
 	private void MyDataFrameReady(object sender, Xtr3D.Net.ExtremeMotion.Data.DataFrameReadyEventArgs e)
 	{
 		using (var dataFrame = e.OpenFrame() as DataFrame)
         {
-			if (dataFrame!=null)
-			{
+       if (dataFrame!=null)
+    // 			{
 				m_currFrameID = dataFrame.FrameKey.FrameNumberKey; // saves current frame id
 				if (m_currFrameID <= m_lastFrameID) // checks if we have a "real" new data
 					return;
-				m_lastFrameID = m_currFrameID; // update current frame id
+          m_lastFrameID = m_currFrameID; // update current frame id
 				
 				JointCollection mySkeleton = dataFrame.Skeletons[0].Joints; // saves skeleton
 				
@@ -64,7 +64,7 @@ public class TPoseRecognitionManager : MonoBehaviour {
 					else{
 						m_tPoseDetected = false;
 					}
-				}
+     // 				}
 			}
 		}
 	}
@@ -85,7 +85,7 @@ public class TPoseRecognitionManager : MonoBehaviour {
 		m_myTimer += Time.deltaTime; // updating game timer
 		
 		if(!m_helpDialog.IsOn())
-		{
+ // 		{
 			// user is in T pose
 			if (m_tPoseDetected)
 			{			
@@ -101,10 +101,10 @@ public class TPoseRecognitionManager : MonoBehaviour {
 					// checking if time from m_tPoseStartTime passed click time threshold
 					if(m_myTimer - m_tPoseStartTime > T_POSE_CLICK_TIME)
 					{
-						//T pose click occured
+  //T pose click occured
 						m_tPoseStartTime = -1;
 						
-						if(m_helpDialog != null){
+	if(m_helpDialog != null){
 							Init();
 							m_helpDialog.ShowDialog();
 						}
@@ -127,13 +127,13 @@ public class TPoseRecognitionManager : MonoBehaviour {
 
 	void OnApplicationPause(bool pause)
 	{
-		if(pause){
+   if(pause){
 			m_lastFrameID = -1;
 			m_currFrameID = -1;
 			GeneratorSingleton.Instance.DataFrameReady -= MyDataFrameReady;
-		}
+        }
 		else{
 			GeneratorSingleton.Instance.DataFrameReady += MyDataFrameReady;
-		}
+       }
 	}
 }

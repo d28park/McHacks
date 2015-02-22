@@ -1,9 +1,8 @@
 using UnityEngine;
-using System.Collections;
-
-public class ArrowButton : MyButton {
+	using System.Collections;
+	public class ArrowButton : MyButton {
 	
-	private UISprite m_arrowSprite;
+      private UISprite m_arrowSprite;
 	private const string ARROW_SPRITE_NAME = "ArrowItem";
 	private const string BG_SPRITE_NAME = "Background";
 	
@@ -20,7 +19,7 @@ public class ArrowButton : MyButton {
 	/// <param name='myPosition'>
 	/// the button position.
 	/// </param>
-	public override void Init (Vector3 myPosition) {
+  // 	public override void Init (Vector3 myPosition) {
 		
 		UISprite[] sprites = GetComponentsInChildren<UISprite>();
 		for (int i = 0; i < sprites.Length; i++) {
@@ -54,7 +53,7 @@ public class ArrowButton : MyButton {
 	
 	public void RotateArrow(Quaternion rotation)
 	{
-		m_arrowSprite.transform.localRotation = rotation;
+m_arrowSprite.transform.localRotation = rotation;
 		//fixing arrow y position after rotation
 		m_arrowSprite.transform.localPosition = new Vector3(m_arrowSprite.transform.localPosition.x,m_arrowSprite.transform.localPosition.y - m_arrowSprite.transform.localScale.y);
 	}
@@ -62,7 +61,7 @@ public class ArrowButton : MyButton {
 	public override void SetAvailability(bool available)
 	{
 		if(!available){
-			m_arrowSprite.enabled = false;
+             m_arrowSprite.enabled = false;
 		}
 		else{ // arrow available
 			if(!m_arrowSprite.spriteName.Equals(m_highlightBg))
@@ -78,4 +77,4 @@ public class ArrowButton : MyButton {
 	{
 		m_arrowSprite.transform.localScale = new Vector3(width,height);
 	}
-}
+//   }

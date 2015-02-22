@@ -25,12 +25,12 @@
       <Forearm>
         <Angle>90</Angle>
         <Tolerance>30</Tolerance>
-      </Forearm>
+	</Forearm>
     </LeftHand>
   </Gesture>
   <Gesture>
     <Id>2</Id>
-    <Class>StaticPosition</Class>
+ <Class>StaticPosition</Class>
     <Name>T position</Name>
     <State>Enabled</State>
     <Side>Both</Side>
@@ -47,13 +47,13 @@
     </RightHand>
     <LeftHand>
       <UpperArm>
-        <Angle>0</Angle>
+			<Angle>0</Angle>
         <Tolerance>30</Tolerance>
       </UpperArm>
       <Forearm>
         <Angle>0</Angle>
         <Tolerance>20</Tolerance>
-      </Forearm>
+					</Forearm>
     </LeftHand>
   </Gesture>
   <Gesture>
@@ -71,10 +71,11 @@
       <Forearm>
         <Angle>90</Angle>
         <Tolerance>20</Tolerance>
-      </Forearm>
-    </LeftHand>
+         </Forearm>
+          </LeftHand>
   </Gesture>
   <Gesture>
+    <Id>4</Id>
     <Id>4</Id>
     <Class>StaticPosition</Class>
     <Name>Right Hand Up</Name>
@@ -107,7 +108,7 @@
   </Gesture>
   <Gesture>
     <Id>7</Id>
-    <Class>Swipe</Class>
+         <Class>Swipe</Class>
     <Name>Left Backhand</Name>
     <Hand>Left</Hand>
     <Direction>Backhand</Direction>
@@ -118,7 +119,7 @@
     <Name>Right Forehand</Name>
     <Hand>Right</Hand>
     <Direction>Forehand</Direction>
-  </Gesture>
+                </Gesture>
   <Gesture>
     <Id>9</Id>
     <Class>Swipe</Class>
@@ -129,7 +130,7 @@
   <Gesture>
     <Id>10</Id>
     <Class>Wings</Class>
-    <Name>Wings</Name>
+            <Name>Wings</Name>
   </Gesture>
   <Gesture>
     <Id>11</Id>

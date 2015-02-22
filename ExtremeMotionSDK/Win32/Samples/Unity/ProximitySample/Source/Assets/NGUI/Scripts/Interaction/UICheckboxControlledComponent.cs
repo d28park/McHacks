@@ -33,8 +33,9 @@ public class UICheckboxControlledComponent : MonoBehaviour
 	{
 		if (enabled && target != null) target.enabled = inverse ? !isActive : isActive;
 	}
-
+     // 
 	/// <summary>
+	/// Legacy functionality -- keeping it for backwards compatibility.
 	/// Legacy functionality -- keeping it for backwards compatibility.
 	/// </summary>
 

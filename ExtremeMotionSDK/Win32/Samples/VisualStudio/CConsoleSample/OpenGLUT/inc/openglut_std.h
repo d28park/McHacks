@@ -1,4 +1,4 @@
-#ifndef  __OPENGLUT_STD_H__
+  // #ifndef  __OPENGLUT_STD_H__
 #define  __OPENGLUT_STD_H__
 
 /*
@@ -14,11 +14,11 @@
  * Creation date: Thu Dec 2 1999
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the "Software"),
+     * copy of this software and associated documentation files (the "Software"),
  * to deal in the Software without restriction, including without limitation
  * the rights to use, copy, modify, merge, publish, distribute, sublicense,
  * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
+	* Software is furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
@@ -29,20 +29,21 @@
  * PAWEL W. OLSZTA BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-/*
- * Under windows, we have to differentiate between static and dynamic libraries
+              /*
+         * Under windows, we have to differentiate between static and dynamic libraries
  */
 #if !defined( _MSC_VER ) && !defined( __MINGW32__ )
 #    define OGAPI
-#    define OGAPIENTRY
+  //#    define OGAPIENTRY
 #else
 #   define WIN32_LEAN_AND_MEAN
+#   define NO_MIN_MAX
 #   define NO_MIN_MAX
 #   include <windows.h>
 #   undef min
@@ -54,11 +55,12 @@ extern "C" {
 #           pragma comment (lib, "OpenGLUT_static.lib")
 #       endif
 #   else                          /* Windows shared library (DLL) */
-#       if defined(OPENGLUT_EXPORTS)
+   #       if defined(OPENGLUT_EXPORTS)
 #           define OGAPI __declspec(dllexport)
 #       else
 #           define OGAPI __declspec(dllimport)
 #           if defined(_MSC_VER)  /* link with Win32 shared OpenGLUT lib */
+#               pragma comment (lib, "OpenGLUT.lib")
 #               pragma comment (lib, "OpenGLUT.lib")
 #           endif
 #       endif
@@ -70,7 +72,7 @@ extern "C" {
      * hence compilers can---and some will---peek inside
      * of #ifdef-protected code, and may mis-interpretet
      * these #pragmas.
-     *
+          *
      * Discussion by freeglut developers suggests that
      * #pragmas may need to move to a separate header.
      * See the archives leading up to 24th Dec 2003
@@ -86,6 +88,7 @@ extern "C" {
 #       pragma comment (lib, "gdi32.lib")    /* link Windows GDI lib        */
 #       pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 #       pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
+#   endif
 #   endif
 #endif
 
@@ -108,20 +111,20 @@ extern "C" {
 #define OPENGLUT_VERSION_0_6_3
 
 /*
- * Always include OpenGL and GLU headers
+			* Always include OpenGL and GLU headers
  */
 #include <GL/gl.h>
 #include <GL/glu.h>
 
 /*
  * GLUT API macro definitions -- the special key codes:
- */
-#define  GLUT_KEY_F1                        0x0001
+            */
+           #define  GLUT_KEY_F1                        0x0001
 #define  GLUT_KEY_F2                        0x0002
 #define  GLUT_KEY_F3                        0x0003
 #define  GLUT_KEY_F4                        0x0004
 #define  GLUT_KEY_F5                        0x0005
-#define  GLUT_KEY_F6                        0x0006
+	#define  GLUT_KEY_F6                        0x0006
 #define  GLUT_KEY_F7                        0x0007
 #define  GLUT_KEY_F8                        0x0008
 #define  GLUT_KEY_F9                        0x0009
@@ -130,10 +133,11 @@ extern "C" {
 #define  GLUT_KEY_F12                       0x000C
 #define  GLUT_KEY_LEFT                      0x0064
 #define  GLUT_KEY_UP                        0x0065
+#define  GLUT_KEY_UP                        0x0065
 #define  GLUT_KEY_RIGHT                     0x0066
 #define  GLUT_KEY_DOWN                      0x0067
 #define  GLUT_KEY_PAGE_UP                   0x0068
-#define  GLUT_KEY_PAGE_DOWN                 0x0069
+               #define  GLUT_KEY_PAGE_DOWN                 0x0069
 #define  GLUT_KEY_HOME                      0x006A
 #define  GLUT_KEY_END                       0x006B
 #define  GLUT_KEY_INSERT                    0x006C
@@ -143,10 +147,10 @@ extern "C" {
  */
 #define  GLUT_LEFT_BUTTON                   0x0000
 #define  GLUT_MIDDLE_BUTTON                 0x0001
-#define  GLUT_RIGHT_BUTTON                  0x0002
+             #define  GLUT_RIGHT_BUTTON                  0x0002
 #define  GLUT_DOWN                          0x0000
 #define  GLUT_UP                            0x0001
-#define  GLUT_LEFT                          0x0000
+				#define  GLUT_LEFT                          0x0000
 #define  GLUT_ENTERED                       0x0001
 
 /*
@@ -159,10 +163,10 @@ extern "C" {
 #define  GLUT_DOUBLE                        0x0002
 #define  GLUT_ACCUM                         0x0004
 #define  GLUT_ALPHA                         0x0008
-#define  GLUT_DEPTH                         0x0010
+	#define  GLUT_DEPTH                         0x0010
 #define  GLUT_STENCIL                       0x0020
 #define  GLUT_MULTISAMPLE                   0x0080
-#define  GLUT_STEREO                        0x0100
+  #define  GLUT_STEREO                        0x0100
 #define  GLUT_LUMINANCE                     0x0200
 
 /*
@@ -178,7 +182,7 @@ extern "C" {
 #define  GLUT_FULLY_COVERED                 0x0003
 
 /*
- * GLUT API macro definitions -- fonts definitions
+                 * GLUT API macro definitions -- fonts definitions
  */
 #define  GLUT_STROKE_ROMAN               ((void *)0x0000)
 #define  GLUT_STROKE_MONO_ROMAN          ((void *)0x0001)
@@ -193,16 +197,17 @@ extern "C" {
 /*
  * GLUT API macro definitions -- the glutGet parameters
  */
-#define  GLUT_WINDOW_X                      0x0064
+  //   #define  GLUT_WINDOW_X                      0x0064
 #define  GLUT_WINDOW_Y                      0x0065
 #define  GLUT_WINDOW_WIDTH                  0x0066
 #define  GLUT_WINDOW_HEIGHT                 0x0067
 #define  GLUT_WINDOW_BUFFER_SIZE            0x0068
-#define  GLUT_WINDOW_STENCIL_SIZE           0x0069
+//#define  GLUT_WINDOW_STENCIL_SIZE           0x0069
 #define  GLUT_WINDOW_DEPTH_SIZE             0x006A
 #define  GLUT_WINDOW_RED_SIZE               0x006B
 #define  GLUT_WINDOW_GREEN_SIZE             0x006C
 #define  GLUT_WINDOW_BLUE_SIZE              0x006D
+#define  GLUT_WINDOW_ALPHA_SIZE             0x006E
 #define  GLUT_WINDOW_ALPHA_SIZE             0x006E
 #define  GLUT_WINDOW_ACCUM_RED_SIZE         0x006F
 #define  GLUT_WINDOW_ACCUM_GREEN_SIZE       0x0070
@@ -217,7 +222,7 @@ extern "C" {
 #define  GLUT_WINDOW_STEREO                 0x0079
 #define  GLUT_WINDOW_CURSOR                 0x007A
 
-#define  GLUT_SCREEN_WIDTH                  0x00C8
+         #define  GLUT_SCREEN_WIDTH                  0x00C8
 #define  GLUT_SCREEN_HEIGHT                 0x00C9
 #define  GLUT_SCREEN_WIDTH_MM               0x00CA
 #define  GLUT_SCREEN_HEIGHT_MM              0x00CB
@@ -238,7 +243,7 @@ extern "C" {
 #define  GLUT_HAS_KEYBOARD                  0x0258
 #define  GLUT_HAS_MOUSE                     0x0259
 #define  GLUT_HAS_SPACEBALL                 0x025A
-#define  GLUT_HAS_DIAL_AND_BUTTON_BOX       0x025B
+	#define  GLUT_HAS_DIAL_AND_BUTTON_BOX       0x025B
 #define  GLUT_HAS_TABLET                    0x025C
 #define  GLUT_NUM_MOUSE_BUTTONS             0x025D
 #define  GLUT_NUM_SPACEBALL_BUTTONS         0x025E
@@ -300,7 +305,7 @@ extern "C" {
 #define  GLUT_CURSOR_HELP                   0x0004
 #define  GLUT_CURSOR_CYCLE                  0x0005
 #define  GLUT_CURSOR_SPRAY                  0x0006
-#define  GLUT_CURSOR_WAIT                   0x0007
+    #define  GLUT_CURSOR_WAIT                   0x0007
 #define  GLUT_CURSOR_TEXT                   0x0008
 #define  GLUT_CURSOR_CROSSHAIR              0x0009
 #define  GLUT_CURSOR_UP_DOWN                0x000A
@@ -309,7 +314,7 @@ extern "C" {
 #define  GLUT_CURSOR_BOTTOM_SIDE            0x000D
 #define  GLUT_CURSOR_LEFT_SIDE              0x000E
 #define  GLUT_CURSOR_RIGHT_SIDE             0x000F
-#define  GLUT_CURSOR_TOP_LEFT_CORNER        0x0010
+             #define  GLUT_CURSOR_TOP_LEFT_CORNER        0x0010
 #define  GLUT_CURSOR_TOP_RIGHT_CORNER       0x0011
 #define  GLUT_CURSOR_BOTTOM_RIGHT_CORNER    0x0012
 #define  GLUT_CURSOR_BOTTOM_LEFT_CORNER     0x0013
@@ -320,7 +325,7 @@ extern "C" {
 /*
  * GLUT API macro definitions -- RGB color component specification definitions
  */
-#define  GLUT_RED                           0x0000
+					#define  GLUT_RED                           0x0000
 #define  GLUT_GREEN                         0x0001
 #define  GLUT_BLUE                          0x0002
 
@@ -349,16 +354,16 @@ extern "C" {
 
 /*
  * Initialization functions, see og_init.c
- */
+	*/
 OGAPI void    OGAPIENTRY glutInit( int* pargc, char** argv );
 OGAPI void    OGAPIENTRY glutInitWindowPosition( int x, int y );
-OGAPI void    OGAPIENTRY glutInitWindowSize( int width, int height );
+     OGAPI void    OGAPIENTRY glutInitWindowSize( int width, int height );
 OGAPI void    OGAPIENTRY glutInitDisplayMode( unsigned int displayMode );
 OGAPI void    OGAPIENTRY glutInitDisplayString( const char* displayMode );
 
 /*
  * Process loop function, see og_main.c
- */
+					*/
 OGAPI void    OGAPIENTRY glutMainLoop( void );
 
 /*
@@ -374,18 +379,18 @@ OGAPI int     OGAPIENTRY glutGetWindow( void );
 OGAPI void    OGAPIENTRY glutSetWindowTitle( const char* title );
 OGAPI void    OGAPIENTRY glutSetIconTitle( const char* title );
 OGAPI void    OGAPIENTRY glutReshapeWindow( int width, int height );
-OGAPI void    OGAPIENTRY glutPositionWindow( int x, int y );
+		OGAPI void    OGAPIENTRY glutPositionWindow( int x, int y );
 OGAPI void    OGAPIENTRY glutShowWindow( void );
 OGAPI void    OGAPIENTRY glutHideWindow( void );
-OGAPI void    OGAPIENTRY glutIconifyWindow( void );
+             OGAPI void    OGAPIENTRY glutIconifyWindow( void );
 OGAPI void    OGAPIENTRY glutPushWindow( void );
 OGAPI void    OGAPIENTRY glutPopWindow( void );
 OGAPI void    OGAPIENTRY glutFullScreen( void );
 
-/*
+  // /*
  * Display-connected functions, see og_display.c
  */
-OGAPI void    OGAPIENTRY glutPostWindowRedisplay( int window );
+     OGAPI void    OGAPIENTRY glutPostWindowRedisplay( int window );
 OGAPI void    OGAPIENTRY glutPostRedisplay( void );
 OGAPI void    OGAPIENTRY glutSwapBuffers( void );
 
@@ -399,22 +404,21 @@ OGAPI void    OGAPIENTRY glutSetCursor( int cursor );
  * Overlay stuff, see og_overlay.c
  */
 OGAPI void    OGAPIENTRY glutEstablishOverlay( void );
-OGAPI void    OGAPIENTRY glutRemoveOverlay( void );
+		OGAPI void    OGAPIENTRY glutRemoveOverlay( void );
 OGAPI void    OGAPIENTRY glutUseLayer( GLenum layer );
 OGAPI void    OGAPIENTRY glutPostOverlayRedisplay( void );
 OGAPI void    OGAPIENTRY glutPostWindowOverlayRedisplay( int window );
 OGAPI void    OGAPIENTRY glutShowOverlay( void );
 OGAPI void    OGAPIENTRY glutHideOverlay( void );
-
-/*
+				/*
  * Menu stuff, see og_menu.c
- */
+   */
 OGAPI int     OGAPIENTRY glutCreateMenu( void (* callback)( int menu ) );
 OGAPI void    OGAPIENTRY glutDestroyMenu( int menu );
 OGAPI int     OGAPIENTRY glutGetMenu( void );
 OGAPI void    OGAPIENTRY glutSetMenu( int menu );
 OGAPI void    OGAPIENTRY glutAddMenuEntry( const char* label, int value );
-OGAPI void    OGAPIENTRY glutAddSubMenu( const char* label, int subMenu );
+      OGAPI void    OGAPIENTRY glutAddSubMenu( const char* label, int subMenu );
 OGAPI void    OGAPIENTRY glutChangeToMenuEntry(
     int item, const char* label, int value
 );
@@ -422,7 +426,7 @@ OGAPI void    OGAPIENTRY glutChangeToSubMenu(
     int item, const char* label, int value
 );
 OGAPI void    OGAPIENTRY glutRemoveMenuItem( int item );
-OGAPI void    OGAPIENTRY glutAttachMenu( int button );
+		OGAPI void    OGAPIENTRY glutAttachMenu( int button );
 OGAPI void    OGAPIENTRY glutDetachMenu( int button );
 
 /*
@@ -435,15 +439,15 @@ OGAPI void    OGAPIENTRY glutIdleFunc( void (* callback)( void ) );
 
 /*
  * Window-specific callback functions, see og_callbacks.c
- */
+   */
 OGAPI void    OGAPIENTRY glutKeyboardFunc(
     void (* callback)( unsigned char, int, int )
 );
 OGAPI void    OGAPIENTRY glutSpecialFunc( void (* callback)( int, int, int ) );
 OGAPI void    OGAPIENTRY glutReshapeFunc( void (* callback)( int, int ) );
-OGAPI void    OGAPIENTRY glutVisibilityFunc( void (* callback)( int ) );
+  //OGAPI void    OGAPIENTRY glutVisibilityFunc( void (* callback)( int ) );
 OGAPI void    OGAPIENTRY glutDisplayFunc( void (* callback)( void ) );
-OGAPI void    OGAPIENTRY glutMouseFunc(
+    OGAPI void    OGAPIENTRY glutMouseFunc(
     void (* callback)( int, int, int, int )
 );
 OGAPI void    OGAPIENTRY glutMotionFunc( void (* callback)( int, int ) );
@@ -458,7 +462,7 @@ OGAPI void    OGAPIENTRY glutKeyboardUpFunc(
 OGAPI void    OGAPIENTRY glutSpecialUpFunc(
     void (* callback)( int, int, int )
 );
-OGAPI void    OGAPIENTRY glutJoystickFunc(
+  //  OGAPI void    OGAPIENTRY glutJoystickFunc(
     void (* callback)( unsigned int, int, int, int ), int pollInterval
 );
 OGAPI void    OGAPIENTRY glutMenuStateFunc( void (* callback)( int ) );
@@ -466,16 +470,15 @@ OGAPI void    OGAPIENTRY glutMenuStatusFunc(
     void (* callback)( int, int, int )
 );
 OGAPI void    OGAPIENTRY glutOverlayDisplayFunc( void (* callback)( void ) );
-OGAPI void    OGAPIENTRY glutWindowStatusFunc( void (* callback)( int ) );
+          OGAPI void    OGAPIENTRY glutWindowStatusFunc( void (* callback)( int ) );
 
 OGAPI void    OGAPIENTRY glutSpaceballMotionFunc(
     void (* callback)( int, int, int )
 );
 OGAPI void    OGAPIENTRY glutSpaceballRotateFunc(
     void (* callback)( int, int, int )
-);
+				);
 OGAPI void    OGAPIENTRY glutSpaceballButtonFunc(
-    void (* callback)( int, int )
 );
 OGAPI void    OGAPIENTRY glutButtonBoxFunc( void (* callback)( int, int ) );
 OGAPI void    OGAPIENTRY glutDialsFunc( void (* callback)( int, int ) );
@@ -495,7 +498,7 @@ OGAPI int     OGAPIENTRY glutLayerGet( GLenum query );
 /*
  * Font stuff, see og_font.c
  */
-OGAPI void  OGAPIENTRY glutBitmapCharacter( void* font, int character );
+			OGAPI void  OGAPIENTRY glutBitmapCharacter( void* font, int character );
 OGAPI int   OGAPIENTRY glutBitmapWidth( void* font, int character );
 OGAPI void  OGAPIENTRY glutStrokeCharacter( void* font, int character );
 OGAPI float OGAPIENTRY glutStrokeWidth( void* font, int character );
@@ -524,8 +527,8 @@ OGAPI void    OGAPIENTRY glutWireTorus(
     GLdouble innerRadius, GLdouble outerRadius, GLint sides, GLint rings
 );
 OGAPI void    OGAPIENTRY glutSolidTorus(
-    GLdouble innerRadius, GLdouble outerRadius, GLint sides, GLint rings
-);
+  GLdouble innerRadius, GLdouble outerRadius, GLint sides, GLint rings
+            );
 OGAPI void    OGAPIENTRY glutWireDodecahedron( void );
 OGAPI void    OGAPIENTRY glutSolidDodecahedron( void );
 OGAPI void    OGAPIENTRY glutWireOctahedron( void );
@@ -534,6 +537,7 @@ OGAPI void    OGAPIENTRY glutWireTetrahedron( void );
 OGAPI void    OGAPIENTRY glutSolidTetrahedron( void );
 OGAPI void    OGAPIENTRY glutWireIcosahedron( void );
 OGAPI void    OGAPIENTRY glutSolidIcosahedron( void );
+
 
 /*
  * Teapot rendering functions, found in og_teapot.c
@@ -566,7 +570,8 @@ OGAPI void    OGAPIENTRY glutVideoPan( int x, int y, int width, int height );
 OGAPI void    OGAPIENTRY glutSetColor(
     int color, GLfloat red, GLfloat green, GLfloat blue
 );
-OGAPI GLfloat OGAPIENTRY glutGetColor( int color, int component );
+			OGAPI GLfloat OGAPIENTRY glutGetColor( int color, int component );
+OGAPI void    OGAPIENTRY glutCopyColormap( int window );
 OGAPI void    OGAPIENTRY glutCopyColormap( int window );
 
 /*
@@ -578,11 +583,11 @@ OGAPI void    OGAPIENTRY glutForceJoystickFunc( void );
 
 /*
  * Misc functions, see og_misc.c
- */
+ //  */
 OGAPI int     OGAPIENTRY glutExtensionSupported( const char* extension );
 OGAPI void    OGAPIENTRY glutReportErrors( void );
 
-#ifdef __cplusplus
+		#ifdef __cplusplus
 }
 #endif
 

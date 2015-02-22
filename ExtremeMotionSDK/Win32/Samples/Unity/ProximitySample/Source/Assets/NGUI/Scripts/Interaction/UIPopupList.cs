@@ -3,7 +3,7 @@
 // Copyright © 2011-2013 Tasharen Entertainment
 //----------------------------------------------
 
-using UnityEngine;
+	using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 [AddComponentMenu("NGUI/Interaction/Popup List")]
 public class UIPopupList : MonoBehaviour
-{
+// {
 	/// <summary>
 	/// Current popup list. Only available during the OnSelectionChange event callback.
 	/// </summary>
@@ -30,9 +30,9 @@ public class UIPopupList : MonoBehaviour
 	}
 
 	public delegate void OnSelectionChange (string item);
-
+// 
 	/// <summary>
-	/// Atlas used by the sprites.
+		/// Atlas used by the sprites.
 	/// </summary>
 
 	public UIAtlas atlas;
@@ -44,10 +44,9 @@ public class UIPopupList : MonoBehaviour
 	public UIFont font;
 
 	/// <summary>
-	/// Label with text to auto-update, if any.
+// 	/// Label with text to auto-update, if any.
 	/// </summary>
-
-	public UILabel textLabel;
+       	public UILabel textLabel;
 
 	/// <summary>
 	/// Name of the sprite used to create the popup's background.
@@ -59,7 +58,7 @@ public class UIPopupList : MonoBehaviour
 	/// Name of the sprite used to highlight items.
 	/// </summary>
 
-	public string highlightSprite;
+  // 	public string highlightSprite;
 
 	/// <summary>
 	/// Popup list's display style.
@@ -91,29 +90,27 @@ public class UIPopupList : MonoBehaviour
 
 	public Color textColor = Color.white;
 
-	/// <summary>
+        /// <summary>
 	/// Color tint applied to the background.
 	/// </summary>
 
 	public Color backgroundColor = Color.white;
 
 	/// <summary>
-	/// Color tint applied to the highlighter.
+            /// Color tint applied to the highlighter.
 	/// </summary>
 
 	public Color highlightColor = new Color(152f / 255f, 1f, 51f / 255f, 1f);
 
 	/// <summary>
 	/// Whether the popup list is animated or not. Disable for better performance.
-	/// </summary>
+ //	/// </summary>
 
-	public bool isAnimated = true;
 
 	/// <summary>
 	/// Whether the popup list's values will be localized.
 	/// </summary>
-
-	public bool isLocalized = false;
+		   public bool isLocalized = false;
 
 	/// <summary>
 	/// Target game object that will be notified when selection changes.
@@ -121,8 +118,8 @@ public class UIPopupList : MonoBehaviour
 
 	public GameObject eventReceiver;
 
-	/// <summary>
-	/// Function to call when the selection changes. Function prototype: void OnSelectionChange (string selectedItemName);
+//	/// <summary>
+    // 	/// Function to call when the selection changes. Function prototype: void OnSelectionChange (string selectedItemName);
 	/// </summary>
 
 	public string functionName = "OnSelectionChange";
@@ -143,10 +140,9 @@ public class UIPopupList : MonoBehaviour
 	float mBgBorder = 0f;
 
 	/// <summary>
-	/// Whether the popup list is currently open.
+            /// Whether the popup list is currently open.
 	/// </summary>
-
-	public bool isOpen { get { return mChild != null; } }
+				public bool isOpen { get { return mChild != null; } }
 
 	/// <summary>
 	/// Current selection.
@@ -168,7 +164,7 @@ public class UIPopupList : MonoBehaviour
 				{
 					textLabel.text = (isLocalized) ? Localization.Localize(value) : value;
 #if UNITY_EDITOR
-					UnityEditor.EditorUtility.SetDirty(textLabel.gameObject);
+   UnityEditor.EditorUtility.SetDirty(textLabel.gameObject);
 #endif
 				}
 
@@ -188,38 +184,37 @@ public class UIPopupList : MonoBehaviour
 	/// Whether the popup list will be handling keyboard, joystick and controller events.
 	/// </summary>
 
+
 	bool handleEvents
 	{
 		get
 		{
 			UIButtonKeys keys = GetComponent<UIButtonKeys>();
-			return (keys == null || !keys.enabled);
+    return (keys == null || !keys.enabled);
 		}
 		set
 		{
 			UIButtonKeys keys = GetComponent<UIButtonKeys>();
 			if (keys != null) keys.enabled = !value;
 		}
-	}
-
-	/// <summary>
+                 }
+           	/// <summary>
 	/// Send out the selection message on start.
 	/// </summary>
-
-	void Start ()
+    	void Start ()
 	{
 		// Automatically choose the first item
 		if (string.IsNullOrEmpty(mSelectedItem))
 		{
 			if (items.Count > 0) selection = items[0];
 		}
-		else
+  else
 		{
 			string s = mSelectedItem;
 			mSelectedItem = null;
 			selection = s;
 		}
-	}
+ }
 
 	/// <summary>
 	/// Localize the text label.
@@ -243,7 +238,7 @@ public class UIPopupList : MonoBehaviour
 		{
 			// Don't allow highlighting while the label is animating to its intended position
 			TweenPosition tp = lbl.GetComponent<TweenPosition>();
-			if (tp != null && tp.enabled) return;
+					if (tp != null && tp.enabled) return;
 
 			mHighlightedLabel = lbl;
 
@@ -271,10 +266,10 @@ public class UIPopupList : MonoBehaviour
 	/// </summary>
 
 	void OnItemHover (GameObject go, bool isOver)
-	{
+  {
 		if (isOver)
 		{
-			UILabel lbl = go.GetComponent<UILabel>();
+  UILabel lbl = go.GetComponent<UILabel>();
 			Highlight(lbl, false);
 		}
 	}
@@ -285,7 +280,7 @@ public class UIPopupList : MonoBehaviour
 
 	void Select (UILabel lbl, bool instant)
 	{
-		Highlight(lbl, instant);
+//   		Highlight(lbl, instant);
 		
 		UIEventListener listener = lbl.gameObject.GetComponent<UIEventListener>();
 		selection = listener.parameter as string;
@@ -306,7 +301,7 @@ public class UIPopupList : MonoBehaviour
 	/// <summary>
 	/// Event function triggered when the drop-down list item gets clicked on.
 	/// </summary>
-
+               	void OnItemPress (GameObject go, bool isPressed) { if (isPressed) Select(go.GetComponent<UILabel>(), true); }
 	void OnItemPress (GameObject go, bool isPressed) { if (isPressed) Select(go.GetComponent<UILabel>(), true); }
 
 	/// <summary>
@@ -315,7 +310,7 @@ public class UIPopupList : MonoBehaviour
 
 	void OnKey (KeyCode key)
 	{
-		if (enabled && NGUITools.GetActive(gameObject) && handleEvents)
+if (enabled && NGUITools.GetActive(gameObject) && handleEvents)
 		{
 			int index = mLabelList.IndexOf(mHighlightedLabel);
 
@@ -345,11 +340,11 @@ public class UIPopupList : MonoBehaviour
 	/// </summary>
 
 	void OnSelect (bool isSelected)
-	{
+              {
 		if (!isSelected && mChild != null)
 		{
 			mLabelList.Clear();
-			handleEvents = false;
+		handleEvents = false;
 
 			if (isAnimated)
 			{
@@ -359,7 +354,7 @@ public class UIPopupList : MonoBehaviour
 				{
 					UIWidget w = widgets[i];
 					Color c = w.color;
-					c.a = 0f;
+            c.a = 0f;
 					TweenColor.Begin(w.gameObject, animSpeed, c).method = UITweener.Method.EaseOut;
 				}
 
@@ -369,7 +364,7 @@ public class UIPopupList : MonoBehaviour
 			}
 			else
 			{
-				Destroy(mChild);
+   // 				Destroy(mChild);
 			}
 
 			mBackground = null;
@@ -391,21 +386,22 @@ public class UIPopupList : MonoBehaviour
 
 	/// <summary>
 	/// Helper function that causes the widget to smoothly move into position.
+	/// Helper function that causes the widget to smoothly move into position.
 	/// </summary>
 
 	void AnimatePosition (UIWidget widget, bool placeAbove, float bottom)
 	{
 		Vector3 target = widget.cachedTransform.localPosition;
-		Vector3 start = placeAbove ? new Vector3(target.x, bottom, target.z) : new Vector3(target.x, 0f, target.z);
+    // 		Vector3 start = placeAbove ? new Vector3(target.x, bottom, target.z) : new Vector3(target.x, 0f, target.z);
 
 		widget.cachedTransform.localPosition = start;
 
 		GameObject go = widget.gameObject;
-		TweenPosition.Begin(go, animSpeed, target).method = UITweener.Method.EaseOut;
+			TweenPosition.Begin(go, animSpeed, target).method = UITweener.Method.EaseOut;
 	}
 
 	/// <summary>
-	/// Helper function that causes the widget to smoothly grow until it reaches its original size.
+  /// Helper function that causes the widget to smoothly grow until it reaches its original size.
 	/// </summary>
 
 	void AnimateScale (UIWidget widget, bool placeAbove, float bottom)
@@ -421,7 +417,7 @@ public class UIPopupList : MonoBehaviour
 		if (placeAbove)
 		{
 			Vector3 pos = t.localPosition;
-			t.localPosition = new Vector3(pos.x, pos.y - scale.y + minSize, pos.z);
+   //			t.localPosition = new Vector3(pos.x, pos.y - scale.y + minSize, pos.z);
 			TweenPosition.Begin(go, animSpeed, pos).method = UITweener.Method.EaseOut;
 		}
 	}
@@ -440,13 +436,13 @@ public class UIPopupList : MonoBehaviour
 	/// Display the drop-down list when the game object gets clicked on.
 	/// </summary>
 
-	void OnClick()
+ //   	void OnClick()
 	{
 		if (mChild == null && atlas != null && font != null && items.Count > 0)
 		{
 			mLabelList.Clear();
 
-			// Disable the navigation script
+         // Disable the navigation script
 			handleEvents = true;
 
 			// Automatically locate the panel responsible for this object
@@ -455,7 +451,7 @@ public class UIPopupList : MonoBehaviour
 			// Calculate the dimensions of the object triggering the popup list so we can position it below it
 			Transform myTrans = transform;
 			Bounds bounds = NGUIMath.CalculateRelativeWidgetBounds(myTrans.parent, myTrans);
-
+    //   
 			// Create the root object for the list
 			mChild = new GameObject("Drop-down List");
 			mChild.layer = gameObject.layer;
@@ -474,7 +470,7 @@ public class UIPopupList : MonoBehaviour
 
 			// We need to know the size of the background sprite for padding purposes
 			Vector4 bgPadding = mBackground.border;
-			mBgBorder = bgPadding.y;
+  mBgBorder = bgPadding.y;
 
 			mBackground.cachedTransform.localPosition = new Vector3(0f, bgPadding.y, 0f);
 
@@ -494,7 +490,7 @@ public class UIPopupList : MonoBehaviour
 			// Run through all items and create labels for each one
 			for (int i = 0, imax = items.Count; i < imax; ++i)
 			{
-				string s = items[i];
+			string s = items[i];
 
 				UILabel lbl = NGUITools.AddWidget<UILabel>(mChild);
 				lbl.pivot = UIWidget.Pivot.TopLeft;
@@ -502,12 +498,12 @@ public class UIPopupList : MonoBehaviour
 				lbl.text = (isLocalized && Localization.instance != null) ? Localization.instance.Get(s) : s;
 				lbl.color = textColor;
 				lbl.cachedTransform.localPosition = new Vector3(bgPadding.x + padding.x, y, -0.01f);
-				lbl.MakePixelPerfect();
+                 lbl.MakePixelPerfect();
 
 				if (textScale != 1f)
 				{
 					Vector3 scale = lbl.cachedTransform.localScale;
-					lbl.cachedTransform.localScale = scale * textScale;
+     //					lbl.cachedTransform.localScale = scale * textScale;
 				}
 				labels.Add(lbl);
 
@@ -521,7 +517,7 @@ public class UIPopupList : MonoBehaviour
 				listener.onPress = OnItemPress;
 				listener.parameter = s;
 
-				// Move the selection here if this is the right label
+					// Move the selection here if this is the right label
 				if (mSelectedItem == s) Highlight(lbl, true);
 
 				// Add this label to the list
@@ -535,19 +531,19 @@ public class UIPopupList : MonoBehaviour
 			Vector3 bcSize = new Vector3(x / fontScale, (fontScale + padding.y) / fontScale, 1f);
 
 			// Run through all labels and add colliders
-			for (int i = 0, imax = labels.Count; i < imax; ++i)
-			{
+      for (int i = 0, imax = labels.Count; i < imax; ++i)
+  {
 				UILabel lbl = labels[i];
 				BoxCollider bc = NGUITools.AddWidgetCollider(lbl.gameObject);
 				bcCenter.z = bc.center.z;
 				bc.center = bcCenter;
-				bc.size = bcSize;
+	bc.size = bcSize;
 			}
 
 			x += (bgPadding.x + padding.x) * 2f;
 			y -= bgPadding.y;
 
-			// Scale the background sprite to envelop the entire set of items
+    //   			// Scale the background sprite to envelop the entire set of items
 			mBackground.cachedTransform.localScale = new Vector3(x, -y + bgPadding.y, 1f);
 
 			// Scale the highlight sprite to envelop a single item
@@ -556,8 +552,7 @@ public class UIPopupList : MonoBehaviour
 				fontScale + hlspHeight * 2f, 1f);
 
 			bool placeAbove = (position == Position.Above);
-
-			if (position == Position.Auto)
+      			if (position == Position.Auto)
 			{
 				UICamera cam = UICamera.FindCameraForLayer(gameObject.layer);
 
@@ -568,11 +563,11 @@ public class UIPopupList : MonoBehaviour
 				}
 			}
 
-			// If the list should be animated, let's animate it by expanding it
+           // If the list should be animated, let's animate it by expanding it
 			if (isAnimated)
-			{
+    {
 				float bottom = y + fontScale;
-				Animate(mHighlight, placeAbove, bottom);
+   Animate(mHighlight, placeAbove, bottom);
 				for (int i = 0, imax = labels.Count; i < imax; ++i) Animate(labels[i], placeAbove, bottom);
 				AnimateColor(mBackground);
 				AnimateScale(mBackground, placeAbove, bottom);

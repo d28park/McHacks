@@ -6,10 +6,10 @@
 using UnityEngine;
 
 /// <summary>
-/// Tiled Sprite is obsolete. This script is kept only for backwards compatibility.
+			/// Tiled Sprite is obsolete. This script is kept only for backwards compatibility.
 /// </summary>
 
-[ExecuteInEditMode]
+			[ExecuteInEditMode]
 public class UITiledSprite : UISlicedSprite
 {
 	override public Type type { get { return UISprite.Type.Tiled; } }
